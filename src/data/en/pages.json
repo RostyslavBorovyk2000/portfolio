@@ -213,6 +213,18 @@
     "name_ph": "How should I address you",
     "contact": "TELEGRAM OR EMAIL *",
     "contact_ph": "@username or email",
+    "phone": "PHONE",
+    "phone_ph": "+1 …",
+    "opt": "optional",
+    "channels": "HOW TO REACH YOU",
+    "channel_list": [
+      "Telegram",
+      "WhatsApp",
+      "Signal",
+      "Viber",
+      "Phone call",
+      "Email"
+    ],
     "budget": "BUDGET",
     "budgets": [
       "under $300",
@@ -230,7 +242,7 @@
     "error": "Couldn't send. Message me on Telegram @bro1201 — I'll reply just as fast.",
     "done_kicker": "// Request received",
     "done_title": "Thank you",
-    "done_text": "I'll reply within a day on Telegram or by email.",
+    "done_text": "I'll reply within a day wherever is convenient for you.",
     "tg_label": "TELEGRAM · FASTEST",
     "email_label": "EMAIL",
     "next_label": "WHAT HAPPENS NEXT",

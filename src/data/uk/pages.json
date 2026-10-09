@@ -213,6 +213,18 @@
     "name_ph": "Як до вас звертатися",
     "contact": "TELEGRAM АБО EMAIL *",
     "contact_ph": "@username або email",
+    "phone": "ТЕЛЕФОН",
+    "phone_ph": "+380 …",
+    "opt": "необов'язково",
+    "channels": "ЯК ЗВ'ЯЗАТИСЬ",
+    "channel_list": [
+      "Telegram",
+      "Viber",
+      "WhatsApp",
+      "Signal",
+      "Дзвінок",
+      "Email"
+    ],
     "budget": "БЮДЖЕТ",
     "budgets": [
       "до $300",
@@ -230,7 +242,7 @@
     "error": "Не вдалося надіслати. Напишіть мені в Telegram @bro1201 — відповім так само швидко.",
     "done_kicker": "// Заявку отримано",
     "done_title": "Дякую",
-    "done_text": "Відповім протягом доби в Telegram або на email.",
+    "done_text": "Відповім протягом доби там, де вам зручно.",
     "tg_label": "TELEGRAM · НАЙШВИДШЕ",
     "email_label": "EMAIL",
     "next_label": "ЩО БУДЕ ДАЛІ",

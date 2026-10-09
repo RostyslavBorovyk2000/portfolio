@@ -195,7 +195,8 @@
       var btn = form.querySelector('button[type=submit]'), lbl = btn.querySelector('.lbl'), old = lbl.textContent;
       var status = form.querySelector('.form-status');
       btn.disabled = true; lbl.textContent = form.getAttribute('data-sending'); status.textContent = '';
-      var data = Object.fromEntries(new FormData(form).entries());
+      var fd = new FormData(form), data = Object.fromEntries(fd.entries());
+      data.channels = fd.getAll('channels').join(', ');
       data.lang = root.lang; data.page = location.pathname; data.elapsed = Date.now() - t0;
       fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })

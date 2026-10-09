@@ -18,6 +18,15 @@ const p = data(lang, 'pages').contact;
           <label class="f" for="l-name"><span>{p.name}</span><input id="l-name" name="name" autocomplete="name" maxlength="100" placeholder={p.name_ph} required /><small class="err"></small></label>
           <label class="f" for="l-contact"><span>{p.contact}</span><input id="l-contact" name="contact" maxlength="120" placeholder={p.contact_ph} required /><small class="err"></small></label>
         </div>
+        <div class="row2">
+          <label class="f" for="l-phone"><span>{p.phone} <i class="opt">· {p.opt}</i></span><input id="l-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder={p.phone_ph} /><small class="err"></small></label>
+          <fieldset class="f" style="border:0;padding:0;margin:0;min-width:0">
+            <legend class="leg">{p.channels} <i class="opt">· {p.opt}</i></legend>
+            <div class="pick pick-sm" style="margin-top:.5rem">
+              {p.channel_list.map((c: string, i: number) => <label><input type="checkbox" name="channels" id={`ch${i}`} value={c} /><span>{c}</span></label>)}
+            </div>
+          </fieldset>
+        </div>
         <fieldset class="f" style="border:0;padding:0;margin:0">
           <legend style="font-family:var(--f-mono);font-size:.75rem;color:var(--muted);letter-spacing:.08em;padding:0">{p.budget}</legend>
           <div class="pick" style="margin-top:.5rem">

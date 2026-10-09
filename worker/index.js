@@ -6,7 +6,7 @@
  *   TG_CHAT_ID   — твій chat id (куди надсилати заявки)
  * Make не потрібен: 0 кредитів на заявку.
  */
-const MAX = { name: 100, contact: 120, budget: 40, task: 3000 };
+const MAX = { name: 100, contact: 120, phone: 30, channels: 120, budget: 40, task: 3000 };
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json; charset=utf-8' } });
@@ -31,6 +31,8 @@ async function handleLead(request, env) {
   const lead = {
     name: clean(body.name, MAX.name),
     contact: clean(body.contact, MAX.contact),
+    phone: clean(body.phone, MAX.phone),
+    channels: clean(body.channels, MAX.channels),
     budget: clean(body.budget, MAX.budget),
     task: clean(body.task, MAX.task),
   };
@@ -43,6 +45,8 @@ async function handleLead(request, env) {
     '',
     `<b>Ім'я:</b> ${esc(lead.name)}`,
     `<b>Контакт:</b> ${esc(lead.contact)}`,
+    `<b>Телефон:</b> ${esc(lead.phone || '—')}`,
+    `<b>Зручно:</b> ${esc(lead.channels || '—')}`,
     `<b>Бюджет:</b> ${esc(lead.budget || '—')}`,
     '',
     `<b>Задача:</b>\n${esc(lead.task)}`,
