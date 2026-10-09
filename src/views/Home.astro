@@ -26,7 +26,7 @@ const log = lang === 'uk'
 const person = {
   '@context': 'https://schema.org', '@type': 'Person', name: site.name, jobTitle: site.role,
   url: new URL(url(lang, '/'), Astro.site).href, image: new URL('/img/photo.jpg', Astro.site).href,
-  sameAs: [`https://t.me/${site.telegram}`], knowsAbout: ['Make.com', 'OpenAI', 'Telegram Bot API', 'Supabase', 'AI automation'],
+  sameAs: [`https://t.me/${site.telegram}`, `https://t.me/${site.channel}`, 'https://github.com/RostyslavBorovyk2000'], knowsAbout: ['Make.com', 'OpenAI', 'Telegram Bot API', 'Supabase', 'AI automation'],
   address: { '@type': 'PostalAddress', addressCountry: 'UA' },
 };
 const org = {

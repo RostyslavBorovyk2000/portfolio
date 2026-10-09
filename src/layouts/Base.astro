@@ -94,6 +94,7 @@ const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id
         <div>
           <h4>{site.footer_contact}</h4>
           <a href={tg} target="_blank" rel="noopener">Telegram @{site.telegram}</a>
+          <a href={`https://t.me/${site.channel}`} target="_blank" rel="noopener">{site.channel_label}</a>
           <span><span>{site.email}</span><button class="copy" type="button" data-copy={site.email} data-done={site.copied}>{site.copy}</button></span>
           <a href={url(other, path)} hreflang={other}>{other === 'en' ? 'English version' : 'Українська версія'}</a>
         </div>

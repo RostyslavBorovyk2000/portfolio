@@ -12,7 +12,7 @@ const site = data(lang, 'site');
 const p = data(lang, 'pages').about;
 const ld = [{ '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: {
   '@type': 'Person', name: site.name, jobTitle: site.role, image: new URL('/img/photo.jpg', Astro.site).href,
-  sameAs: [`https://t.me/${site.telegram}`], knowsAbout: p.stack.map((s: any) => s.value) } }];
+  sameAs: [`https://t.me/${site.telegram}`, `https://t.me/${site.channel}`, 'https://github.com/RostyslavBorovyk2000'], knowsAbout: p.stack.map((s: any) => s.value) } }];
 ---
 <Base lang={lang} title={p.seo_title} description={p.seo_description} jsonld={ld}>
   <section class="phero grid-bg"><div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:3rem;align-items:center">

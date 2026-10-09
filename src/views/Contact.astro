@@ -40,6 +40,7 @@ const p = data(lang, 'pages').contact;
     </div>
     <aside class="side-c">
       <a class="chan hi" href={`https://t.me/${site.telegram}`} target="_blank" rel="noopener"><span class="meta" style="color:var(--brass-hi)">{p.tg_label}</span><b>@{site.telegram}</b></a>
+      <a class="chan" href={`https://t.me/${site.channel}`} target="_blank" rel="noopener"><span class="meta">{site.channel_label}</span><b style="font-size:1.05rem">t.me/{site.channel}</b></a>
       <div class="chan"><span class="meta">{p.email_label}</span><b style="font-size:1.05rem"><span>{site.email}</span><button class="copy" type="button" data-copy={site.email} data-done={site.copied}>{site.copy}</button></b></div>
       <div class="chan"><span class="meta">{p.next_label}</span>
         {p.next.map((t: string, i: number) => <p style="color:var(--soft)"><b style="color:var(--brass-hi);font-family:var(--f-mono);font-size:.9rem">{i + 1}.</b> {t}</p>)}
