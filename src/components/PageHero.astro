@@ -1,0 +1,14 @@
+---
+import Crumbs from './Crumbs.astro';
+interface Props { crumbs: { name: string; href?: string }[]; kicker: string; title: string; lead?: string }
+const { crumbs, kicker, title, lead } = Astro.props;
+---
+<section class="phero grid-bg">
+  <div class="wrap">
+    <Crumbs items={crumbs} />
+    <p class="kicker">{kicker}</p>
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { url, type Lang } from '../i18n';
+import { data } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').contact;
+---
+<Base lang={lang} title={p.seo_title} description={p.seo_description}>
+  <PageHero crumbs={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', '') }]} kicker={p.kicker} title={p.title} lead={p.lead} />
+  <section class="sec" style="padding-top:3rem"><div class="wrap cgrid">
+    <div>
+      <form class="cform" id="lead" novalidate data-required={p.required} data-sending={p.sending} data-error={p.error}>
+        <p class="kicker">{p.form_kicker}</p>
+        <div class="row2">
+          <label class="f" for="l-name"><span>{p.name}</span><input id="l-name" name="name" autocomplete="name" maxlength="100" placeholder={p.name_ph} required /><small class="err"></small></label>
+          <label class="f" for="l-contact"><span>{p.contact}</span><input id="l-contact" name="contact" maxlength="120" placeholder={p.contact_ph} required /><small class="err"></small></label>
+        </div>
+        <fieldset class="f" style="border:0;padding:0;margin:0">
+          <legend style="font-family:var(--f-mono);font-size:.75rem;color:var(--muted);letter-spacing:.08em;padding:0">{p.budget}</legend>
+          <div class="pick" style="margin-top:.5rem">
+            {p.budgets.map((b: string, i: number) => <label><input type="radio" name="budget" id={`b${i}`} value={b} checked={i === p.budgets.length - 1} /><span>{b}</span></label>)}
+          </div>
+        </fieldset>
+        <label class="f" for="l-task"><span>{p.task}</span><textarea id="l-task" name="task" maxlength="3000" placeholder={p.task_ph} required></textarea><small class="err"></small></label>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+          <p class="note" style="max-width:38ch">{p.privacy}</p>
+          <button class="btn btn-p" type="submit"><span class="lbl">{p.submit}</span><span class="ar" aria-hidden="true">→</span></button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="done" id="lead-done" tabindex="-1" hidden>
+        <p class="kicker">{p.done_kicker}</p>
+        <p class="h3">{p.done_title}, <span data-name></span>!</p>
+        <p class="muted">{p.done_text}</p>
+      </div>
+    </div>
+    <aside class="side-c">
+      <a class="chan hi" href={`https://t.me/${site.telegram}`} target="_blank" rel="noopener"><span class="meta" style="color:var(--brass-hi)">{p.tg_label}</span><b>@{site.telegram}</b></a>
+      <div class="chan"><span class="meta">{p.email_label}</span><b style="font-size:1.05rem"><span>{site.email}</span><button class="copy" type="button" data-copy={site.email} data-done={site.copied}>{site.copy}</button></b></div>
+      <div class="chan"><span class="meta">{p.next_label}</span>
+        {p.next.map((t: string, i: number) => <p style="color:var(--soft)"><b style="color:var(--brass-hi);font-family:var(--f-mono);font-size:.9rem">{i + 1}.</b> {t}</p>)}
+      </div>
+      <p class="chip" style="opacity:1;transform:none;animation:none;align-self:flex-start"><span class="dot"></span>{site.status}</p>
+    </aside>
+  </div></section>
+</Base>

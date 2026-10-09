@@ -1,0 +1,43 @@
+{
+  "brand": "BOROVYK AUTOMATION",
+  "name": "Ростислав Боровик",
+  "role": "AI Automation Specialist",
+  "telegram": "bro1201",
+  "email": "rostykfox911@gmail.com",
+  "status": "Відкритий до проєктів і найму",
+  "nav": [
+    { "label": "Кейси", "path": "/cases/" },
+    { "label": "Послуги", "path": "/services/" },
+    { "label": "Про мене", "path": "/about/" },
+    { "label": "Блог", "path": "/blog/" },
+    { "label": "Контакти", "path": "/contact/" }
+  ],
+  "cta": "Обговорити проєкт",
+  "skip": "Перейти до змісту",
+  "menu": "Меню",
+  "home": "Головна",
+  "footer_text": "AI-автоматизація для бізнесу: Telegram-боти, моніторинг, контент.",
+  "footer_site": "САЙТ",
+  "footer_services": "ПОСЛУГИ",
+  "footer_contact": "КОНТАКТ",
+  "copy": "копіювати",
+  "copied": "скопійовано",
+  "mbar_tg": "Telegram",
+  "mbar_lead": "Залишити заявку",
+  "fab": "Написати в Telegram",
+  "open_case": "Відкрити кейс",
+  "read_case": "Читати кейс",
+  "case_soon": "Кейс готується",
+  "more": "Детальніше",
+  "read": "Читати",
+  "minutes": "ХВ",
+  "price_label": "ВАРТІСТЬ",
+  "price_on_request": "За запитом",
+  "all": "Усі",
+  "cta_block": {
+    "kicker": "Контакт",
+    "title": "Яку рутину автоматизуємо?",
+    "text": "Опишіть задачу кількома реченнями. Відповім протягом доби: як її автоматизувати і скільки коштуватиме утримання.",
+    "btn": "Залишити заявку"
+  }
+}

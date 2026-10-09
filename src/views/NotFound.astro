@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Btn from '../components/Btn.astro';
+import { url, type Lang } from '../i18n';
+import { data } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = data(lang, 'pages').notfound;
+---
+<Base lang={lang} title={p.title} description={p.text} noindex>
+  <section class="nf grid-bg"><div class="wrap">
+    <p class="big" aria-hidden="true"><span>4</span><span>0</span><span>4</span></p>
+    <div style="display:flex;flex-direction:column;gap:1.25rem">
+      <p class="kicker">{p.kicker}</p>
+      <h1 class="h2">{p.h1}</h1>
+      <p class="muted">{p.text}</p>
+      <div class="cta-row"><Btn href={url(lang, '/')}>{p.home}</Btn><Btn href={url(lang, '/cases/')} kind="g">{p.cases}</Btn></div>
+    </div>
+  </div></section>
+</Base>

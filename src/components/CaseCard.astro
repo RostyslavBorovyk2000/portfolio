@@ -1,0 +1,37 @@
+---
+import Tags from './Tags.astro';
+import { url, type Lang } from '../i18n';
+import { slugOf, data } from '../lib/data';
+interface Props { lang: Lang; entry: any; big?: boolean; delay?: number; showTags?: boolean }
+const { lang, entry, big = false, delay = 0, showTags = false } = Astro.props;
+const site = data(lang, 'site');
+const d = entry.data;
+const href = d.has_page ? url(lang, `/cases/${slugOf(entry.id)}/`) : undefined;
+const Tag = href ? 'a' : 'div';
+---
+{big ? (
+  <Tag class="card case-big spot rv" href={href} data-cat={d.category.join(' ')} style={`--d:${delay}s`}>
+    <div class="txt">
+      <p class="meta" style="color:var(--brass-hi)">{d.meta}</p>
+      <h3 class="h2" style="font-size:clamp(2rem,3.4vw,2.75rem)">{d.title}</h3>
+      <p style="color:var(--soft);max-width:46ch">{d.summary}</p>
+      {d.kpis.length > 0 && (
+        <div class="kpis">{d.kpis.slice(0, 3).map((k: any) => <div><strong>{k.value}</strong><span>{k.label}</span></div>)}</div>
+      )}
+      {showTags && <Tags items={d.stack} />}
+      {href && <span class="go">{site.read_case} <i>→</i></span>}
+    </div>
+    <div class="vis">
+      {d.cover && <img src={d.cover} alt={d.cover_alt} loading="lazy" width="720" height="935" />}
+      {showTags && d.images[1] && <img src={d.images[1].src} alt={d.images[1].alt} loading="lazy" style="width:20rem" />}
+    </div>
+  </Tag>
+) : (
+  <Tag class="card case-sm spot rv" href={href} data-cat={d.category.join(' ')} style={`--d:${delay}s`}>
+    <p class="meta">{d.meta}</p>
+    <h3 class="h3">{d.title}</h3>
+    <p class="muted">{d.summary}</p>
+    {showTags && <Tags items={d.stack} />}
+    {href ? <span class="go">{site.open_case} <i>→</i></span> : <span class="go" style="color:var(--dim)">{site.case_soon}</span>}
+  </Tag>
+)}

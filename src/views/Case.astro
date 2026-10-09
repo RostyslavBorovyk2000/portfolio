@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Num from '../components/Num.astro';
+import Tags from '../components/Tags.astro';
+import Cta from '../components/Cta.astro';
+import SecHead from '../components/SecHead.astro';
+import { url, type Lang } from '../i18n';
+import { data, cases, slugOf, paras } from '../lib/data';
+interface Props { lang: Lang; entry: any }
+const { lang, entry } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').cases;
+const d = entry.data;
+const slug = slugOf(entry.id);
+const all = (await cases(lang)).filter((c) => c.data.has_page);
+const idx = all.findIndex((c) => c.id === entry.id);
+const next = all.length > 1 ? all[(idx + 1) % all.length] : undefined;
+const home = new URL(url(lang, '/'), Astro.site).href;
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: site.home, item: home },
+    { '@type': 'ListItem', position: 2, name: p.kicker.replace('// ', ''), item: new URL(url(lang, '/cases/'), Astro.site).href },
+    { '@type': 'ListItem', position: 3, name: d.title, item: new URL(url(lang, `/cases/${slug}/`), Astro.site).href } ] },
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: d.title, description: d.description, author: { '@type': 'Person', name: site.name }, inLanguage: lang },
+];
+---
+<Base lang={lang} title={`${d.title} — ${p.case_kicker.replace('// ', '')} · Borovyk Automation`} description={d.description} image={d.cover ?? '/img/og.jpg'} jsonld={ld}>
+  <section class="phero grid-bg"><div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:3rem;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:1.4rem;min-width:0">
+      <Crumbs items={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', ''), href: url(lang, '/cases/') }, { name: d.title }]} />
+      <p class="kicker">{p.case_kicker}</p>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.summary}</p>
+      {d.facts.length > 0 && <div class="facts" style="border-top:1px solid var(--line2)">{d.facts.map((f: any) => <div><span>{f.label}</span><span>{f.value}</span></div>)}</div>}
+      <Tags items={d.stack} />
+    </div>
+    {d.cover ? (
+      <div class="ticks" style="position:relative;background:var(--deep);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:clamp(1.5rem,4vw,3rem)"><img src={d.cover} alt={d.cover_alt} width="720" height="935" style="width:19rem;border-radius:.6rem" /></div>
+    ) : (
+      <div class="arch grid-bg" style="background-size:3rem 3rem;display:flex;flex-direction:column;gap:.9rem">
+        {d.flow.map((n: any) => <div class="node"><span class="mono">{n.code}</span><b>{n.name}</b><small>{n.sub}</small></div>)}
+      </div>
+    )}
+  </div></section>
+
+  {d.kpis.length > 0 && (
+    <section class="sec" style="padding-top:clamp(3rem,6vw,5rem)"><div class="wrap"><div class="kgrid">
+      {d.kpis.map((k: any, i: number) => <Num value={k.value} label={k.label} delay={i * 0.08} />)}
+    </div></div></section>
+  )}
+
+  {d.task && (
+    <section class="sec"><div class="wrap cblock rv">
+      <div style="display:flex;flex-direction:column;gap:1rem"><p class="kicker">{p.task}</p><h2 class="h2" style="font-size:clamp(1.7rem,3vw,2.75rem)">{d.task_title}</h2></div>
+      <div class="body">{paras(d.task).map((t) => <p>{t}</p>)}</div>
+    </div></section>
+  )}
+
+  {d.solution && (
+    <section class="sec"><div class="wrap cblock rv">
+      <div style="display:flex;flex-direction:column;gap:1rem"><p class="kicker">{p.solution}</p><h2 class="h2" style="font-size:clamp(1.7rem,3vw,2.75rem)">{d.solution_title}</h2></div>
+      <div class="body">
+        {paras(d.solution).map((t) => <p>{t}</p>)}
+        {d.solution_points.length > 0 && <ul>{d.solution_points.map((t: string) => <li>{t}</li>)}</ul>}
+      </div>
+    </div></section>
+  )}
+
+  {d.cover && d.flow.length > 0 && (
+    <section class="sec"><div class="wrap">
+      <SecHead kicker={p.architecture} title={p.architecture_title} />
+      <div class="arch grid-bg rv" style="background-size:3rem 3rem">
+        <div class="flow" style={`grid-template-columns:repeat(${d.flow.length},minmax(10rem,1fr))`}>
+          {d.flow.map((n: any, i: number) => (
+            <div class="node"><span class="mono">{n.code}</span><b>{n.name}</b><small>{n.sub}</small>{i < d.flow.length - 1 && <span class="wire" style={`--d:${i * 0.4}s`} aria-hidden="true"></span>}</div>
+          ))}
+        </div>
+      </div>
+      {d.nodes.length > 0 && <div class="sub-nodes rv">{d.nodes.map((n: any) => <div class="node"><span class="mono">{n.code}</span><b>{n.name}</b><small>{n.sub}</small></div>)}</div>}
+    </div></section>
+  )}
+
+  {(d.images.length > 0 || d.quote) && (
+    <section class="sec"><div class="wrap" style="display:flex;flex-direction:column;gap:2.5rem">
+      <SecHead kicker={p.result} title={p.result_title} />
+      {d.images.length > 0 && (
+        <div class="gal">
+          {d.images.map((im: any, i: number) => (
+            <figure class="rv" style={`--d:${i * 0.08}s`}><div><img src={im.src} alt={im.alt} loading="lazy" style={im.src.includes('monitor') ? 'width:100%;border-radius:.5rem' : 'width:15rem;border-radius:.5rem'} /></div><figcaption>{im.caption}</figcaption></figure>
+          ))}
+        </div>
+      )}
+      {d.quote && <p class="quote rv">{d.quote}</p>}
+    </div></section>
+  )}
+
+  <section class="sec"><div class="wrap">
+    <div class="pager rv">
+      <a href={url(lang, '/cases/')}><p class="meta">{p.all}</p><p class="h3" style="margin-top:.5rem">{p.back}</p></a>
+      {next && next.id !== entry.id && <a href={url(lang, `/cases/${slugOf(next.id)}/`)}><p class="meta">{p.next}</p><p class="h3" style="margin-top:.5rem">{next.data.title}</p></a>}
+    </div>
+  </div></section>
+
+  <Cta lang={lang} kicker={p.cta_kicker} title={d.cta_title} text={d.cta_text} />
+</Base>

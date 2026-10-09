@@ -1,0 +1,168 @@
+# Sveltia CMS — адмінка сайту на /admin/
+# Вхід: «Sign In with Token» (GitHub fine-grained token з доступом Contents: Read and write до цього репозиторію)
+# або «Work with Local Repository» у Chrome, коли сайт запущено локально.
+backend:
+  name: github
+  repo: RostyslavBorovyk2000/portfolio
+  branch: main
+  commit_messages:
+    create: "content: створено {{collection}} «{{slug}}»"
+    update: "content: оновлено {{collection}} «{{slug}}»"
+    delete: "content: видалено {{collection}} «{{slug}}»"
+    uploadMedia: "media: завантажено {{path}}"
+    deleteMedia: "media: видалено {{path}}"
+
+site_url: https://borovyk-automation.com
+display_url: https://borovyk-automation.com
+logo_url: /favicon.svg
+locale: uk
+
+media_folder: public/img/uploads
+public_folder: /img/uploads
+
+i18n:
+  structure: multiple_folders
+  locales: [uk, en]
+  default_locale: uk
+
+collections:
+  # ---------------- КЕЙСИ ----------------
+  - name: cases
+    label: Кейси
+    label_singular: Кейс
+    folder: src/content/cases
+    extension: md
+    format: frontmatter
+    create: true
+    i18n: true
+    slug: "{{fields._slug}}"
+    summary: "{{order}} · {{title}}"
+    sortable_fields: [order, title]
+    fields:
+      - { name: title, label: Назва, widget: string, i18n: true }
+      - { name: description, label: "Опис для Google (до 160 символів)", widget: text, i18n: true }
+      - { name: meta, label: "Підпис над назвою (ФЛАГМАН · MAKE · ...)", widget: string, i18n: true }
+      - { name: summary, label: Короткий опис для картки, widget: text, i18n: true }
+      - name: category
+        label: Категорії (для фільтрів)
+        widget: select
+        multiple: true
+        i18n: duplicate
+        options: [{ label: Telegram-боти, value: bot }, { label: Моніторинг, value: mon }, { label: Контент, value: cnt }, { label: Інтеграції, value: api }]
+      - { name: order, label: Порядок, widget: number, value_type: int, default: 10, i18n: duplicate }
+      - { name: featured, label: Головний кейс (велика картка), widget: boolean, default: false, i18n: duplicate }
+      - { name: has_page, label: Має окрему сторінку, widget: boolean, default: true, i18n: duplicate }
+      - { name: draft, label: Чернетка (не показувати), widget: boolean, default: false, i18n: duplicate }
+      - { name: cover, label: Обкладинка, widget: image, required: false, i18n: duplicate }
+      - { name: cover_alt, label: Опис обкладинки (alt), widget: string, required: false, i18n: true }
+      - name: kpis
+        label: Цифри
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: value, label: Значення, widget: string }, { name: label, label: Підпис, widget: string }]
+      - { name: stack, label: Стек, widget: list, required: false, i18n: duplicate }
+      - name: facts
+        label: Факти (роль, тип, рік)
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: label, label: Назва, widget: string }, { name: value, label: Значення, widget: string }]
+      - { name: task_title, label: Задача — заголовок, widget: string, required: false, i18n: true }
+      - { name: task, label: Задача — текст, widget: text, required: false, i18n: true }
+      - { name: solution_title, label: Рішення — заголовок, widget: string, required: false, i18n: true }
+      - { name: solution, label: Рішення — текст, widget: text, required: false, i18n: true }
+      - { name: solution_points, label: Рішення — пункти, widget: list, required: false, i18n: true }
+      - name: flow
+        label: Схема (основний ланцюжок)
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: code, label: Код, widget: string }, { name: name, label: Назва, widget: string }, { name: sub, label: Підпис, widget: string }]
+      - name: nodes
+        label: Схема (додаткові блоки)
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: code, label: Код, widget: string }, { name: name, label: Назва, widget: string }, { name: sub, label: Підпис, widget: string }]
+      - name: images
+        label: Галерея
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: src, label: Фото, widget: image }, { name: alt, label: Опис (alt), widget: string }, { name: caption, label: Підпис, widget: string }]
+      - { name: quote, label: Цитата-результат, widget: text, required: false, i18n: true }
+      - { name: cta_title, label: Заклик — заголовок, widget: string, required: false, i18n: true }
+      - { name: cta_text, label: Заклик — текст, widget: text, required: false, i18n: true }
+
+  # ---------------- ПОСЛУГИ ----------------
+  - name: services
+    label: Послуги
+    label_singular: Послуга
+    folder: src/content/services
+    extension: md
+    format: frontmatter
+    create: true
+    i18n: true
+    slug: "{{fields._slug}}"
+    summary: "{{order}} · {{title}}"
+    fields:
+      - { name: title, label: Назва, widget: string, i18n: true }
+      - { name: seo_title, label: Заголовок для Google, widget: string, i18n: true }
+      - { name: description, label: Опис для Google, widget: text, i18n: true }
+      - { name: code, label: "Код (BOT, MON...)", widget: string, i18n: duplicate }
+      - { name: short, label: Короткий опис, widget: text, i18n: true }
+      - { name: items, label: Що входить (3 пункти), widget: list, i18n: true }
+      - { name: price, label: "Ціна (порожньо = «За запитом»)", widget: string, required: false, i18n: true }
+      - { name: order, label: Порядок, widget: number, value_type: int, default: 10, i18n: duplicate }
+      - { name: has_page, label: Має окрему сторінку, widget: boolean, default: false, i18n: duplicate }
+      - { name: chat_demo, label: Показувати демо-чат, widget: boolean, default: false, i18n: duplicate }
+      - { name: lead, label: Сторінка — вступ, widget: text, required: false, i18n: true }
+      - { name: problem_title, label: Проблема — заголовок, widget: string, required: false, i18n: true }
+      - { name: problem, label: Проблема — текст, widget: text, required: false, i18n: true }
+      - name: includes
+        label: Що отримуєте
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: title, label: Назва, widget: string }, { name: text, label: Текст, widget: string }]
+      - name: steps
+        label: Етапи
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: title, label: Назва, widget: string }, { name: text, label: Текст, widget: string }]
+      - { name: related_case, label: "Пов'язаний кейс (slug, напр. autohunter)", widget: string, required: false, i18n: duplicate }
+      - { name: price_note, label: Примітка до ціни, widget: text, required: false, i18n: true }
+      - name: faq
+        label: FAQ
+        widget: list
+        required: false
+        i18n: true
+        fields: [{ name: q, label: Питання, widget: string }, { name: a, label: Відповідь, widget: text }]
+
+  # ---------------- БЛОГ ----------------
+  - name: blog
+    label: Блог
+    label_singular: Стаття
+    folder: src/content/blog
+    extension: md
+    format: frontmatter
+    create: true
+    i18n: true
+    slug: "{{fields._slug}}"
+    summary: "{{date}} · {{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Заголовок, widget: string, i18n: true }
+      - { name: description, label: Опис для Google, widget: text, i18n: true }
+      - { name: date, label: Дата, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD, i18n: duplicate }
+      - { name: category, label: "Категорія (MAKE.COM, AI...)", widget: string, i18n: duplicate }
+      - { name: read_minutes, label: Хвилин читання, widget: number, value_type: int, default: 5, i18n: duplicate }
+      - { name: lead, label: Вступ, widget: text, required: false, i18n: true }
+      - { name: related_case, label: "Пов'язаний кейс (slug)", widget: string, required: false, i18n: duplicate }
+      - { name: tags, label: Теги, widget: list, required: false, i18n: true }
+      - { name: draft, label: Чернетка, widget: boolean, default: false, i18n: duplicate }
+      - { name: body, label: Текст статті, widget: markdown, i18n: true }
+
+  # Тексти сторінок (src/data/{uk,en}/*.json) поки редагуються в коді — так безпечніше.

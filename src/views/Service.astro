@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import SecHead from '../components/SecHead.astro';
+import Btn from '../components/Btn.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { url, type Lang } from '../i18n';
+import { data, cases, slugOf, paras } from '../lib/data';
+interface Props { lang: Lang; entry: any }
+const { lang, entry } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').services;
+const d = entry.data;
+const slug = slugOf(entry.id);
+const related = d.related_case ? (await cases(lang)).find((c) => slugOf(c.id) === d.related_case) : undefined;
+const script = lang === 'uk'
+  ? [['u','Добрий вечір! Чи є вільний час на манікюр у суботу?'],['b','Добрий вечір! У суботу вільно о 11:00 і о 15:30. Який час зручніший?',['11:00','15:30']],['u','15:30'],['b','Записала вас на суботу о 15:30. Нагадаю за день. Як вас звати?'],['u','Олена'],['b','Дякую, Олено! Запис підтверджено ✓ Адміністратор уже бачить заявку.']]
+  : [['u','Good evening! Any free slots for a manicure on Saturday?'],['b','Good evening! Saturday is free at 11:00 and 15:30. Which suits you?',['11:00','15:30']],['u','15:30'],['b',"Booked you for Saturday at 15:30. I'll remind you a day before. What's your name?"],['u','Olena'],['b','Thank you, Olena! Booking confirmed ✓ The administrator can already see it.']];
+const page = new URL(url(lang, `/services/${slug}/`), Astro.site).href;
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Service', name: d.title, description: d.description, url: page, provider: { '@type': 'Person', name: site.name }, areaServed: ['UA', 'EU', 'US'] },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: site.home, item: new URL(url(lang, '/'), Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: p.kicker.replace('// ', ''), item: new URL(url(lang, '/services/'), Astro.site).href },
+    { '@type': 'ListItem', position: 3, name: d.title, item: page } ] },
+  ...(d.faq.length ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: d.faq.map((i: any) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })) }] : []),
+];
+---
+<Base lang={lang} title={d.seo_title} description={d.description} jsonld={ld}>
+  <section class="phero grid-bg"><div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,24rem),1fr));gap:3rem;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:1.4rem;min-width:0">
+      <Crumbs items={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', ''), href: url(lang, '/services/') }, { name: d.title }]} />
+      <p class="kicker">{p.service_kicker} · [ {d.code} ]</p>
+      <h1>{d.title}</h1>
+      {d.lead && <p class="lead">{d.lead}</p>}
+      <div class="cta-row">
+        <Btn href={url(lang, '/contact/')}>{site.cta}</Btn>
+        {related && <Btn href={url(lang, `/cases/${slugOf(related.id)}/`)} kind="g">{related.data.title}</Btn>}
+      </div>
+    </div>
+    {d.chat_demo && (
+      <div class="chat rv" role="img" aria-label={p.chat_title}>
+        <div class="chat-top"><span class="av">AI</span><div><b style="font-size:.95rem">{p.chat_title}</b><small>{p.chat_status}</small></div></div>
+        <div class="chat-body" data-chat data-script={JSON.stringify(script)} data-typing={lang === 'uk' ? 'друкує...' : 'typing...'}></div>
+      </div>
+    )}
+  </div></section>
+
+  {d.problem && (
+    <section class="sec"><div class="wrap two">
+      <div class="rv" style="display:flex;flex-direction:column;gap:1rem"><p class="kicker">{p.problem}</p><h2 class="h2">{d.problem_title}</h2></div>
+      <div class="rv prose-block" style="color:var(--soft)">{paras(d.problem).map((t) => <p>{t}</p>)}</div>
+    </div></section>
+  )}
+
+  {d.includes.length > 0 && (
+    <section class="sec"><div class="wrap">
+      <SecHead kicker={p.includes} title={p.includes_title} />
+      <div class="inc rv">{d.includes.map((it: any) => <div><span class="ck">✓</span><div><b>{it.title}</b><p>{it.text}</p></div></div>)}</div>
+    </div></section>
+  )}
+
+  {d.steps.length > 0 && (
+    <section class="sec"><div class="wrap">
+      <SecHead kicker={p.steps} title={p.steps_title} />
+      <div class="steps">{d.steps.map((s: any, i: number) => <div class="step" style={`--d:${i * 0.15}s`}><p class="mono">STEP 0{i + 1}</p><h3>{s.title}</h3><p>{s.text}</p></div>)}</div>
+    </div></section>
+  )}
+
+  <section class="sec"><div class="wrap cases">
+    {related && (
+      <a class="card spot rv" href={url(lang, `/cases/${slugOf(related.id)}/`)} style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr))">
+        <div style="padding:2rem;display:flex;flex-direction:column;gap:.8rem;min-width:0"><p class="kicker">{p.related}</p><p class="h3">{related.data.title}</p><p class="muted">{related.data.summary}</p><span class="go">{site.open_case} <i>→</i></span></div>
+        {related.data.cover && <div style="background:var(--deep);display:flex;align-items:center;justify-content:center;padding:1.5rem"><img src={related.data.cover} alt={related.data.cover_alt} loading="lazy" style="width:11rem;border-radius:.5rem" /></div>}
+      </a>
+    )}
+    <div class="rv" style="border:1px solid var(--brass);padding:2rem;display:flex;flex-direction:column;gap:.9rem">
+      <p class="kicker">{p.price}</p><p class="big-out">{d.price || site.price_on_request}</p>
+      {d.price_note && <p class="muted">{d.price_note}</p>}
+      <div style="margin-top:auto"><Btn href={url(lang, '/contact/')}>{p.price_btn}</Btn></div>
+    </div>
+  </div></section>
+
+  {d.faq.length > 0 && (
+    <section class="sec"><div class="wrap two">
+      <div class="rv" style="display:flex;flex-direction:column;gap:1rem"><p class="kicker">{p.faq}</p><h2 class="h2">{p.faq_title}</h2></div>
+      <div class="rv"><Faq items={d.faq} /></div>
+    </div></section>
+  )}
+  <Cta lang={lang} kicker={p.cta_kicker} />
+</Base>

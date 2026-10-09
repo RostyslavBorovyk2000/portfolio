@@ -1,0 +1,9 @@
+---
+import View from '../../views/Service.astro';
+import { services, slugOf } from '../../lib/data';
+export async function getStaticPaths() {
+  return (await services('uk')).filter((e) => e.data.has_page).map((entry) => ({ params: { slug: slugOf(entry.id) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<View lang="uk" entry={entry} />

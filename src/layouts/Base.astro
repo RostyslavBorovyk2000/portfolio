@@ -1,0 +1,112 @@
+---
+import '../styles/global.css';
+import { url, stripLang, OG_LOCALE, type Lang } from '../i18n';
+import { data, services, slugOf } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  image?: string;
+  jsonld?: object[];
+  noindex?: boolean;
+  type?: 'website' | 'article';
+}
+const { lang, title, description, image = '/img/og.jpg', jsonld = [], noindex = false, type = 'website' } = Astro.props;
+const site = data(lang, 'site');
+const path = stripLang(Astro.url.pathname);
+const canonical = new URL(url(lang, path), Astro.site).href;
+const alt = { uk: new URL(url('uk', path), Astro.site).href, en: new URL(url('en', path), Astro.site).href };
+const ogImage = new URL(image, Astro.site).href;
+const tg = `https://t.me/${site.telegram}`;
+const current = (p: string) => path === p || (p !== '/' && path.startsWith(p));
+const other: Lang = lang === 'uk' ? 'en' : 'uk';
+const svc = await services(lang);
+const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : url(lang, '/services/') + '#' + slugOf(s.id);
+---
+<!doctype html>
+<html lang={lang} data-btn="magnetic">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="uk" href={alt.uk} />
+  <link rel="alternate" hreflang="en" href={alt.en} />
+  <link rel="alternate" hreflang="x-default" href={alt.uk} />
+  {noindex && <meta name="robots" content="noindex" />}
+  <meta property="og:type" content={type} />
+  <meta property="og:site_name" content="Borovyk Automation" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content={OG_LOCALE[lang]} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#141619" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" />
+  {jsonld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+</head>
+<body>
+  <a class="skip" href="#main">{site.skip}</a>
+  <div class="progress" aria-hidden="true"></div>
+  <header class="hdr">
+    <div class="wrap">
+      <a class="logo" href={url(lang, '/')} aria-label={`${site.brand} — ${site.home}`}><i>B</i>{site.brand}</a>
+      <nav class="nav" aria-label={site.menu}>
+        {site.nav.map((n: any) => <a href={url(lang, n.path)} aria-current={current(n.path) ? 'page' : undefined}>{n.label}</a>)}
+        <span class="lang">
+          {lang === 'uk' ? <b>UA</b> : <a href={url('uk', path)} hreflang="uk" lang="uk">UA</a>}
+          {' / '}
+          {lang === 'en' ? <b>EN</b> : <a href={url('en', path)} hreflang="en" lang="en">EN</a>}
+        </span>
+        <a class="btn btn-p btn-sm" href={url(lang, '/contact/')}><span class="lbl">{site.cta}</span><span class="ar" aria-hidden="true">→</span></a>
+      </nav>
+      <button class="burger" type="button" aria-label={site.menu} aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="mnav" aria-label={site.menu}>
+    {site.nav.map((n: any, i: number) => <a href={url(lang, n.path)} aria-current={current(n.path) ? 'page' : undefined}><small>0{i + 1}</small>{n.label}</a>)}
+    <span class="lang">
+      {lang === 'uk' ? <b>UA</b> : <a href={url('uk', path)}>UA</a>} / {lang === 'en' ? <b>EN</b> : <a href={url('en', path)}>EN</a>}
+    </span>
+    <a class="btn btn-p" href={url(lang, '/contact/')}><span class="lbl">{site.cta}</span><span class="ar" aria-hidden="true">→</span></a>
+  </nav>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="ftr">
+    <div class="wrap">
+      <div class="ftr-g">
+        <div>
+          <a class="logo" href={url(lang, '/')}><i>B</i>{site.brand}</a>
+          <p class="muted" style="max-width:30ch">{site.footer_text}</p>
+        </div>
+        <div><h4>{site.footer_site}</h4>{site.nav.filter((n: any) => n.path !== '/services/').map((n: any) => <a href={url(lang, n.path)}>{n.label}</a>)}</div>
+        <div><h4>{site.footer_services}</h4>{svc.map((s) => <a href={svcHref(s)}>{s.data.title}</a>)}</div>
+        <div>
+          <h4>{site.footer_contact}</h4>
+          <a href={tg} target="_blank" rel="noopener">Telegram @{site.telegram}</a>
+          <span><span>{site.email}</span><button class="copy" type="button" data-copy={site.email} data-done={site.copied}>{site.copy}</button></span>
+          <a href={url(other, path)} hreflang={other}>{other === 'en' ? 'English version' : 'Українська версія'}</a>
+        </div>
+      </div>
+      <div class="ftr-b"><span>© {new Date().getFullYear()} {site.brand}</span><span>BOROVYK-AUTOMATION.COM</span></div>
+    </div>
+  </footer>
+
+  <div class="mbar">
+    <a class="btn btn-g" href={tg} target="_blank" rel="noopener"><span class="lbl">{site.mbar_tg}</span></a>
+    <a class="btn btn-p" href={url(lang, '/contact/')}><span class="lbl">{site.mbar_lead}</span><span class="ar" aria-hidden="true">→</span></a>
+  </div>
+  <a class="tgfab" href={tg} target="_blank" rel="noopener"><i aria-hidden="true">✈</i>{site.fab}</a>
+  <script src="../scripts/app.js"></script>
+</body>
+</html>

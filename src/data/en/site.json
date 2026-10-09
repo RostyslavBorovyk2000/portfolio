@@ -1,0 +1,43 @@
+{
+  "brand": "BOROVYK AUTOMATION",
+  "name": "Rostyslav Borovyk",
+  "role": "AI Automation Specialist",
+  "telegram": "bro1201",
+  "email": "rostykfox911@gmail.com",
+  "status": "Open to projects and full-time roles",
+  "nav": [
+    { "label": "Case studies", "path": "/cases/" },
+    { "label": "Services", "path": "/services/" },
+    { "label": "About", "path": "/about/" },
+    { "label": "Blog", "path": "/blog/" },
+    { "label": "Contact", "path": "/contact/" }
+  ],
+  "cta": "Discuss a project",
+  "skip": "Skip to content",
+  "menu": "Menu",
+  "home": "Home",
+  "footer_text": "AI automation for business: Telegram bots, monitoring, content.",
+  "footer_site": "SITE",
+  "footer_services": "SERVICES",
+  "footer_contact": "CONTACT",
+  "copy": "copy",
+  "copied": "copied",
+  "mbar_tg": "Telegram",
+  "mbar_lead": "Send a request",
+  "fab": "Message on Telegram",
+  "open_case": "Open case study",
+  "read_case": "Read case study",
+  "case_soon": "Case study coming soon",
+  "more": "Learn more",
+  "read": "Read",
+  "minutes": "MIN",
+  "price_label": "PRICE",
+  "price_on_request": "On request",
+  "all": "All",
+  "cta_block": {
+    "kicker": "Contact",
+    "title": "What routine should we automate?",
+    "text": "Describe the task in a few sentences. Within a day I'll reply with how to automate it and what it will cost to run.",
+    "btn": "Send a request"
+  }
+}

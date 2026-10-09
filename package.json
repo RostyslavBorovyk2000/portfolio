@@ -1,0 +1,17 @@
+{
+  "name": "borovyk-automation",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "5.18.2"
+  },
+  "engines": { "node": ">=20" }
+}

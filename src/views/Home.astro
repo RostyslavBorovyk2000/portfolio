@@ -1,0 +1,152 @@
+---
+import Base from '../layouts/Base.astro';
+import Btn from '../components/Btn.astro';
+import SecHead from '../components/SecHead.astro';
+import Num from '../components/Num.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import CaseCard from '../components/CaseCard.astro';
+import { url, type Lang } from '../i18n';
+import { data, cases, services, slugOf, inline } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const site = data(lang, 'site');
+const h = data(lang, 'home');
+const allCases = await cases(lang);
+const featured = allCases.find((c) => c.data.featured) ?? allCases[0];
+const rest = allCases.filter((c) => c !== featured).slice(0, 2);
+const svc = await services(lang);
+const svcHref = (s: any) => (s.data.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : url(lang, '/services/') + '#' + slugOf(s.id));
+
+const log = lang === 'uk'
+  ? [['08:00:00','k','pg_cron','запуск autohunter-hourly'],['08:00:02','','auto.ria','47 нових оголошень за фільтрами'],['08:00:03','','supabase','pick_deals(): ринкова ціна для 47 авто'],['08:00:03','','supabase','нижче ринку: 3 · дублікати: 9'],['08:00:05','k','openai','оцінка 3 авто: плюси, ризики, чек-лист'],['08:00:07','g','telegram','✓ надіслано 3 картки'],['08:00:07','','make','використано 39 кредитів (було 158)'],['10:00:00','k','pg_cron','запуск autohunter-hourly'],['10:00:00','','supabase','активних фільтрів: 0'],['10:00:00','g','make','✓ пропущено, 0 кредитів']]
+  : [['08:00:00','k','pg_cron','run autohunter-hourly'],['08:00:02','','auto.ria','47 new listings match filters'],['08:00:03','','supabase','pick_deals(): market price for 47 cars'],['08:00:03','','supabase','below market: 3 · duplicates: 9'],['08:00:05','k','openai','review 3 cars: pros, risks, checklist'],['08:00:07','g','telegram','✓ 3 cards sent'],['08:00:07','','make','39 credits used (was 158)'],['10:00:00','k','pg_cron','run autohunter-hourly'],['10:00:00','','supabase','active filters: 0'],['10:00:00','g','make','✓ skipped, 0 credits']];
+
+const person = {
+  '@context': 'https://schema.org', '@type': 'Person', name: site.name, jobTitle: site.role,
+  url: new URL(url(lang, '/'), Astro.site).href, image: new URL('/img/photo.jpg', Astro.site).href,
+  sameAs: [`https://t.me/${site.telegram}`], knowsAbout: ['Make.com', 'OpenAI', 'Telegram Bot API', 'Supabase', 'AI automation'],
+  address: { '@type': 'PostalAddress', addressCountry: 'UA' },
+};
+const org = {
+  '@context': 'https://schema.org', '@type': 'ProfessionalService', name: 'Borovyk Automation',
+  url: new URL(url(lang, '/'), Astro.site).href, areaServed: ['UA', 'EU', 'US'], founder: { '@type': 'Person', name: site.name },
+  serviceType: svc.map((s) => s.data.title),
+};
+const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: h.faq.items.map((i: any) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })) };
+---
+<Base lang={lang} title={h.seo_title} description={h.seo_description} jsonld={[person, org, faqLd]}>
+  <section class="hero">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="wrap hero-in">
+      <div class="hero-txt">
+        <p class="kicker"><span class="type">{h.hero.kicker}</span></p>
+        <h1><span class="ln"><span>{h.hero.first}</span></span><span class="ln"><span style="--d:.3s">{h.hero.last}</span></span></h1>
+        <p class="lead" set:html={inline(h.hero.lead)} />
+        <div class="cta-row">
+          <Btn href={url(lang, '/contact/')}>{h.hero.btn_main}</Btn>
+          <Btn href={url(lang, '/cases/')} kind="g">{h.hero.btn_second}</Btn>
+        </div>
+        <div class="trust">{h.hero.trust.map((t: string) => <span>{t}</span>)}</div>
+      </div>
+      <div class="hero-ph">
+        <div class="frame"><img src="/img/photo.jpg" srcset="/img/photo-sm.jpg 600w, /img/photo.jpg 1200w" sizes="(max-width:820px) 100vw, 45vw" alt={h.hero.photo_alt} width="1200" height="1800" fetchpriority="high" /></div>
+        <div class="ticks" aria-hidden="true"></div>
+        <div class="chips">
+          <p class="chip" style="--d:.9s"><span class="dot"></span>{site.status}</p>
+          <p class="chip" style="--d:1.1s" set:html={inline(h.hero.chip_cost).replace('<strong>', '<b>').replace('</strong>', '</b>')} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marq" aria-label="Stack">
+    {[0, 1].map((n) => (
+      <div class="marq-tr" aria-hidden={n === 1 ? 'true' : undefined}><b>// STACK</b>{h.stack.map((s: string) => <span>{s}</span>)}</div>
+    ))}
+  </div>
+
+  <section class="sec" style="padding-top:clamp(3rem,6vw,5rem)"><div class="wrap">
+    <div class="nums">{h.numbers.map((n: any, i: number) => <Num value={n.value} label={n.label} delay={i * 0.08} />)}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap live">
+    <div class="rv" style="display:flex;flex-direction:column;gap:1.2rem">
+      <p class="kicker">{h.live.kicker}</p>
+      <h2 class="h2">{h.live.title}</h2>
+      <p class="lead">{h.live.text}</p>
+      <div><Btn href={url(lang, '/cases/autohunter/')} kind="g">{h.live.btn}</Btn></div>
+    </div>
+    <div class="term rv" style="--d:.1s" role="img" aria-label={h.live.label}>
+      <div class="term-top"><i></i><i></i><i></i><span>{h.live.label}</span></div>
+      <div class="term-body" data-term data-lines={JSON.stringify(log)}></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={h.cases.kicker} title={h.cases.title} link={{ href: url(lang, '/cases/'), label: h.cases.all }} />
+    <div class="cases">
+      {featured && <CaseCard lang={lang} entry={featured} big />}
+      {rest.map((c, i) => <CaseCard lang={lang} entry={c} delay={i * 0.08} />)}
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={h.services.kicker} title={h.services.title} link={{ href: url(lang, '/services/'), label: h.services.all }} />
+    <div class="svc rv">
+      {svc.map((s) => (
+        <a href={svcHref(s)}><span class="scode">[ {s.data.code} ]</span><h3 class="h3" style="font-size:1.3rem">{s.data.title}</h3><p>{s.data.short}</p><span class="more">{site.more} →</span></a>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={h.roi.kicker} title={h.roi.title} />
+    <div class="roi rv" data-roi data-h={h.roi.h} data-hm={h.roi.hm}>
+      <div class="roi-in">
+        <p class="muted">{h.roi.intro}</p>
+        <div class="fld"><label for="roi-h">{h.roi.hours} <output id="o-h">10 {h.roi.h}</output></label><input id="roi-h" type="range" min="1" max="40" value="10" /></div>
+        <div class="fld"><label for="roi-r">{h.roi.rate} <output id="o-r">$8</output></label><input id="roi-r" type="range" min="2" max="40" value="8" /></div>
+        <div class="fld"><label for="roi-a">{h.roi.share} <output id="o-a">60%</output></label><input id="roi-a" type="range" min="10" max="90" step="5" value="60" /></div>
+      </div>
+      <div class="roi-out" aria-live="polite">
+        <p class="mono" style="color:var(--dim)">{h.roi.now}</p>
+        <p class="big-out" id="o-cost">$346</p>
+        <div class="roi-row"><span>{h.roi.per_month}</span><b id="o-hm">43 {h.roi.h}</b></div>
+        <div class="roi-row"><span>{h.roi.free}</span><b id="o-free">26 {h.roi.hm}</b></div>
+        <div class="roi-row"><span>{h.roi.year}</span><b id="o-year" style="color:var(--brass-hi)">$2 494</b></div>
+        <Btn href={url(lang, '/contact/')} block>{h.roi.btn}</Btn>
+        <p class="note">{h.roi.note}</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={h.process.kicker} title={h.process.title} />
+    <div class="steps">
+      {h.process.steps.map((s: any, i: number) => (
+        <div class="step" style={`--d:${i * 0.15}s`}><p class="mono">STEP 0{i + 1}</p><h3>{s.title}</h3><p>{s.text}</p></div>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="split rv">
+      <div class="pic"><img src="/img/photo-sm.jpg" alt={site.name} width="600" height="900" style="object-position:50% 60%" /></div>
+      <div class="body">
+        <p class="kicker">{h.about.kicker}</p>
+        <h2 class="h2" style="font-size:clamp(1.6rem,3vw,2.6rem)">{h.about.title}</h2>
+        <p style="color:var(--soft)">{h.about.text}</p>
+        <div><Btn href={url(lang, '/about/')} kind="g">{h.about.btn}</Btn></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap two">
+    <div class="rv" style="display:flex;flex-direction:column;gap:1rem"><p class="kicker">{h.faq.kicker}</p><h2 class="h2">{h.faq.title}</h2></div>
+    <div class="rv"><Faq items={h.faq.items} /></div>
+  </div></section>
+
+  <Cta lang={lang} />
+</Base>

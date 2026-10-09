@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SecHead from '../components/SecHead.astro';
+import Cta from '../components/Cta.astro';
+import { url, type Lang } from '../i18n';
+import { data, services, slugOf } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').services;
+const list = await services(lang);
+const home = new URL(url(lang, '/'), Astro.site).href;
+const ld = [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: list.map((s, i) => ({
+  '@type': 'ListItem', position: i + 1, item: { '@type': 'Service', name: s.data.title, description: s.data.description, provider: { '@type': 'Person', name: site.name } } })) },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: site.home, item: home },
+    { '@type': 'ListItem', position: 2, name: p.kicker.replace('// ', ''), item: new URL(url(lang, '/services/'), Astro.site).href } ] }];
+---
+<Base lang={lang} title={p.seo_title} description={p.seo_description} jsonld={ld}>
+  <PageHero crumbs={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', '') }]} kicker={p.kicker} title={p.title} lead={p.lead} />
+  <section class="sec" style="padding-top:1rem"><div class="wrap">
+    {list.map((s) => {
+      const d = s.data; const Tag = d.has_page ? 'a' : 'div';
+      return (
+        <Tag class="srow rv" id={slugOf(s.id)} href={d.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : undefined}>
+          <span class="mono" style="color:var(--brass-hi);font-size:.9rem">[ {d.code} ]</span>
+          <div style="min-width:0"><h2 class="h3" style="font-size:clamp(1.4rem,2.2vw,1.75rem);margin-bottom:.6rem">{d.title}</h2><p class="muted">{d.short}</p></div>
+          <ul>{d.items.map((i: string) => <li>{i}</li>)}</ul>
+          <div class="price"><span class="meta">{site.price_label}</span><b>{d.price || site.price_on_request}</b>{d.has_page ? <span class="link">{site.more} →</span> : <a class="link" href={url(lang, '/contact/')}>{site.cta} →</a>}</div>
+        </Tag>
+      );
+    })}
+  </div></section>
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={p.always_kicker} title={p.always_title} />
+    <div class="inc rv">{p.always.map((it: any, i: number) => <div><span class="ck">0{i + 1}</span><div><b>{it.title}</b><p>{it.text}</p></div></div>)}</div>
+  </div></section>
+  <Cta lang={lang} />
+</Base>

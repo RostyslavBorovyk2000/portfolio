@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CaseCard from '../components/CaseCard.astro';
+import Btn from '../components/Btn.astro';
+import Cta from '../components/Cta.astro';
+import { url, type Lang } from '../i18n';
+import { data, cases } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').cases;
+const list = await cases(lang);
+const featured = list.find((c) => c.data.featured);
+const rest = list.filter((c) => c !== featured);
+const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: site.home, item: new URL(url(lang, '/'), Astro.site).href },
+  { '@type': 'ListItem', position: 2, name: p.kicker.replace('// ', ''), item: new URL(url(lang, '/cases/'), Astro.site).href } ] };
+---
+<Base lang={lang} title={p.seo_title} description={p.seo_description} jsonld={[crumbs]}>
+  <PageHero crumbs={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', '') }]} kicker={p.kicker} title={p.title} lead={p.lead} />
+  <section class="sec" style="padding-top:2.5rem"><div class="wrap" style="display:flex;flex-direction:column;gap:1.75rem">
+    <div class="filters" data-for="#case-list" role="group">
+      <button type="button" data-f="all" aria-pressed="true">{site.all} · {list.length}</button>
+      {p.filters.map((f: any) => <button type="button" data-f={f.key} aria-pressed="false">{f.label}</button>)}
+    </div>
+    <div class="cases" id="case-list">
+      {featured && <CaseCard lang={lang} entry={featured} big showTags />}
+      {rest.map((c, i) => <CaseCard lang={lang} entry={c} delay={i * 0.08} showTags />)}
+    </div>
+    <div class="rv" style="border:1px dashed var(--line2);padding:2rem;display:flex;justify-content:space-between;align-items:center;gap:1.25rem;flex-wrap:wrap">
+      <div><p class="meta">{p.slot_label}</p><p class="h3" style="margin-top:.4rem">{p.slot_title}</p></div>
+      <Btn href={url(lang, '/contact/')} kind="g">{p.slot_btn}</Btn>
+    </div>
+  </div></section>
+  <Cta lang={lang} />
+</Base>

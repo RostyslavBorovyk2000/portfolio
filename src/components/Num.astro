@@ -1,0 +1,5 @@
+---
+interface Props { value: string; label: string; delay?: number }
+const { value, label, delay = 0 } = Astro.props;
+---
+<div class="num rv" style={`--d:${delay}s`}><strong data-count={value}>{value}</strong><span>{label}</span></div>

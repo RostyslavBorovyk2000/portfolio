@@ -1,0 +1,6 @@
+---
+interface Props { href: string; kind?: 'p' | 'g'; size?: 'sm'; block?: boolean; external?: boolean; arrow?: boolean }
+const { href, kind = 'p', size, block, external, arrow = true } = Astro.props;
+const cls = ['btn', `btn-${kind}`, size && 'btn-sm', block && 'btn-block'].filter(Boolean).join(' ');
+---
+<a class={cls} href={href} {...(external ? { target: '_blank', rel: 'noopener' } : {})}><span class="lbl"><slot /></span>{arrow && <span class="ar" aria-hidden="true">→</span>}</a>

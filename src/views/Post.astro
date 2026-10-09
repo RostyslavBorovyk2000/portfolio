@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Tags from '../components/Tags.astro';
+import Cta from '../components/Cta.astro';
+import { render } from 'astro:content';
+import { url, type Lang } from '../i18n';
+import { data, cases, slugOf } from '../lib/data';
+interface Props { lang: Lang; entry: any }
+const { lang, entry } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').blog;
+const d = entry.data;
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2);
+const related = d.related_case ? (await cases(lang)).find((c) => slugOf(c.id) === d.related_case) : undefined;
+const fmt = new Intl.DateTimeFormat(lang === 'uk' ? 'uk-UA' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const page = new URL(url(lang, `/blog/${slugOf(entry.id)}/`), Astro.site).href;
+const ld = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: d.title, description: d.description, datePublished: d.date.toISOString(),
+  inLanguage: lang, url: page, mainEntityOfPage: page, author: { '@type': 'Person', name: site.name }, image: new URL('/img/og.jpg', Astro.site).href }];
+---
+<Base lang={lang} title={`${d.title} — Borovyk Automation`} description={d.description} jsonld={ld} type="article">
+  <section class="phero grid-bg"><div class="wrap" style="max-width:56rem">
+    <Crumbs items={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', ''), href: url(lang, '/blog/') }, { name: d.title }]} />
+    <p class="meta" style="display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:1rem"><span style="color:var(--brass-hi)">{d.category}</span><time datetime={d.date.toISOString()}>{fmt.format(d.date)}</time><span>{d.read_minutes} {p.read_time}</span></p>
+    <h1 style="max-width:22ch;font-size:clamp(2rem,4.6vw,3.75rem)">{d.title}</h1>
+    {d.lead && <p class="lead">{d.lead}</p>}
+    <div class="author"><img src="/img/photo-sm.jpg" alt={site.name} width="600" height="900" /><div><b style="font-size:.95rem">{site.name}</b><p class="meta">{site.role.toUpperCase()}</p></div></div>
+  </div></section>
+  <section class="sec" style="padding-top:4rem"><div class="wrap art">
+    <nav class="toc" aria-label={p.toc}>
+      <p class="meta" style="color:var(--dim)">{p.toc}</p>
+      {toc.map((h, i) => <a href={`#${h.slug}`} class={i === 0 ? 'on' : undefined}>0{i + 1} · {h.text}</a>)}
+    </nav>
+    <article>
+      <Content />
+      <div style="border-top:1px solid var(--line);padding-top:1.75rem"><Tags items={d.tags} /></div>
+      <div class="pager">
+        <a href={url(lang, '/blog/')}><p class="meta">{p.all}</p><p class="h3" style="margin-top:.5rem">{p.back}</p></a>
+        {related && <a href={url(lang, `/cases/${slugOf(related.id)}/`)}><p class="meta">{p.related}</p><p class="h3" style="margin-top:.5rem">{related.data.title}</p></a>}
+      </div>
+    </article>
+    <div></div>
+  </div></section>
+  <Cta lang={lang} kicker={p.cta_kicker} title={p.cta_title} text={p.cta_text} />
+</Base>
