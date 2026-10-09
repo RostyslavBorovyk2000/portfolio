@@ -8,11 +8,30 @@
   "email": "rostykfox911@gmail.com",
   "status": "Відкритий до проєктів і найму",
   "nav": [
-    { "label": "Кейси", "path": "/cases/" },
-    { "label": "Послуги", "path": "/services/" },
-    { "label": "Про мене", "path": "/about/" },
-    { "label": "Блог", "path": "/blog/" },
-    { "label": "Контакти", "path": "/contact/" }
+    {
+      "label": "Кейси",
+      "path": "/cases/"
+    },
+    {
+      "label": "Послуги",
+      "path": "/services/"
+    },
+    {
+      "label": "Про мене",
+      "path": "/about/"
+    },
+    {
+      "label": "Блог",
+      "path": "/blog/"
+    },
+    {
+      "label": "Відгуки",
+      "path": "/reviews/"
+    },
+    {
+      "label": "Контакти",
+      "path": "/contact/"
+    }
   ],
   "cta": "Обговорити проєкт",
   "skip": "Перейти до змісту",

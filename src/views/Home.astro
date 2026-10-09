@@ -6,8 +6,9 @@ import Num from '../components/Num.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import CaseCard from '../components/CaseCard.astro';
+import ReviewCard from '../components/ReviewCard.astro';
 import { url, type Lang } from '../i18n';
-import { data, cases, services, slugOf, inline } from '../lib/data';
+import { data, cases, services, reviews, slugOf, inline } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -17,6 +18,8 @@ const allCases = await cases(lang);
 const featured = allCases.find((c) => c.data.featured) ?? allCases[0];
 const rest = allCases.filter((c) => c !== featured).slice(0, 2);
 const svc = await services(lang);
+const revs = (await reviews()).slice(0, 3);
+const rp = data(lang, 'pages').reviews;
 const svcHref = (s: any) => (s.data.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : url(lang, '/services/') + '#' + slugOf(s.id));
 
 const log = lang === 'uk'
@@ -142,6 +145,13 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       </div>
     </div>
   </div></section>
+
+  {revs.length > 0 && (
+    <section class="sec"><div class="wrap">
+      <SecHead kicker={rp.home_kicker} title={rp.home_title} link={{ href: url(lang, '/reviews/'), label: rp.home_all }} />
+      <div class="revs">{revs.map((r, i) => <ReviewCard entry={r} lang={lang} delay={i * 0.08} />)}</div>
+    </div></section>
+  )}
 
   <section class="sec"><div class="wrap two">
     <div class="rv" style="display:flex;flex-direction:column;gap:1rem"><p class="kicker">{h.faq.kicker}</p><h2 class="h2">{h.faq.title}</h2></div>

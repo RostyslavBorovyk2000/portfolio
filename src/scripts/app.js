@@ -181,14 +181,13 @@
   });
 
   /* ---- форма заявки → /api/lead (Cloudflare Pages Function → Telegram) ---- */
-  var form = d.getElementById('lead');
-  if (form) {
+  d.querySelectorAll('form[data-api], form#lead').forEach(function (form) {
     var t0 = Date.now();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var ok = true;
       form.querySelectorAll('[required]').forEach(function (x) {
-        var f = x.closest('.f'), bad = !x.value.trim();
+        var f = x.closest('.f'), bad = x.type === 'checkbox' ? !x.checked : !x.value.trim();
         f.classList.toggle('bad', bad); f.querySelector('.err').textContent = bad ? form.getAttribute('data-required') : ''; if (bad) ok = false;
       });
       if (!ok) { form.querySelector('.bad input, .bad textarea').focus(); return; }
@@ -198,18 +197,18 @@
       var fd = new FormData(form), data = Object.fromEntries(fd.entries());
       data.channels = fd.getAll('channels').join(', ');
       data.lang = root.lang; data.page = location.pathname; data.elapsed = Date.now() - t0;
-      fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      fetch(form.getAttribute('data-api') || '/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(function () {
           form.hidden = true;
-          var done = d.getElementById('lead-done');
+          var done = d.getElementById(form.getAttribute('data-done') || 'lead-done');
           done.querySelector('[data-name]').textContent = data.name;
           done.hidden = false; done.focus();
         })
         .catch(function () { status.textContent = form.getAttribute('data-error'); })
         .finally(function () { btn.disabled = false; lbl.textContent = old; });
     });
-  }
+  });
 
   /* ---- копіювання контактів ---- */
   d.addEventListener('click', function (e) {

@@ -1,0 +1,16 @@
+---
+import { paras } from '../lib/data';
+interface Props { entry: any; lang: 'uk' | 'en'; delay?: number }
+const { entry, lang, delay = 0 } = Astro.props;
+const d = entry.data;
+const date = d.date.toLocaleDateString(lang === 'uk' ? 'uk-UA' : 'en-GB', { month: 'long', year: 'numeric' });
+---
+<figure class="card rev rv" style={`--d:${delay}s`}>
+  <p class="rev-stars" aria-label={`${d.rating}/5`}>{'★'.repeat(d.rating)}<span>{'★'.repeat(5 - d.rating)}</span></p>
+  <blockquote>{paras(entry.body ?? '').map((t) => <p>{t}</p>)}</blockquote>
+  <figcaption>
+    <b>{d.name}</b>
+    {d.role && <span>{d.role}</span>}
+    <small class="meta">{[d.project, date, d.link ? null : d.source].filter(Boolean).join(' · ')}{d.link && <> · <a href={d.link} target="_blank" rel="noopener nofollow">{d.source}</a></>}</small>
+  </figcaption>
+</figure>

@@ -8,11 +8,30 @@
   "email": "rostykfox911@gmail.com",
   "status": "Open to projects and full-time roles",
   "nav": [
-    { "label": "Case studies", "path": "/cases/" },
-    { "label": "Services", "path": "/services/" },
-    { "label": "About", "path": "/about/" },
-    { "label": "Blog", "path": "/blog/" },
-    { "label": "Contact", "path": "/contact/" }
+    {
+      "label": "Case studies",
+      "path": "/cases/"
+    },
+    {
+      "label": "Services",
+      "path": "/services/"
+    },
+    {
+      "label": "About",
+      "path": "/about/"
+    },
+    {
+      "label": "Blog",
+      "path": "/blog/"
+    },
+    {
+      "label": "Reviews",
+      "path": "/reviews/"
+    },
+    {
+      "label": "Contact",
+      "path": "/contact/"
+    }
   ],
   "cta": "Discuss a project",
   "skip": "Skip to content",

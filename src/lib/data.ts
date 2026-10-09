@@ -26,6 +26,11 @@ export async function posts(lang: Lang) {
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
+export async function reviews() {
+  return (await getCollection('reviews', (e) => e.data.published))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+
 /** **жирний** → <strong>, решта екранується */
 export function inline(s = ''): string {
   const esc = s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));

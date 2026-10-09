@@ -14,6 +14,54 @@ const json = (body, status = 200) =>
 const clean = (v, n) => String(v ?? '').replace(/\s+\n/g, '\n').trim().slice(0, n);
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
 
+// Спільні перевірки для форм: секрети, Origin, JSON, антиспам. Повертає body або Response.
+async function readForm(request, env) {
+  if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return json({ ok: false, error: 'not_configured' }, 500);
+  const origin = request.headers.get('Origin') || '';
+  if (origin && new URL(origin).host !== new URL(request.url).host) return json({ ok: false, error: 'origin' }, 403);
+  let body;
+  try { body = await request.json(); } catch { return json({ ok: false, error: 'bad_json' }, 400); }
+  if (body.website || Number(body.elapsed) < 3000) return json({ ok: true });
+  return body;
+}
+
+async function sendTg(env, text) {
+  const r = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text, parse_mode: 'HTML', disable_web_page_preview: true }),
+  });
+  return r.ok ? json({ ok: true }) : json({ ok: false, error: 'telegram' }, 502);
+}
+
+// Відгук → тобі в Telegram на перевірку. На сайт потрапляє лише після публікації в /admin.
+async function handleReview(request, env) {
+  const body = await readForm(request, env);
+  if (body instanceof Response) return body;
+  const rv = {
+    name: clean(body.name, 100),
+    role: clean(body.role, 120),
+    project: clean(body.project, 120),
+    text: clean(body.text, 2000),
+    rating: Math.min(5, Math.max(1, parseInt(body.rating, 10) || 5)),
+  };
+  if (!rv.name || !rv.text || body.consent !== 'yes') return json({ ok: false, error: 'required' }, 422);
+  const host = new URL(request.url).origin;
+  const text = [
+    `<b>⭐ Новий відгук з сайту</b> ${'★'.repeat(rv.rating)}${'☆'.repeat(5 - rv.rating)}`,
+    '',
+    `<b>Ім'я:</b> ${esc(rv.name)}`,
+    `<b>Компанія/роль:</b> ${esc(rv.role || '—')}`,
+    `<b>Проєкт:</b> ${esc(rv.project || '—')}`,
+    '',
+    `<b>Відгук:</b>\n${esc(rv.text)}`,
+    '',
+    `✅ Дозвіл на публікацію: так`,
+    `Опублікувати: ${host}/admin/#/collections/reviews/new`,
+  ].join('\n');
+  return sendTg(env, text);
+}
+
 async function handleLead(request, env) {
   if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return json({ ok: false, error: 'not_configured' }, 500);
 
@@ -69,6 +117,11 @@ export default {
     if (pathname === '/api/lead' || pathname === '/api/lead/') {
       if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405);
       try { return await handleLead(request, env); }
+      catch { return json({ ok: false, error: 'server' }, 500); }
+    }
+    if (pathname === '/api/review' || pathname === '/api/review/') {
+      if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405);
+      try { return await handleReview(request, env); }
       catch { return json({ ok: false, error: 'server' }, 500); }
     }
     // SEO: одна адреса для кожної сторінки — www → без www, і завжди зі слешем у кінці (301)

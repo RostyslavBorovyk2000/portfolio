@@ -166,4 +166,27 @@ collections:
       - { name: draft, label: Чернетка, widget: boolean, default: false, i18n: duplicate }
       - { name: body, label: Текст статті, widget: markdown, i18n: true }
 
+  # ---------------- ВІДГУКИ ----------------
+  # Новий відгук приходить у Telegram-бота. Перевір його і створи тут запис — він з'явиться на сайті (обидві мови).
+  - name: reviews
+    label: Відгуки
+    label_singular: Відгук
+    folder: src/content/reviews
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{name}}"
+    summary: "{{date}} · {{name}} · {{rating}}★"
+    sortable_fields: [date, name]
+    fields:
+      - { name: name, label: "Ім'я", widget: string }
+      - { name: role, label: "Компанія або роль", widget: string, required: false }
+      - { name: rating, label: "Оцінка (1–5)", widget: number, value_type: int, min: 1, max: 5, default: 5 }
+      - { name: date, label: Дата, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD }
+      - { name: project, label: "Що робили (необов'язково)", widget: string, required: false }
+      - { name: source, label: "Джерело (сайт, Fiverr, Telegram…)", widget: string, default: "сайт" }
+      - { name: link, label: "Посилання на оригінал (необов'язково)", widget: string, required: false }
+      - { name: published, label: Показувати на сайті, widget: boolean, default: true }
+      - { name: body, label: Текст відгуку, widget: text }
+
   # Тексти сторінок (src/data/{uk,en}/*.json) поки редагуються в коді — так безпечніше.

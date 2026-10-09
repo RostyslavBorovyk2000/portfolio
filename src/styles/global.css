@@ -543,3 +543,24 @@ html[data-btn="scan"] .btn::after{opacity:.35;transform:scale(1)}
 .vid video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
 .vid p{border-top:1px solid var(--line);padding:.9rem 1.1rem;font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
 .hero-thumb{width:100%;max-width:40rem;aspect-ratio:3/2;object-fit:cover}
+
+/* ---- відгуки ---- */
+.revs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,22rem),1fr));gap:1.25rem}
+.rev{margin:0;padding:clamp(1.4rem,2.5vw,2rem);display:flex;flex-direction:column;gap:1.1rem}
+.rev-stars{color:var(--brass);letter-spacing:.15em;font-size:1.05rem}.rev-stars span{color:var(--line2)}
+.rev blockquote{margin:0;color:var(--soft);display:flex;flex-direction:column;gap:.7rem;flex:1}
+.rev figcaption{display:flex;flex-direction:column;gap:.2rem;border-top:1px solid var(--line);padding-top:1rem}
+.rev figcaption span{color:var(--muted);font-size:.92rem}
+.rev figcaption a{color:inherit}
+.stars{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:.25rem}
+.stars input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.stars label{cursor:pointer;font-size:2rem;line-height:1;color:var(--line2);transition:color .2s,transform .2s var(--ease)}
+.stars label::before{content:"★"}
+.stars label:hover,.stars label:hover~label,.stars input:checked~label{color:var(--brass)}
+.stars label:hover{transform:scale(1.15)}
+.stars input:focus-visible+label{outline:2px solid var(--brass);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.chk{display:grid!important;grid-template-columns:auto 1fr;gap:.4rem .7rem;align-items:start;cursor:pointer}
+.chk input{width:1.15rem;height:1.15rem;margin-top:.15rem;accent-color:var(--brass)}
+.chk em{font-style:normal;color:var(--soft);font-size:.95rem}
+.chk .err{grid-column:2}

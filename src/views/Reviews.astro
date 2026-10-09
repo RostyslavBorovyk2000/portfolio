@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import { url, type Lang } from '../i18n';
+import { data, reviews } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const site = data(lang, 'site');
+const p = data(lang, 'pages').reviews;
+const list = await reviews();
+---
+<Base lang={lang} title={p.seo_title} description={p.seo_description}>
+  <PageHero crumbs={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', '') }]} kicker={p.kicker} title={p.title} lead={p.lead} />
+
+  {list.length > 0 && (
+    <section class="sec" style="padding-top:3rem"><div class="wrap revs">
+      {list.map((r, i) => <ReviewCard entry={r} lang={lang} delay={(i % 3) * 0.08} />)}
+    </div></section>
+  )}
+
+  <section class="sec" style={list.length ? '' : 'padding-top:3rem'}><div class="wrap cgrid">
+    <div>
+      <form class="cform" id="review" data-api="/api/review" data-done="review-done" novalidate data-required={p.required} data-sending={p.sending} data-error={p.error}>
+        <p class="kicker">{p.form_kicker}</p>
+        <div class="row2">
+          <label class="f" for="r-name"><span>{p.name}</span><input id="r-name" name="name" autocomplete="name" maxlength="100" placeholder={p.name_ph} required /><small class="err"></small></label>
+          <label class="f" for="r-role"><span>{p.role} <i class="opt">· {p.opt}</i></span><input id="r-role" name="role" autocomplete="organization" maxlength="120" placeholder={p.role_ph} /><small class="err"></small></label>
+        </div>
+        <div class="row2">
+          <fieldset class="f" style="border:0;padding:0;margin:0;min-width:0">
+            <legend class="leg">{p.rating}</legend>
+            <div class="stars" style="margin-top:.5rem">
+              {[5, 4, 3, 2, 1].map((n) => <><input type="radio" name="rating" id={`st${n}`} value={n} checked={n === 5} /><label for={`st${n}`} title={p.stars[n - 1]}><span class="sr">{p.stars[n - 1]}</span></label></>)}
+            </div>
+          </fieldset>
+          <label class="f" for="r-project"><span>{p.project} <i class="opt">· {p.opt}</i></span><input id="r-project" name="project" maxlength="120" placeholder={p.project_ph} /><small class="err"></small></label>
+        </div>
+        <label class="f" for="r-text"><span>{p.text}</span><textarea id="r-text" name="text" maxlength="2000" placeholder={p.text_ph} required></textarea><small class="err"></small></label>
+        <label class="f chk" for="r-consent"><input type="checkbox" id="r-consent" name="consent" value="yes" required /><em>{p.consent}</em><small class="err"></small></label>
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap">
+          <p class="note" style="max-width:38ch">{p.privacy}</p>
+          <button class="btn btn-p" type="submit"><span class="lbl">{p.submit}</span><span class="ar" aria-hidden="true">→</span></button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="done" id="review-done" tabindex="-1" hidden>
+        <p class="kicker">{p.done_kicker}</p>
+        <p class="h3">{p.done_title}, <span data-name></span>!</p>
+        <p class="muted">{p.done_text}</p>
+      </div>
+    </div>
+    <aside class="side-c">
+      {list.length === 0 && <div class="chan hi"><span class="meta" style="color:var(--brass-hi)">{p.empty_title.toUpperCase()}</span><p style="color:var(--soft)">{p.empty_text}</p></div>}
+      <div class="chan"><span class="meta">{p.side_title}</span><p style="color:var(--soft)">{p.side_text}</p></div>
+    </aside>
+  </div></section>
+</Base>

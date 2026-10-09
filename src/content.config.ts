@@ -77,4 +77,18 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { cases, services, blog };
+const reviews = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/reviews' }),
+  schema: z.object({
+    name: z.string(),
+    role: z.string().optional(),
+    rating: z.number().min(1).max(5).default(5),
+    date: z.coerce.date(),
+    project: z.string().optional(),
+    source: z.string().default('сайт'),
+    link: z.string().optional(),
+    published: z.boolean().default(true),
+  }),
+});
+
+export const collections = { cases, services, blog, reviews };
