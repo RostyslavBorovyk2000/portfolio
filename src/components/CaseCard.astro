@@ -27,6 +27,18 @@ const Tag = href ? 'a' : 'div';
     </div>
   </Tag>
 ) : (
+  d.thumb ? (
+    <Tag class="card has-thumb spot rv" href={href} data-cat={d.category.join(' ')} style={`--d:${delay}s`}>
+      <img class="thumb" src={d.thumb} alt="" loading="lazy" width="1200" height="800" />
+      <div class="card-body">
+        <p class="meta">{d.meta}</p>
+        <h3 class="h3">{d.title}</h3>
+        <p class="muted">{d.summary}</p>
+        {showTags && <Tags items={d.stack} />}
+        {href ? <span class="go">{site.open_case} <i>→</i></span> : <span class="go" style="color:var(--dim)">{site.case_soon}</span>}
+      </div>
+    </Tag>
+  ) : (
   <Tag class="card case-sm spot rv" href={href} data-cat={d.category.join(' ')} style={`--d:${delay}s`}>
     <p class="meta">{d.meta}</p>
     <h3 class="h3">{d.title}</h3>
@@ -34,4 +46,5 @@ const Tag = href ? 'a' : 'div';
     {showTags && <Tags items={d.stack} />}
     {href ? <span class="go">{site.open_case} <i>→</i></span> : <span class="go" style="color:var(--dim)">{site.case_soon}</span>}
   </Tag>
+  )
 )}

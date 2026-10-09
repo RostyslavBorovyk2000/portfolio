@@ -1,14 +1,31 @@
 {
   "cases": {
     "seo_title": "AI automation case studies — Borovyk Automation",
-    "seo_description": "Real AI automation projects: AutoHunter, AI autoposting for Telegram, an AI administrator for a beauty salon. Task, solution, numbers.",
+    "seo_description": "Real AI automation projects: AutoHunter, an AI salon administrator, Telegram autoposting, sales call analysis, reports, a voice assistant. Task, solution, diagram.",
     "kicker": "// Case studies",
     "title": "Systems that already work",
     "lead": "Real projects with numbers: how much time the routine took, what I built and what it costs to run.",
     "filters": [
-      { "key": "bot", "label": "Telegram bots" },
-      { "key": "mon", "label": "Monitoring" },
-      { "key": "cnt", "label": "Content" }
+      {
+        "key": "bot",
+        "label": "Telegram bots"
+      },
+      {
+        "key": "ana",
+        "label": "AI analytics and reports"
+      },
+      {
+        "key": "cnt",
+        "label": "Content and outreach"
+      },
+      {
+        "key": "mon",
+        "label": "Monitoring"
+      },
+      {
+        "key": "dev",
+        "label": "Python"
+      }
     ],
     "slot_label": "SPACE FOR THE NEXT CASE STUDY",
     "slot_title": "Your project could be here",
@@ -34,12 +51,30 @@
     "always_kicker": "// In every project",
     "always_title": "Always included",
     "always": [
-      { "title": "Running-cost estimate", "text": "You know the monthly service costs before we start." },
-      { "title": "Key security", "text": "API keys live only in secure vaults, never in chat messages." },
-      { "title": "Documentation", "text": "Diagram, guide and video. The system doesn't depend on me." },
-      { "title": "Team training", "text": "I show how to use it and what to do when something changes." },
-      { "title": "Real-data testing", "text": "Launch only after testing on your actual scenarios." },
-      { "title": "Post-launch report", "text": "How much time and money the system actually saves." }
+      {
+        "title": "Running-cost estimate",
+        "text": "You know the monthly service costs before we start."
+      },
+      {
+        "title": "Key security",
+        "text": "API keys live only in secure vaults, never in chat messages."
+      },
+      {
+        "title": "Documentation",
+        "text": "Diagram, guide and video. The system doesn't depend on me."
+      },
+      {
+        "title": "Team training",
+        "text": "I show how to use it and what to do when something changes."
+      },
+      {
+        "title": "Real-data testing",
+        "text": "Launch only after testing on your actual scenarios."
+      },
+      {
+        "title": "Post-launch report",
+        "text": "How much time and money the system actually saves."
+      }
     ],
     "service_kicker": "// Service",
     "problem": "// Problem",
@@ -61,41 +96,107 @@
     "seo_description": "Rostyslav Borovyk: AI automation with Make.com, Supabase and OpenAI. AI LAB graduate, author of AutoHunter. Freelance and open to full-time roles.",
     "kicker": "// About",
     "title": "Hi, I'm Rostyslav",
-    "lead": "An AI automation specialist from Ukraine. I build systems that take routine work off businesses and design them to cost as little as possible to run.",
+    "lead": "An AI automation specialist from Ukraine. I came to automation from front-end development, so I think like an engineer: a system should run on its own, be easy to understand and cost as little as possible.",
     "btn": "Message me",
     "approach_kicker": "// Approach",
     "approach_title": "An engineer, not a button-pusher",
     "approach": [
-      "I completed the AI Specialist course at AI LAB. My graduation project is AutoHunter: an AI bot that monitors AUTO.RIA and finds cars priced below market.",
+      "Before AI I studied front-end development: HTML, CSS, JavaScript, React. That's where my habit of understanding what's under the hood and doing things neatly comes from.",
+      "In 2026 I completed the AI Specialist course at AI LAB. During the course I built eight working automations: Telegram bots, AI analysis of sales calls, an email filter, monthly YouTube reports, personalised outreach, an AI administrator for a salon and autoposting for a Telegram channel. My graduation project is AutoHunter: a bot that monitors AUTO.RIA and finds cars priced below market.",
       "My rule is simple: heavy logic goes into the database, and AI is called only where it's really needed. That's how AutoHunter's Make usage dropped from 158 to 39 credits per run.",
-      "I work with clients as a freelancer and I'm open to a full-time role in a team building AI products."
+      "For myself I wrote Jarvis, a Python voice assistant that understands Ukrainian and controls my computer. I work with clients as a freelancer and I'm open to a full-time role in a team building AI products."
     ],
     "stack_kicker": "// Stack",
     "stack_title": "What I work with",
     "stack": [
-      { "value": "Make.com", "label": "AUTOMATION" },
-      { "value": "OpenAI · Claude", "label": "AI" },
-      { "value": "Supabase · PostgreSQL", "label": "DATABASE" },
-      { "value": "Telegram Bot API", "label": "MESSAGING" },
-      { "value": "Google Sheets · Notion", "label": "DATA" },
-      { "value": "pg_cron · pg_net", "label": "SCHEDULING" }
+      {
+        "value": "Make.com",
+        "label": "AUTOMATION"
+      },
+      {
+        "value": "OpenAI · Claude",
+        "label": "AI"
+      },
+      {
+        "value": "Supabase · PostgreSQL",
+        "label": "DATABASE"
+      },
+      {
+        "value": "Telegram Bot API",
+        "label": "MESSAGING"
+      },
+      {
+        "value": "Google Sheets · Calendar · Gmail",
+        "label": "GOOGLE"
+      },
+      {
+        "value": "Python",
+        "label": "SCRIPTS"
+      },
+      {
+        "value": "Apify · AssemblyAI",
+        "label": "DATA"
+      },
+      {
+        "value": "HTML · CSS · JS · React · Astro",
+        "label": "FRONT-END"
+      }
     ],
     "facts_kicker": "// In short",
     "facts_title": "Facts",
     "facts": [
-      { "label": "LOCATION", "value": "Ukraine · remote" },
-      { "label": "FORMAT", "value": "Freelance · open to hire" },
-      { "label": "EDUCATION", "value": "AI LAB · AI Specialist" },
-      { "label": "FLAGSHIP", "value": "AutoHunter" },
-      { "label": "LANGUAGES", "value": "Ukrainian · English" },
-      { "label": "REPLY", "value": "within a day" }
+      {
+        "label": "LOCATION",
+        "value": "Ukraine · remote"
+      },
+      {
+        "label": "FORMAT",
+        "value": "Freelance · open to hire"
+      },
+      {
+        "label": "EDUCATION",
+        "value": "AI LAB · AI Specialist"
+      },
+      {
+        "label": "BEFORE AI",
+        "value": "Front-end · React"
+      },
+      {
+        "label": "PROJECTS",
+        "value": "10 automations"
+      },
+      {
+        "label": "LANGUAGES",
+        "value": "Ukrainian · English"
+      },
+      {
+        "label": "REPLY",
+        "value": "within a day"
+      }
     ],
     "path_kicker": "// Path",
     "path_title": "How I got here",
     "path": [
-      { "label": "2026", "title": "AI LAB", "text": "AI Specialist course: Make, AI agents, databases." },
-      { "label": "2026", "title": "AutoHunter", "text": "Graduation project: monitoring, AI evaluation, bot." },
-      { "label": "NOW", "title": "Client projects", "text": "Autoposting, an AI administrator, new tasks." }
+      {
+        "label": "2023",
+        "title": "Front-end",
+        "text": "HTML, CSS, JavaScript and React: first websites and team projects."
+      },
+      {
+        "label": "2026",
+        "title": "AI LAB",
+        "text": "AI Specialist course: eight working automations on Make, OpenAI and Google."
+      },
+      {
+        "label": "2026",
+        "title": "AutoHunter",
+        "text": "Graduation project: AUTO.RIA monitoring, AI review, bot, costs −75%."
+      },
+      {
+        "label": "NOW",
+        "title": "Clients and my own products",
+        "text": "Autoposting, an AI administrator, Jarvis and new tasks."
+      }
     ],
     "cta_kicker": "Work together?",
     "cta_title": "Get in touch",
@@ -113,7 +214,13 @@
     "contact": "TELEGRAM OR EMAIL *",
     "contact_ph": "@username or email",
     "budget": "BUDGET",
-    "budgets": ["under $300", "$300–800", "$800–2000", "$2000+", "not sure yet"],
+    "budgets": [
+      "under $300",
+      "$300–800",
+      "$800–2000",
+      "$2000+",
+      "not sure yet"
+    ],
     "task": "TASK *",
     "task_ph": "What takes up your time? For example: I spend 3 hours a day answering clients in Direct and want a bot that books appointments",
     "privacy": "Your request comes straight to my Telegram. Data is never shared with third parties.",
@@ -127,7 +234,11 @@
     "tg_label": "TELEGRAM · FASTEST",
     "email_label": "EMAIL",
     "next_label": "WHAT HAPPENS NEXT",
-    "next": ["I read your request and reply within a day.", "A free 30-minute call to review the task.", "A proposal: plan, timeline, price and running costs."]
+    "next": [
+      "I read your request and reply within a day.",
+      "A free 30-minute call to review the task.",
+      "A proposal: plan, timeline, price and running costs."
+    ]
   },
   "blog": {
     "seo_title": "Blog on AI automation and Make.com — Borovyk Automation",

@@ -8,16 +8,42 @@
     "lead": "I build **AI-powered Telegram bots**, monitoring and automations on Make.com and Supabase. They take routine work off your team and cost very little to run.",
     "btn_main": "Discuss a project",
     "btn_second": "See case studies",
-    "trust": ["Reply within a day", "First review is free", "Running costs calculated upfront"],
+    "trust": [
+      "Reply within a day",
+      "First review is free",
+      "Running costs calculated upfront"
+    ],
     "chip_cost": "RUN COST: **158 → 39** credits",
     "photo_alt": "Rostyslav Borovyk, AI automation specialist"
   },
-  "stack": ["MAKE.COM", "OPENAI", "CLAUDE", "SUPABASE", "POSTGRESQL", "TELEGRAM BOT API", "NOTION", "GOOGLE SHEETS", "PG_CRON"],
+  "stack": [
+    "MAKE.COM",
+    "OPENAI",
+    "CLAUDE",
+    "SUPABASE",
+    "POSTGRESQL",
+    "TELEGRAM BOT API",
+    "NOTION",
+    "GOOGLE SHEETS",
+    "PG_CRON"
+  ],
   "numbers": [
-    { "value": "3", "label": "working AI systems in the portfolio" },
-    { "value": "−75%", "label": "Make credits per run after optimisation" },
-    { "value": "622", "label": "listings AutoHunter processed on day one" },
-    { "value": "$0.54", "label": "total AI cost for a full day of testing" }
+    {
+      "value": "10",
+      "label": "AI automations in the portfolio"
+    },
+    {
+      "value": "−75%",
+      "label": "Make credits per run after optimisation"
+    },
+    {
+      "value": "622",
+      "label": "listings AutoHunter processed on day one"
+    },
+    {
+      "value": "$0.54",
+      "label": "total AI cost for a full day of testing"
+    }
   ],
   "live": {
     "kicker": "// Under the hood",
@@ -26,8 +52,16 @@
     "btn": "Case breakdown",
     "label": "DEMO LOG · AUTOHUNTER"
   },
-  "cases": { "kicker": "// Case studies", "title": "Systems in production", "all": "All case studies →" },
-  "services": { "kicker": "// Services", "title": "What I automate", "all": "All services →" },
+  "cases": {
+    "kicker": "// Case studies",
+    "title": "Systems in production",
+    "all": "All case studies →"
+  },
+  "services": {
+    "kicker": "// Services",
+    "title": "What I automate",
+    "all": "All services →"
+  },
   "roi": {
     "kicker": "// Calculator",
     "title": "What does your routine cost?",
@@ -48,26 +82,50 @@
     "kicker": "// How I work",
     "title": "From task to launch",
     "steps": [
-      { "title": "Task review", "text": "A free call: I map the process and measure how much time it takes." },
-      { "title": "Prototype", "text": "A first working version within a few days, so you see real results." },
-      { "title": "Test and launch", "text": "Testing on real data, fixes, and training for your team." },
-      { "title": "Support", "text": "Error monitoring, improvements and control of service costs." }
+      {
+        "title": "Task review",
+        "text": "A free call: I map the process and measure how much time it takes."
+      },
+      {
+        "title": "Prototype",
+        "text": "A first working version within a few days, so you see real results."
+      },
+      {
+        "title": "Test and launch",
+        "text": "Testing on real data, fixes, and training for your team."
+      },
+      {
+        "title": "Support",
+        "text": "Error monitoring, improvements and control of service costs."
+      }
     ]
   },
   "about": {
     "kicker": "// About",
     "title": "An automation engineer who counts every credit",
-    "text": "I completed the AI Specialist course at AI LAB; my graduation project is AutoHunter. I work with clients as a freelancer and I'm open to a full-time role.",
+    "text": "I came to AI from front-end development. I completed the AI Specialist course at AI LAB, built 10 automations, and my graduation project is AutoHunter. I freelance and I'm open to a full-time role.",
     "btn": "More about me"
   },
   "faq": {
     "kicker": "// FAQ",
     "title": "Frequently asked questions",
     "items": [
-      { "q": "How long does development take?", "a": "A simple bot takes a few days. A system like AutoHunter with a database and AI takes 2–4 weeks, depending on the task." },
-      { "q": "How much does it cost to run?", "a": "Services (Make, AI, database) usually cost tens of dollars per month. I design the system to keep that number low and show you the calculation before we start." },
-      { "q": "Do I need technical knowledge?", "a": "No. You describe the process in plain words, I turn it into automation and train your team to use it." },
-      { "q": "What happens after launch?", "a": "I can maintain the system: monitor errors, update prompts and keep costs under control." }
+      {
+        "q": "How long does development take?",
+        "a": "A simple bot takes a few days. A system like AutoHunter with a database and AI takes 2–4 weeks, depending on the task."
+      },
+      {
+        "q": "How much does it cost to run?",
+        "a": "Services (Make, AI, database) usually cost tens of dollars per month. I design the system to keep that number low and show you the calculation before we start."
+      },
+      {
+        "q": "Do I need technical knowledge?",
+        "a": "No. You describe the process in plain words, I turn it into automation and train your team to use it."
+      },
+      {
+        "q": "What happens after launch?",
+        "a": "I can maintain the system: monitor errors, update prompts and keep costs under control."
+      }
     ]
   }
 }

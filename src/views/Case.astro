@@ -30,13 +30,15 @@ const ld = [
     <div style="display:flex;flex-direction:column;gap:1.4rem;min-width:0">
       <Crumbs items={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', ''), href: url(lang, '/cases/') }, { name: d.title }]} />
       <p class="kicker">{p.case_kicker}</p>
-      <h1>{d.title}</h1>
+      <h1 style="font-size:clamp(1.8rem,3.4vw,3.2rem)">{d.title}</h1>
       <p class="lead">{d.summary}</p>
       {d.facts.length > 0 && <div class="facts" style="border-top:1px solid var(--line2)">{d.facts.map((f: any) => <div><span>{f.label}</span><span>{f.value}</span></div>)}</div>}
       <Tags items={d.stack} />
     </div>
     {d.cover ? (
       <div class="ticks" style="position:relative;background:var(--deep);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:clamp(1.5rem,4vw,3rem)"><img src={d.cover} alt={d.cover_alt} width="720" height="935" style="width:19rem;border-radius:.6rem" /></div>
+    ) : d.thumb ? (
+      <div class="ticks" style="position:relative;justify-self:center;width:100%;max-width:40rem"><img class="hero-thumb" src={d.thumb} alt={d.cover_alt} width="1200" height="800" fetchpriority="high" /></div>
     ) : (
       <div class="arch grid-bg" style="background-size:3rem 3rem;display:flex;flex-direction:column;gap:.9rem">
         {d.flow.map((n: any) => <div class="node"><span class="mono">{n.code}</span><b>{n.name}</b><small>{n.sub}</small></div>)}
@@ -67,7 +69,7 @@ const ld = [
     </div></section>
   )}
 
-  {d.cover && d.flow.length > 0 && (
+  {(d.cover || d.thumb) && d.flow.length > 0 && (
     <section class="sec"><div class="wrap">
       <SecHead kicker={p.architecture} title={p.architecture_title} />
       <div class="arch grid-bg rv" style="background-size:3rem 3rem">
@@ -81,13 +83,16 @@ const ld = [
     </div></section>
   )}
 
-  {(d.images.length > 0 || d.quote) && (
+  {(d.images.length > 0 || d.quote || d.video) && (
     <section class="sec"><div class="wrap" style="display:flex;flex-direction:column;gap:2.5rem">
       <SecHead kicker={p.result} title={p.result_title} />
+      {d.video && (
+        <div class="vid rv"><video controls preload="none" playsinline poster={d.video.poster} src={d.video.src}></video>{d.video.caption && <p>{d.video.caption}</p>}</div>
+      )}
       {d.images.length > 0 && (
         <div class="gal">
           {d.images.map((im: any, i: number) => (
-            <figure class="rv" style={`--d:${i * 0.08}s`}><div><img src={im.src} alt={im.alt} loading="lazy" style={im.src.includes('monitor') ? 'width:100%;border-radius:.5rem' : 'width:15rem;border-radius:.5rem'} /></div><figcaption>{im.caption}</figcaption></figure>
+            <figure class="rv" style={`--d:${(i % 3) * 0.08}s`}><div><img src={im.src} alt={im.alt} loading="lazy" /></div><figcaption>{im.caption}</figcaption></figure>
           ))}
         </div>
       )}

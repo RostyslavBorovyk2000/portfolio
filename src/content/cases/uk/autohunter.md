@@ -8,6 +8,7 @@ order: 1
 featured: true
 cover: /img/card.jpg
 cover_alt: Картка авто в боті AutoHunter
+video: { src: /video/autohunter.mp4, poster: /video/autohunter-poster.jpg, caption: "Відео-демо роботи AutoHunter · 2:26" }
 images:
   - { src: /img/card.jpg, alt: Картка авто з оцінкою AI, caption: 01 · Картка авто з оцінкою AI }
   - { src: /img/monitor.jpg, alt: Моніторинг і статистика, caption: 02 · Моніторинг і статистика }

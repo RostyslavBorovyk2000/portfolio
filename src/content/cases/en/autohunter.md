@@ -8,6 +8,7 @@ order: 1
 featured: true
 cover: /img/card.jpg
 cover_alt: Car card in the AutoHunter bot
+video: { src: /video/autohunter.mp4, poster: /video/autohunter-poster.jpg, caption: "AutoHunter demo video (in Ukrainian) · 2:26" }
 images:
   - { src: /img/card.jpg, alt: Car card with AI review, caption: 01 · Car card with AI review }
   - { src: /img/monitor.jpg, alt: Monitoring and statistics, caption: 02 · Monitoring and statistics }

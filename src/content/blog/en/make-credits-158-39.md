@@ -1,7 +1,7 @@
 ---
 title: How I cut Make usage from 158 to 39 credits
 description: "A practical breakdown: moving logic from Make.com scenarios into Supabase SQL functions. What changed, how much it saved and when not to do it."
-date: 2026-10-09
+date: 2026-10-06
 category: MAKE.COM
 read_minutes: 4
 lead: One AutoHunter monitoring run used to cost 158 operations. After moving the logic into the database it costs 39. Here's exactly what I changed.

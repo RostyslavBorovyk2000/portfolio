@@ -19,7 +19,7 @@ const page = new URL(url(lang, `/blog/${slugOf(entry.id)}/`), Astro.site).href;
 const ld = [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: d.title, description: d.description, datePublished: d.date.toISOString(),
   inLanguage: lang, url: page, mainEntityOfPage: page, author: { '@type': 'Person', name: site.name }, image: new URL('/img/og.jpg', Astro.site).href }];
 ---
-<Base lang={lang} title={`${d.title} — Borovyk Automation`} description={d.description} jsonld={ld} type="article">
+<Base lang={lang} title={`${d.title} — Borovyk Automation`} description={d.description} jsonld={ld} type="article" image={related?.data.thumb ?? related?.data.cover ?? '/img/og.jpg'}>
   <section class="phero grid-bg"><div class="wrap" style="max-width:56rem">
     <Crumbs items={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', ''), href: url(lang, '/blog/') }, { name: d.title }]} />
     <p class="meta" style="display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:1rem"><span style="color:var(--brass-hi)">{d.category}</span><time datetime={d.date.toISOString()}>{fmt.format(d.date)}</time><span>{d.read_minutes} {p.read_time}</span></p>

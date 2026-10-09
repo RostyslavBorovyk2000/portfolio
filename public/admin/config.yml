@@ -48,12 +48,13 @@ collections:
         widget: select
         multiple: true
         i18n: duplicate
-        options: [{ label: Telegram-боти, value: bot }, { label: Моніторинг, value: mon }, { label: Контент, value: cnt }, { label: Інтеграції, value: api }]
+        options: [{ label: Telegram-боти, value: bot }, { label: AI-аналітика, value: ana }, { label: Контент, value: cnt }, { label: Моніторинг, value: mon }, { label: Python, value: dev }]
       - { name: order, label: Порядок, widget: number, value_type: int, default: 10, i18n: duplicate }
       - { name: featured, label: Головний кейс (велика картка), widget: boolean, default: false, i18n: duplicate }
       - { name: has_page, label: Має окрему сторінку, widget: boolean, default: true, i18n: duplicate }
       - { name: draft, label: Чернетка (не показувати), widget: boolean, default: false, i18n: duplicate }
-      - { name: cover, label: Обкладинка, widget: image, required: false, i18n: duplicate }
+      - { name: cover, label: "Вертикальне фото (для головного кейсу)", widget: image, required: false, i18n: duplicate }
+      - { name: thumb, label: "Обкладинка картки (3:2)", widget: image, required: false, i18n: true }
       - { name: cover_alt, label: Опис обкладинки (alt), widget: string, required: false, i18n: true }
       - name: kpis
         label: Цифри
