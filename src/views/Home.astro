@@ -42,7 +42,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="wrap hero-in">
       <div class="hero-txt">
         <p class="kicker"><span class="type">{h.hero.kicker}</span></p>
-        <h1><span class="ln"><span>{h.hero.first}</span></span><span class="ln"><span style="--d:.3s">{h.hero.last}</span></span></h1>
+        <h1><span class="ln"><span>{h.hero.first}</span></span> <span class="ln"><span style="--d:.3s">{h.hero.last}</span></span></h1>
         <p class="lead" set:html={inline(h.hero.lead)} />
         <div class="cta-row">
           <Btn href={url(lang, '/contact/')}>{h.hero.btn_main}</Btn>

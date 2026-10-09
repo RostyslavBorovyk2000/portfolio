@@ -25,7 +25,7 @@ const ld = [
   { '@context': 'https://schema.org', '@type': 'CreativeWork', name: d.title, description: d.description, author: { '@type': 'Person', name: site.name }, inLanguage: lang },
 ];
 ---
-<Base lang={lang} title={`${d.title} — ${p.case_kicker.replace('// ', '')} · Borovyk Automation`} description={d.description} image={d.cover ?? '/img/og.jpg'} jsonld={ld}>
+<Base lang={lang} title={`${d.title} — ${p.case_kicker.replace('// ', '')} · Borovyk Automation`} description={d.description} image={d.cover ?? d.thumb ?? '/img/og.jpg'} jsonld={ld}>
   <section class="phero grid-bg"><div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:3rem;align-items:center">
     <div style="display:flex;flex-direction:column;gap:1.4rem;min-width:0">
       <Crumbs items={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', ''), href: url(lang, '/cases/') }, { name: d.title }]} />
