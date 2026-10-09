@@ -18,7 +18,7 @@ html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (min-width:1921px){html{font-size:calc(100vw / 120)}}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:1.0625rem;line-height:1.6;overflow-x:hidden}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 [hidden]{display:none!important}
 a{color:inherit}
 h1,h2,h3{text-wrap:balance;margin:0;overflow-wrap:break-word}
@@ -524,3 +524,4 @@ html[data-btn="scan"] .btn::after{opacity:.35;transform:scale(1)}
 .art article img{border:1px solid var(--line)}
 .done:focus{outline:none}
 .prose-block p + p{margin-top:1rem}
+.case-big .vis img:only-child{max-width:72%}
