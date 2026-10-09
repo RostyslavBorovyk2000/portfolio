@@ -1,6 +1,7 @@
 /**
- * POST /api/lead — заявка з форми сайту → повідомлення в Telegram.
- * Cloudflare Pages Function. Секрети задаються в Cloudflare (Settings → Variables and Secrets):
+ * Cloudflare Worker: роздає статичний сайт (dist/) і приймає POST /api/lead —
+ * заявку з форми → повідомлення в Telegram.
+ * Секрети задаються в Cloudflare (Worker → Settings → Variables and Secrets):
  *   TG_BOT_TOKEN — токен бота для заявок (від @BotFather)
  *   TG_CHAT_ID   — твій chat id (куди надсилати заявки)
  * Make не потрібен: 0 кредитів на заявку.
@@ -13,7 +14,7 @@ const json = (body, status = 200) =>
 const clean = (v, n) => String(v ?? '').replace(/\s+\n/g, '\n').trim().slice(0, n);
 const esc = (s) => s.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
 
-export async function onRequestPost({ request, env }) {
+async function handleLead(request, env) {
   if (!env.TG_BOT_TOKEN || !env.TG_CHAT_ID) return json({ ok: false, error: 'not_configured' }, 500);
 
   // Приймаємо лише запити з нашого сайту
@@ -58,4 +59,14 @@ export async function onRequestPost({ request, env }) {
   return json({ ok: true });
 }
 
-export const onRequest = () => json({ ok: false, error: 'method' }, 405);
+export default {
+  async fetch(request, env) {
+    const { pathname } = new URL(request.url);
+    if (pathname === '/api/lead' || pathname === '/api/lead/') {
+      if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405);
+      try { return await handleLead(request, env); }
+      catch { return json({ ok: false, error: 'server' }, 500); }
+    }
+    return env.ASSETS.fetch(request);
+  },
+};

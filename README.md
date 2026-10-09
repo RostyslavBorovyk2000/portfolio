@@ -2,7 +2,7 @@
 
 Сайт-портфоліо Ростислава Боровика: AI-автоматизація, Telegram-боти, Make.com.
 
-**Стек:** [Astro 5](https://astro.build) (статичний сайт) · Sveltia CMS (адмінка на `/admin/`) · Cloudflare Pages (хостинг) · Cloudflare Pages Functions (форма заявки → Telegram).
+**Стек:** [Astro 5](https://astro.build) (статичний сайт) · Sveltia CMS (адмінка на `/admin/`) · Cloudflare Workers зі static assets (хостинг + форма заявки → Telegram).
 
 ## Запуск у себе
 
@@ -30,7 +30,8 @@ src/
   pages/              ← маршрути: українська без префікса, англійська в /en/
   styles/global.css   ← дизайн Graphite (токени на :root)
   scripts/app.js      ← анімації, кнопки «Магніт», калькулятор, форма
-functions/api/lead.js ← POST /api/lead: заявка → Telegram
+worker/index.js       ← Cloudflare Worker: роздає dist/ і приймає POST /api/lead → Telegram
+wrangler.jsonc        ← налаштування Worker
 public/
   admin/              ← Sveltia CMS
   img/                ← фото, og.jpg для превʼю в соцмережах
@@ -43,16 +44,18 @@ public/
 
 Кейс без окремої сторінки: `has_page: false` (картка покаже «Кейс готується»).
 
-## Деплой (Cloudflare Pages)
+## Деплой (Cloudflare Workers)
 
-1. Cloudflare → Workers & Pages → Create → Pages → Connect to Git → цей репозиторій.
-2. Framework preset: **Astro**. Build command: `npm run build`. Output: `dist`.
+1. Cloudflare → Workers & Pages → Create application → Import a repository → цей репозиторій.
+2. Settings → Build: **Build command** `npm run build`, **Deploy command** `npx wrangler deploy`.
 3. Settings → Variables and Secrets → додай **секрети**:
    - `TG_BOT_TOKEN` — токен бота для заявок (@BotFather)
    - `TG_CHAT_ID` — твій chat id
-4. Custom domains → `borovyk-automation.com`.
+4. Domains → Add custom domain → `borovyk-automation.com`.
 
 Кожен push у `main` автоматично оновлює сайт.
+
+Локально з Worker: створи `.dev.vars` з тими самими змінними і запусти `npm run cf:dev`.
 
 ## Адмінка
 
