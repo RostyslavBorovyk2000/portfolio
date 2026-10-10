@@ -124,9 +124,10 @@ export default {
       try { return await handleReview(request, env); }
       catch { return json({ ok: false, error: 'server' }, 500); }
     }
-    // SEO: одна адреса для кожної сторінки — www → без www, і завжди зі слешем у кінці (301)
+    // SEO: одна адреса для кожної сторінки — http → https, www → без www, і завжди зі слешем у кінці (301)
     const url = new URL(request.url);
     let moved = false;
+    if (url.protocol === 'http:' && !url.hostname.endsWith('localhost')) { url.protocol = 'https:'; moved = true; }
     if (url.hostname.startsWith('www.')) { url.hostname = url.hostname.slice(4); moved = true; }
     if (!url.pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(url.pathname)) { url.pathname += '/'; moved = true; }
     if (moved && (request.method === 'GET' || request.method === 'HEAD')) return Response.redirect(url.toString(), 301);
