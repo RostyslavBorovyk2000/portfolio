@@ -46,6 +46,14 @@ const ld = [
     )}
   </div></section>
 
+  {d.demo && (
+    <section class="sec" style="padding-top:clamp(3rem,6vw,5rem)"><div class="wrap" style="display:flex;flex-direction:column;gap:1.2rem">
+      <SecHead kicker={p.demo_kicker} title={p.demo_title} link={{ href: d.demo.src + (lang === 'en' ? '?lang=en' : ''), label: p.demo_btn + ' ↗' }} />
+      <p class="muted rv" style="max-width:60ch">{p.demo_text}</p>
+      <div class="demo-frame rv"><iframe src={d.demo.src + (lang === 'en' ? '?lang=en' : '')} title={d.title} loading="lazy" style={`height:${d.demo.height}px`}></iframe></div>
+    </div></section>
+  )}
+
   {d.kpis.length > 0 && (
     <section class="sec" style="padding-top:clamp(3rem,6vw,5rem)"><div class="wrap"><div class="kgrid">
       {d.kpis.map((k: any, i: number) => <Num value={k.value} label={k.label} delay={i * 0.08} />)}

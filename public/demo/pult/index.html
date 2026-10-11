@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="uk" style="background:#141619"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Демо: AI-пульт керування бізнесом · Borovyk Automation</title>
+<meta name="description" content="Інтерактивне демо пульта керування малим бізнесом: задачі власника й AI-асистента, контент-план, клієнти і фінанси.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: control desk — status strip on top, tabbed work surfaces below, brand Graphite palette (dark-first) */
+:root{
+  --bg:#141619; --panel:#1B1E22; --panel2:#22262B; --line:#2E3238; --fg:#ECE8DF; --soft:#B9B4A8; --dim:#8C877C;
+  --brass:#C9A44C; --brass-hi:#E0BE6A; --ok:#7BC47F; --warn:#E3A857; --bad:#E07A5F; --on-brass:#141619;
+  --f-display:"Unbounded","Arial Black",sans-serif; --f-body:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.5}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:20px}
+header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:38px;height:38px;border:2px solid var(--brass);color:var(--brass);display:grid;place-items:center;font-family:var(--f-display);font-weight:700}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(1.25rem,3vw,1.6rem);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.kick{font-family:var(--f-mono);font-size:.75rem;color:var(--brass);letter-spacing:.06em;text-transform:uppercase;margin:0}
+.week{font-family:var(--f-mono);font-size:.8rem;color:var(--dim)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stat{background:var(--panel);padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.stat b{font-family:var(--f-display);font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums}
+.stat span{font-size:.8rem;color:var(--dim)}
+.bar{height:4px;background:var(--panel2);margin-top:4px}.bar i{display:block;height:100%;background:var(--brass);width:0;transition:width .4s}
+nav.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+nav.tabs button{background:none;border:0;color:var(--soft);font:500 .95rem var(--f-body);padding:10px 14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--brass)}
+nav.tabs button:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+section.pane{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:820px){.grid2{grid-template-columns:1fr}}
+.box{background:var(--panel);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.box h2{font-family:var(--f-display);font-weight:500;font-size:1rem;margin:0}
+.muted{color:var(--dim);font-size:.85rem;margin:0}
+.day{display:flex;flex-direction:column;gap:6px}
+.day h3{font-family:var(--f-mono);font-size:.75rem;color:var(--brass);letter-spacing:.06em;margin:4px 0 0;text-transform:uppercase}
+.task{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;padding:8px 10px;background:var(--panel2);border-left:3px solid var(--line)}
+.task.me{border-left-color:var(--brass)}
+.task.done{opacity:.55}.task.done .tt{text-decoration:line-through}
+.task input{width:18px;height:18px;accent-color:var(--brass);margin-top:2px}
+.tt{min-width:0;overflow-wrap:anywhere}
+.who{font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border:1px solid var(--line);color:var(--dim);white-space:nowrap}
+.who.c{color:var(--brass);border-color:var(--brass)}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{font-family:var(--f-mono);font-size:.7rem;color:var(--dim);text-align:left;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.pill{font-family:var(--f-mono);font-size:.7rem;padding:2px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.s-draft{color:var(--dim)}.s-ready{color:var(--warn)}.s-done{color:var(--ok)}.s-err{color:var(--bad)}
+select,input[type=text],input[type=number],input[type=date]{background:var(--panel2);color:var(--fg);border:1px solid var(--line);padding:8px 10px;font:inherit;font-size:.9rem;min-width:0}
+input[type=text]{flex:1 1 200px}
+.btn{background:var(--brass);color:var(--on-brass);border:0;padding:9px 14px;font:600 .9rem var(--f-body);cursor:pointer}
+.btn.g{background:none;color:var(--fg);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
+.lk{display:flex;flex-direction:column;gap:2px;padding:12px 14px;background:var(--panel);border:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.lk:hover{border-color:var(--brass)}
+.lk small{font-family:var(--f-mono);font-size:.7rem;color:var(--dim);overflow-wrap:anywhere}
+.lk b{font-weight:600}
+.empty{padding:18px;border:1px dashed var(--line);color:var(--dim);font-size:.9rem}
+.note{font-family:var(--f-mono);font-size:.72rem;color:var(--dim)}
+.plat{font-family:var(--f-mono);font-size:.7rem;color:var(--soft);white-space:nowrap}
+.money-in{color:var(--ok)}.money-out{color:var(--bad)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.demo-bar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px;background:var(--panel2);border-bottom:1px solid var(--brass);font-size:.88rem;color:var(--soft)}
+.demo-bar b{font-family:var(--f-mono);color:var(--brass);letter-spacing:.08em;font-weight:500}
+.btn.sm{padding:6px 12px;font-size:.82rem;text-decoration:none;display:inline-block}
+a.btn{color:var(--on-brass)}
+</style>
+</head><body>
+<div class="demo-bar"><span><b data-t="demoTag">ДЕМО</b> <span data-t="demoText">Дані вигадані, зміни не зберігаються. Потикайте: ставте галочки, міняйте статуси, додавайте записи.</span></span>
+  <span class="row" style="gap:6px"><button class="btn g sm" id="langBtn" type="button">EN</button><button class="btn g sm" id="resetBtn" type="button" data-t="reset">Скинути</button><a class="btn sm" href="https://borovyk-automation.com/contact/" target="_top" data-t="cta">Хочу такий пульт</a></span></div>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="mark" aria-hidden="true">Х</div>
+      <div><p class="kick" data-t="kick">// пульт керування</p><h1 data-t="brand">SMM-агенція «Хвиля»</h1></div></div>
+    <span class="week" id="weekLabel"></span>
+  </header>
+  <div class="stats" aria-label="Summary">
+    <div class="stat"><span data-t="sTasks">Задачі тижня</span><b id="kTasks">—</b><div class="bar"><i id="kTasksBar"></i></div></div>
+    <div class="stat"><span data-t="sPosts">Пости опубліковано</span><b id="kPosts">—</b><div class="bar"><i id="kPostsBar"></i></div></div>
+    <div class="stat"><span data-t="sClients">Клієнти в роботі</span><b id="kClients">—</b><span id="kLeads"></span></div>
+    <div class="stat"><span data-t="sMoney">Баланс місяця</span><b id="kMoney">—</b><span id="kMoneySub"></span></div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="tasks" data-t="tTasks">Задачі</button>
+    <button role="tab" aria-selected="false" data-tab="posts" data-t="tPosts">Контент</button>
+    <button role="tab" aria-selected="false" data-tab="clients" data-t="tClients">Клієнти</button>
+    <button role="tab" aria-selected="false" data-tab="money" data-t="tMoney">Фінанси</button>
+  </nav>
+  <section class="pane" id="p-tasks">
+    <div class="row">
+      <input type="text" id="newTask" maxlength="200" data-ph="phTask" aria-label="New task">
+      <select id="newTaskDay" aria-label="Day"></select>
+      <select id="newTaskWho" aria-label="Who"></select>
+      <button class="btn" id="addTask" type="button" data-t="add">Додати</button>
+    </div>
+    <div id="taskList" class="grid2"></div>
+  </section>
+  <section class="pane" id="p-posts" hidden>
+    <p class="muted" data-t="postsNote">План публікацій. «Готово» означає, що пост погоджено, і автопостинг опублікує його в дату.</p>
+    <div class="tbl box" style="padding:0"><table>
+      <thead><tr><th data-t="thDate">Дата</th><th data-t="thRubric">Рубрика</th><th data-t="thTopic">Тема</th><th data-t="thWhere">Куди</th><th data-t="thStatus">Статус</th></tr></thead>
+      <tbody id="postRows"></tbody></table></div>
+  </section>
+  <section class="pane" id="p-clients" hidden>
+    <div class="row">
+      <input type="text" id="cName" maxlength="80" data-ph="phClient" aria-label="Client">
+      <input type="text" id="cService" maxlength="120" data-ph="phService" aria-label="Service">
+      <input type="number" id="cAmount" min="0" step="1" data-ph="phAmount" aria-label="Amount" style="width:110px">
+      <button class="btn" id="addClient" type="button" data-t="add">Додати</button>
+    </div>
+    <div class="tbl box" style="padding:0"><table>
+      <thead><tr><th data-t="thClient">Клієнт</th><th data-t="thService">Що потрібно</th><th data-t="thStage">Етап</th><th style="text-align:right" data-t="thAmount">Сума</th></tr></thead>
+      <tbody id="clientRows"></tbody></table></div>
+  </section>
+  <section class="pane" id="p-money" hidden>
+    <div class="row">
+      <select id="mType" aria-label="Type"></select>
+      <input type="number" id="mAmount" min="0" step="0.01" data-ph="phAmount" aria-label="Amount" style="width:110px">
+      <input type="text" id="mNote" maxlength="120" data-ph="phNote" aria-label="Note">
+      <button class="btn" id="addMoney" type="button" data-t="add">Додати</button>
+    </div>
+    <div class="tbl box" style="padding:0"><table>
+      <thead><tr><th data-t="thDate">Дата</th><th data-t="thNote">Опис</th><th style="text-align:right" data-t="thAmount">Сума</th></tr></thead>
+      <tbody id="moneyRows"></tbody></table></div>
+  </section>
+  <p class="note" data-t="foot">Це демо. Справжній пульт синхронізується між власником, командою і AI-асистентом, який сам оновлює задачі, контент-план і звіти.</p>
+</div>
+<script src="demo.js"></script>
+</body></html>

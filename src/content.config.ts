@@ -19,6 +19,7 @@ const cases = defineCollection({
     cover: z.string().optional(),
     thumb: z.string().optional(),
     video: z.object({ src: z.string(), poster: z.string().optional(), caption: z.string().optional() }).optional(),
+    demo: z.object({ src: z.string(), height: z.number().default(760) }).optional(),
     cover_alt: z.string().default(''),
     images: z.array(z.object({ src: z.string(), alt: z.string(), caption: z.string() })).default([]),
     kpis: z.array(kv).default([]),

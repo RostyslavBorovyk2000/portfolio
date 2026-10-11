@@ -564,3 +564,7 @@ html[data-btn="scan"] .btn::after{opacity:.35;transform:scale(1)}
 .chk input{width:1.15rem;height:1.15rem;margin-top:.15rem;accent-color:var(--brass)}
 .chk em{font-style:normal;color:var(--soft);font-size:.95rem}
 .chk .err{grid-column:2}
+
+.demo-frame{border:1px solid var(--brass);background:var(--deep);overflow:hidden}
+.demo-frame iframe{display:block;width:100%;border:0}
+@media (max-width:640px){.demo-frame iframe{height:900px!important}}

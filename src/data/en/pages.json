@@ -40,7 +40,11 @@
     "all": "← ALL CASE STUDIES",
     "back": "Back to the list",
     "next": "NEXT CASE STUDY →",
-    "cta_kicker": "Want the same?"
+    "cta_kicker": "Want the same?",
+    "demo_kicker": "// Live demo",
+    "demo_title": "Try it yourself",
+    "demo_text": "A working version with sample data. Tick tasks, change statuses, add rows — you can't break anything.",
+    "demo_btn": "Open full screen"
   },
   "services": {
     "seo_title": "AI automation services: Telegram bots, Make.com, monitoring — Borovyk Automation",
