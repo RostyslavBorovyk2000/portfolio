@@ -4,7 +4,7 @@ description: "One page where the owner and an AI assistant run the week's tasks,
 meta: "COCKPIT · AI ASSISTANT · DASHBOARD"
 summary: "Not a subscription to someone else's CRM, but a system I build around your processes: clients, tasks, content and finances on one screen, with an AI assistant that updates statuses and runs the analytics. Demo below."
 category: ["dev", "ana"]
-order: 4
+order: 2
 has_page: true
 thumb: /img/cases/cover-pult.jpg
 cover_alt: "Business cockpit: weekly tasks, content, clients and finances"

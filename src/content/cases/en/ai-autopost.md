@@ -4,7 +4,7 @@ description: "Telegram channel automation on Make.com: collecting competitor pos
 meta: CLIENT · CONTENT · MAKE · OPENAI
 summary: Every day the system finds the most engaging AI news from competitors, writes a digest in the channel's voice, draws an image and publishes it after one tap.
 category: [cnt, bot]
-order: 3
+order: 4
 has_page: true
 thumb: /img/cases/cover-autopost-en.jpg
 cover_alt: AI autoposting — diagram and post draft

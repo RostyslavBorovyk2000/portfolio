@@ -4,8 +4,7 @@ description: How I built an AI bot that monitors AUTO.RIA, rates cars against th
 meta: FLAGSHIP · MAKE · SUPABASE · OPENAI · TELEGRAM
 summary: An AI hunter for good car deals on AUTO.RIA. It checks new listings every 2 hours, compares the price with the market and sends a Telegram card with advice on what to inspect.
 category: [bot, mon]
-order: 1
-featured: true
+order: 3
 cover: /img/card.jpg
 cover_alt: Car card in the AutoHunter bot
 video: { src: /video/autohunter.mp4, poster: /video/autohunter-poster.jpg, caption: "AutoHunter demo video (in Ukrainian) · 2:26" }

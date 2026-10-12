@@ -4,15 +4,16 @@ description: "A Telegram bot that books clients into a nail studio 24/7: service
 meta: AI ASSISTANT · TELEGRAM · MAKE · OPENAI
 summary: The bot books clients 24/7, shows masters' free slots, reminds them about the visit and keeps the booking sheet instead of an administrator.
 category: [bot]
-order: 2
+order: 1
+featured: true
 has_page: true
 thumb: /img/cases/cover-salon-en.jpg
 cover_alt: AI salon administrator — scenario diagram and bot dialogue
 kpis:
-  - { value: "97 + 6", label: modules in two Make scenarios }
-  - { value: "14", label: "logic branches: booking, rescheduling, cancelling" }
   - { value: "24/7", label: bookings without an administrator }
   - { value: "8–10 h", label: "per month freed from messaging (estimate at 30–40 bookings)" }
+  - { value: "14", label: "logic branches: booking, rescheduling, cancelling" }
+  - { value: "97 + 6", label: modules in two Make scenarios }
 stack: [MAKE.COM, OPENAI, TELEGRAM BOT API, GOOGLE SHEETS, GOOGLE CALENDAR]
 facts:
   - { label: ROLE, value: Design and development }

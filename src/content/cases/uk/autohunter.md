@@ -4,8 +4,7 @@ description: Як я побудував AI-бота, що моніторить A
 meta: ФЛАГМАН · MAKE · SUPABASE · OPENAI · TELEGRAM
 summary: AI-мисливець за вигідними авто на AUTO.RIA. Моніторить оголошення кожні 2 години, оцінює ціну відносно ринку і надсилає в Telegram картку з порадою, що перевірити на огляді.
 category: [bot, mon]
-order: 1
-featured: true
+order: 3
 cover: /img/card.jpg
 cover_alt: Картка авто в боті AutoHunter
 video: { src: /video/autohunter.mp4, poster: /video/autohunter-poster.jpg, caption: "Відео-демо роботи AutoHunter · 2:26" }

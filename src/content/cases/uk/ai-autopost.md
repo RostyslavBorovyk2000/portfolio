@@ -4,7 +4,7 @@ description: "Автоматизація Telegram-каналу на Make.com: з
 meta: КЛІЄНТ · КОНТЕНТ · MAKE · OPENAI
 summary: Щодня система сама знаходить найцікавіші новини AI у конкурентів, пише підбірку у стилі каналу, малює картинку і публікує її після одного натискання кнопки.
 category: [cnt, bot]
-order: 3
+order: 4
 has_page: true
 thumb: /img/cases/cover-autopost.jpg
 cover_alt: AI-автопостинг — схема і чернетка поста

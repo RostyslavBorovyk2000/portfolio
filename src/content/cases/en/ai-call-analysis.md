@@ -4,7 +4,7 @@ description: "Automatic analysis of sales call recordings: AssemblyAI transcript
 meta: "AI ANALYTICS · SALES"
 summary: "Call recording → transcript → AI summary, sentiment and next steps in a sheet. The manager gets recommendations in Telegram, the head gets an email about negative calls."
 category: ["ana", "bot"]
-order: 4
+order: 5
 has_page: true
 thumb: /img/cases/cover-calls-en.jpg
 cover_alt: "AI analysis of sales calls"

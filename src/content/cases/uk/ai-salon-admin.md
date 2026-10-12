@@ -4,15 +4,17 @@ description: "Telegram-бот, що сам записує клієнтів у с
 meta: AI-АСИСТЕНТ · TELEGRAM · MAKE · OPENAI
 summary: Бот сам записує клієнтів 24/7, показує вільний час майстрів, нагадує про візит і веде таблицю записів замість адміністратора.
 category: [bot]
-order: 2
+order: 1
+featured: true
 has_page: true
 thumb: /img/cases/cover-salon.jpg
+cover: /img/cases/salon-slots.jpg
 cover_alt: AI-адміністратор салону — схема і діалог бота
 kpis:
-  - { value: "97 + 6", label: модулів у двох сценаріях Make }
-  - { value: "14", label: "гілок логіки: запис, перенесення, скасування" }
   - { value: "24/7", label: запис без адміністратора }
   - { value: "8–10 год", label: "на місяць звільняється від переписки (оцінка при 30–40 записах)" }
+  - { value: "14", label: "гілок логіки: запис, перенесення, скасування" }
+  - { value: "97 + 6", label: модулів у двох сценаріях Make }
 stack: [MAKE.COM, OPENAI, TELEGRAM BOT API, GOOGLE SHEETS, GOOGLE CALENDAR]
 facts:
   - { label: РОЛЬ, value: Проєкт і розробка }

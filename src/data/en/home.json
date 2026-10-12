@@ -1,19 +1,19 @@
 {
-  "seo_title": "Rostyslav Borovyk — AI automation and Telegram bots for business",
-  "seo_description": "I build AI-powered Telegram bots, monitoring and automations on Make.com and Supabase. Case studies with real numbers and running costs calculated upfront. Reply within a day.",
+  "seo_title": "AI receptionist for salons and clinics — Borovyk Automation",
+  "seo_description": "An AI bot that books clients 24/7, sends visit reminders and answers questions while you work. For salons, barbershops, beauty clinics and medical practices. Cost estimate within a day.",
   "hero": {
-    "kicker": "// AI Automation Specialist",
-    "first": "Rostyslav",
-    "last": "Borovyk",
-    "lead": "I build **AI-powered Telegram bots**, monitoring and automations on Make.com and Supabase. They take routine work off your team and cost very little to run.",
+    "kicker": "// Rostyslav Borovyk · AI automation",
+    "first": "AI receptionist",
+    "last": "for salons and clinics",
+    "lead": "The bot **books clients 24/7**, sends visit reminders and answers questions about prices and free slots while you are with a client. You see ready bookings, not a hundred messages.",
     "btn_main": "Discuss a project",
-    "btn_second": "See case studies",
+    "btn_second": "How it works",
     "trust": [
       "Reply within a day",
-      "First review is free",
-      "Running costs calculated upfront"
+      "Free review of your booking flow",
+      "Running-cost estimate before start"
     ],
-    "chip_cost": "RUN COST: **158 → 39** credits",
+    "chip_cost": "BOOKING: **24/7**, no receptionist",
     "photo_alt": "Rostyslav Borovyk, AI automation specialist"
   },
   "stack": [
@@ -29,43 +29,43 @@
   ],
   "numbers": [
     {
+      "value": "24/7",
+      "label": "client booking without a receptionist"
+    },
+    {
+      "value": "8–10 h",
+      "label": "a month freed from messaging (estimate at 30–40 bookings)"
+    },
+    {
+      "value": "2",
+      "label": "reminders before a visit: a day and an hour before"
+    },
+    {
       "value": "11",
       "label": "AI automations in the portfolio"
-    },
-    {
-      "value": "−75%",
-      "label": "Make credits per run after optimisation"
-    },
-    {
-      "value": "622",
-      "label": "listings AutoHunter processed on day one"
-    },
-    {
-      "value": "$0.54",
-      "label": "total AI cost for a full day of testing"
     }
   ],
   "live": {
-    "kicker": "// Under the hood",
-    "title": "Automation that reports on itself",
-    "text": "This is one AutoHunter cycle: a schedule triggers the check, the database picks the good deals, AI reviews only those, and a ready-made card lands in Telegram. When there are no active filters, monitoring doesn't run and spends zero credits.",
+    "kicker": "// What it looks like inside",
+    "title": "What happens at 10 pm when the salon is closed",
+    "text": "A client writes in the evening. The bot understands dates in plain words, sees the masters' schedules and offers only truly free slots. The booking lands in the sheet and the master's calendar, and the client gets reminders a day and an hour before the visit.",
     "btn": "Case breakdown",
-    "label": "DEMO LOG · AUTOHUNTER"
+    "label": "DEMO LOG · AI RECEPTIONIST"
   },
   "cases": {
     "kicker": "// Case studies",
-    "title": "Systems in production",
+    "title": "Work so far",
     "all": "All case studies →"
   },
   "services": {
     "kicker": "// Services",
-    "title": "What I automate",
+    "title": "What the bot takes over",
     "all": "All services →"
   },
   "roi": {
     "kicker": "// Calculator",
     "title": "What does your routine cost?",
-    "intro": "Estimate how many hours and how much money manual work takes that a bot could handle.",
+    "intro": "Work out how many hours a master or receptionist spends on messages, calls and reminders.",
     "hours": "Hours per week on routine",
     "rate": "Cost of one hour of work",
     "share": "Share that can be automated",
@@ -102,8 +102,8 @@
   },
   "about": {
     "kicker": "// About",
-    "title": "An automation engineer who counts every credit",
-    "text": "I came to AI from front-end development. I completed the AI Specialist course at AI LAB, built 10 automations, and my graduation project is AutoHunter. I freelance and I'm open to a full-time role.",
+    "title": "I build bots that free you from messaging",
+    "text": "I came to AI from front-end development and completed the AI Specialist course at AI LAB. I build AI receptionists for appointment-based businesses and count every cent of running cost: services should cost less than an hour of a receptionist's time.",
     "btn": "More about me"
   },
   "faq": {
@@ -111,20 +111,24 @@
     "title": "Frequently asked questions",
     "items": [
       {
-        "q": "How long does development take?",
-        "a": "A simple bot takes a few days. A system like AutoHunter with a database and AI takes 2–4 weeks, depending on the task."
+        "q": "We already have online booking (Booksy, Altegio). Why a bot?",
+        "a": "Online booking is a form the client has to find and fill in. The bot answers where the client already writes, in plain language: prices, masters, free time. If your system has an API the bot books straight into it; if not, it sends the client your booking link. Plus reminders and bringing clients back."
       },
       {
-        "q": "How much does it cost to run?",
-        "a": "Services (Make, AI, database) usually cost tens of dollars per month. I design the system to keep that number low and show you the calculation before we start."
+        "q": "Won't a bot put clients off?",
+        "a": "The bot writes in your tone and doesn't pretend to be human. Complex questions and complaints go to you. Most clients are glad to get an answer right away instead of the next morning."
       },
       {
-        "q": "Do I need technical knowledge?",
-        "a": "No. You describe the process in plain words, I turn it into automation and train your team to use it."
+        "q": "How long does launch take?",
+        "a": "A first working version takes a few days. A full launch with your services, masters and reminders takes 1–3 weeks, depending on the number of masters and services."
       },
       {
-        "q": "What happens after launch?",
-        "a": "I can maintain the system: monitor errors, update prompts and keep costs under control."
+        "q": "What does it cost to run?",
+        "a": "Services (Make, AI, the sheet) usually cost tens of dollars a month. I design the system to keep that minimal and show the estimate before we start."
+      },
+      {
+        "q": "Do I need technical skills?",
+        "a": "No. Services, prices, masters and schedules live in a regular Google Sheet that you edit yourself. I set everything up and train your team."
       }
     ]
   }

@@ -23,8 +23,8 @@ const rp = data(lang, 'pages').reviews;
 const svcHref = (s: any) => (s.data.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : url(lang, '/services/') + '#' + slugOf(s.id));
 
 const log = lang === 'uk'
-  ? [['08:00:00','k','pg_cron','запуск autohunter-hourly'],['08:00:02','','auto.ria','47 нових оголошень за фільтрами'],['08:00:03','','supabase','pick_deals(): ринкова ціна для 47 авто'],['08:00:03','','supabase','нижче ринку: 3 · дублікати: 9'],['08:00:05','k','openai','оцінка 3 авто: плюси, ризики, чек-лист'],['08:00:07','g','telegram','✓ надіслано 3 картки'],['08:00:07','','make','використано 39 кредитів (було 158)'],['10:00:00','k','pg_cron','запуск autohunter-hourly'],['10:00:00','','supabase','активних фільтрів: 0'],['10:00:00','g','make','✓ пропущено, 0 кредитів']]
-  : [['08:00:00','k','pg_cron','run autohunter-hourly'],['08:00:02','','auto.ria','47 new listings match filters'],['08:00:03','','supabase','pick_deals(): market price for 47 cars'],['08:00:03','','supabase','below market: 3 · duplicates: 9'],['08:00:05','k','openai','review 3 cars: pros, risks, checklist'],['08:00:07','g','telegram','✓ 3 cards sent'],['08:00:07','','make','39 credits used (was 158)'],['10:00:00','k','pg_cron','run autohunter-hourly'],['10:00:00','','supabase','active filters: 0'],['10:00:00','g','make','✓ skipped, 0 credits']];
+  ? [['22:04:11','k','telegram','клієнтка: «є вікно в суботу на манікюр?»'],['22:04:12','','openai','намір: запис · послуга: манікюр · дата: сб 17.10'],['22:04:12','','calendar','вільно в сб: Олена 11:00, 14:30 · Ірина 16:00'],['22:04:13','g','telegram','✓ запропоновано 3 вікна з цінами'],['22:05:02','k','telegram','клієнтка обрала: Олена, 14:30'],['22:05:03','','calendar','повторна перевірка слоту: вільно'],['22:05:03','g','sheets','✓ запис створено + подія в календарі майстра'],['пт 14:30','k','reminders','нагадування за 24 год → надіслано'],['сб 13:30','k','reminders','нагадування за 1 год → «Буду ✓»'],['сб 13:30','g','owner','адміністратор не знадобився']]
+  : [['22:04:11','k','telegram','client: "any slot on Saturday for a manicure?"'],['22:04:12','','openai','intent: booking · service: manicure · date: Sat 17.10'],['22:04:12','','calendar','free on Sat: Olena 11:00, 14:30 · Iryna 16:00'],['22:04:13','g','telegram','✓ 3 slots offered with prices'],['22:05:02','k','telegram','client picked: Olena, 14:30'],['22:05:03','','calendar','re-check slot: still free'],['22:05:03','g','sheets','✓ booking created + master calendar event'],['Fri 14:30','k','reminders','24 h reminder → sent'],['Sat 13:30','k','reminders','1 h reminder → "Coming ✓"'],['Sat 13:30','g','owner','no receptionist needed']];
 
 const person = {
   '@context': 'https://schema.org', '@type': 'Person', name: site.name, jobTitle: site.role,
@@ -45,11 +45,11 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="wrap hero-in">
       <div class="hero-txt">
         <p class="kicker"><span class="type">{h.hero.kicker}</span></p>
-        <h1><span class="ln"><span>{h.hero.first}</span></span> <span class="ln"><span style="--d:.3s">{h.hero.last}</span></span></h1>
+        <h1><span class="ln"><span style="white-space:nowrap">{h.hero.first}</span></span> <span class="ln"><span style="--d:.3s">{h.hero.last}</span></span></h1>
         <p class="lead" set:html={inline(h.hero.lead)} />
         <div class="cta-row">
           <Btn href={url(lang, '/contact/')}>{h.hero.btn_main}</Btn>
-          <Btn href={url(lang, '/cases/')} kind="g">{h.hero.btn_second}</Btn>
+          <Btn href={url(lang, '/cases/ai-salon-admin/')} kind="g">{h.hero.btn_second}</Btn>
         </div>
         <div class="trust">{h.hero.trust.map((t: string) => <span>{t}</span>)}</div>
       </div>
@@ -79,7 +79,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       <p class="kicker">{h.live.kicker}</p>
       <h2 class="h2">{h.live.title}</h2>
       <p class="lead">{h.live.text}</p>
-      <div><Btn href={url(lang, '/cases/autohunter/')} kind="g">{h.live.btn}</Btn></div>
+      <div><Btn href={url(lang, '/cases/ai-salon-admin/')} kind="g">{h.live.btn}</Btn></div>
     </div>
     <div class="term rv" style="--d:.1s" role="img" aria-label={h.live.label}>
       <div class="term-top"><i></i><i></i><i></i><span>{h.live.label}</span></div>
