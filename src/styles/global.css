@@ -129,7 +129,8 @@ html[data-btn="scan"] .btn:active{box-shadow:0 0 0 .3rem var(--brass-lo)}
 .hero .grid-bg{position:absolute;inset:0;pointer-events:none;mask-image:linear-gradient(90deg,#000 0%,#000 55%,transparent 100%)}
 .hero-in{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(2rem,4vw,4rem);align-items:stretch;min-height:min(52rem,calc(100svh - 4.5rem))}
 .hero-txt{display:flex;flex-direction:column;justify-content:center;gap:1.6rem;padding-block:clamp(3rem,6vw,5rem);min-width:0}
-.hero h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,5.4vw,5.25rem);line-height:.98;letter-spacing:-.035em}
+.hero-txt{container-type:inline-size}
+.hero h1{font-family:var(--f-display);font-weight:700;font-size:min(clamp(2.6rem,5.4vw,5.25rem),9.1cqi);line-height:.98;letter-spacing:-.035em}
 .hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
 .hero h1 .ln > span{display:block;transform:translateY(105%);animation:up 1s var(--ease) forwards;animation-delay:var(--d,.15s)}
 @keyframes up{to{transform:none}}
