@@ -320,5 +320,12 @@
     "home_kicker": "// Reviews",
     "home_title": "What clients say",
     "home_all": "All reviews"
+  },
+  "niches": {
+    "kicker": "// Solution",
+    "cta": "Discuss my business",
+    "see_case": "See the case",
+    "includes": "// What the bot does",
+    "includes_title": "What it takes over"
   }
 }

@@ -92,4 +92,27 @@ const reviews = defineCollection({
   }),
 });
 
-export const collections = { cases, services, blog, reviews };
+const niches = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/niches' }),
+  schema: z.object({
+    title: z.string(),
+    seo_title: z.string(),
+    description: z.string(),
+    code: z.string(),
+    card_title: z.string(),
+    card_text: z.string(),
+    order: z.number().default(10),
+    lead: z.string(),
+    problem_title: z.string(),
+    problem: z.string(),
+    includes: z.array(z.object({ title: z.string(), text: z.string() })).default([]),
+    related_case: z.string().optional(),
+    price: z.string(),
+    price_note: z.string().optional(),
+    chat_title: z.string(),
+    chat: z.array(z.array(z.any())).default([]),
+    faq: z.array(qa).default([]),
+  }),
+});
+
+export const collections = { cases, services, blog, reviews, niches };

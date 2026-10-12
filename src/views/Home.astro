@@ -8,7 +8,7 @@ import Cta from '../components/Cta.astro';
 import CaseCard from '../components/CaseCard.astro';
 import ReviewCard from '../components/ReviewCard.astro';
 import { url, type Lang } from '../i18n';
-import { data, cases, services, reviews, slugOf, inline } from '../lib/data';
+import { data, cases, services, reviews, niches, slugOf, inline } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -18,6 +18,7 @@ const allCases = await cases(lang);
 const featured = allCases.find((c) => c.data.featured) ?? allCases[0];
 const rest = allCases.filter((c) => c !== featured).slice(0, 2);
 const svc = await services(lang);
+const nic = await niches(lang);
 const revs = (await reviews()).slice(0, 3);
 const rp = data(lang, 'pages').reviews;
 const svcHref = (s: any) => (s.data.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : url(lang, '/services/') + '#' + slugOf(s.id));
@@ -72,6 +73,16 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
 
   <section class="sec" style="padding-top:clamp(3rem,6vw,5rem)"><div class="wrap">
     <div class="nums">{h.numbers.map((n: any, i: number) => <Num value={n.value} label={n.label} delay={i * 0.08} />)}</div>
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={h.for.kicker} title={h.for.title} />
+    <div class="svc rv">
+      {nic.map((n) => (
+        <a href={url(lang, `/for/${slugOf(n.id)}/`)}><span class="scode">[ {n.data.code} ]</span><h3 class="h3" style="font-size:1.3rem">{n.data.card_title}</h3><p>{n.data.card_text}</p><span class="more">{site.more} →</span></a>
+      ))}
+    </div>
+    <p class="muted rv" style="margin-top:1.2rem"><a href={url(lang, '/contact/')} style="color:var(--brass-hi)">{h.for.other} →</a></p>
   </div></section>
 
   <section class="sec"><div class="wrap live">

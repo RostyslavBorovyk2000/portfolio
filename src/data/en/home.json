@@ -1,11 +1,11 @@
 {
-  "seo_title": "AI receptionist for salons and clinics — Borovyk Automation",
-  "seo_description": "An AI bot that books clients 24/7, sends visit reminders and answers questions while you work. For salons, barbershops, beauty clinics and medical practices. Cost estimate within a day.",
+  "seo_title": "AI bots and automation for small business — Borovyk Automation",
+  "seo_description": "AI bots that answer clients, book appointments, send reminders and keep your sheets up to date. Salons, clinics, car service, Telegram channels. From $300 + support from $50/mo.",
   "hero": {
     "kicker": "// Rostyslav Borovyk",
-    "first": "AI receptionist",
-    "last": "for salons and clinics",
-    "lead": "The bot **books clients 24/7**, sends visit reminders and answers questions about prices and free slots while you are with a client. You see ready bookings, not a hundred messages.",
+    "first": "AI bots",
+    "last": "for small business",
+    "lead": "They answer clients, **book and remind**, and keep your sheets up to date while you work. Built around your processes, from a beauty salon to a car service.",
     "btn_main": "Discuss a project",
     "btn_second": "How it works",
     "trust": [
@@ -13,7 +13,7 @@
       "Free review of your booking flow",
       "Running-cost estimate before start"
     ],
-    "chip_cost": "BOOKING: **24/7**, no receptionist",
+    "chip_cost": "START: **from $300**, support from $50/mo",
     "photo_alt": "Rostyslav Borovyk, AI automation specialist"
   },
   "stack": [
@@ -131,5 +131,10 @@
         "a": "No. Services, prices, masters and schedules live in a regular Google Sheet that you edit yourself. I set everything up and train your team."
       }
     ]
+  },
+  "for": {
+    "kicker": "// Who it's for",
+    "title": "Solutions for your business",
+    "other": "Your business isn't listed? Describe your routine and I'll tell you what a bot can take over."
   }
 }

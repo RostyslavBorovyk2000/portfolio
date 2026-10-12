@@ -21,6 +21,10 @@ export async function services(lang: Lang) {
   return (await getCollection('services', (e) => langOf(e.id) === lang))
     .sort((a, b) => a.data.order - b.data.order);
 }
+export async function niches(lang: Lang) {
+  return (await getCollection('niches', (e) => langOf(e.id) === lang))
+    .sort((a, b) => a.data.order - b.data.order);
+}
 export async function posts(lang: Lang) {
   return (await getCollection('blog', (e) => langOf(e.id) === lang && !e.data.draft))
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());

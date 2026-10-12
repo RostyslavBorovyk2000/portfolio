@@ -1,0 +1,9 @@
+---
+import View from '../../../views/Niche.astro';
+import { niches, slugOf } from '../../../lib/data';
+export async function getStaticPaths() {
+  return (await niches('en')).map((entry) => ({ params: { slug: slugOf(entry.id) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<View lang="en" entry={entry} />
