@@ -94,12 +94,12 @@ a.btn{color:var(--on-brass)}
     <div class="stat"><span data-t="sMoney">Баланс місяця</span><b id="kMoney">—</b><span id="kMoneySub"></span></div>
   </div>
   <nav class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" data-tab="tasks" data-t="tTasks">Задачі</button>
+    <button role="tab" aria-selected="true" data-tab="clients" data-t="tClients">Клієнти</button>
+    <button role="tab" aria-selected="false" data-tab="tasks" data-t="tTasks">Задачі</button>
     <button role="tab" aria-selected="false" data-tab="posts" data-t="tPosts">Контент</button>
-    <button role="tab" aria-selected="false" data-tab="clients" data-t="tClients">Клієнти</button>
-    <button role="tab" aria-selected="false" data-tab="money" data-t="tMoney">Фінанси</button>
+        <button role="tab" aria-selected="false" data-tab="money" data-t="tMoney">Фінанси</button>
   </nav>
-  <section class="pane" id="p-tasks">
+  <section class="pane" id="p-tasks" hidden>
     <div class="row">
       <input type="text" id="newTask" maxlength="200" data-ph="phTask" aria-label="New task">
       <select id="newTaskDay" aria-label="Day"></select>
@@ -114,7 +114,7 @@ a.btn{color:var(--on-brass)}
       <thead><tr><th data-t="thDate">Дата</th><th data-t="thRubric">Рубрика</th><th data-t="thTopic">Тема</th><th data-t="thWhere">Куди</th><th data-t="thStatus">Статус</th></tr></thead>
       <tbody id="postRows"></tbody></table></div>
   </section>
-  <section class="pane" id="p-clients" hidden>
+  <section class="pane" id="p-clients">
     <div class="row">
       <input type="text" id="cName" maxlength="80" data-ph="phClient" aria-label="Client">
       <input type="text" id="cService" maxlength="120" data-ph="phService" aria-label="Service">

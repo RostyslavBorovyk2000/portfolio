@@ -1,5 +1,5 @@
 ---
-title: AutoHunter
+title: "AutoHunter: finding underpriced cars on AUTO.RIA"
 description: How I built an AI bot that monitors AUTO.RIA, rates cars against the market, and cut Make usage from 158 to 39 credits per run.
 meta: FLAGSHIP · MAKE · SUPABASE · OPENAI · TELEGRAM
 summary: An AI hunter for good car deals on AUTO.RIA. It checks new listings every 2 hours, compares the price with the market and sends a Telegram card with advice on what to inspect.
