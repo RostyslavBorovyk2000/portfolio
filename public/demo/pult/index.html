@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="uk" style="background:#141619"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Демо: AI-пульт керування бізнесом · Borovyk Automation</title>
-<meta name="description" content="Інтерактивне демо пульта керування малим бізнесом: задачі власника й AI-асистента, контент-план, клієнти і фінанси.">
+<title>Демо: CRM салону краси з AI-асистентом · Borovyk Automation</title>
+<meta name="description" content="Інтерактивне демо CRM для салону краси: записи клієнток, задачі власниці й AI-асистента, контент-план і фінанси.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -83,8 +83,8 @@ a.btn{color:var(--on-brass)}
   <span class="row" style="gap:6px"><button class="btn g sm" id="langBtn" type="button">EN</button><button class="btn g sm" id="resetBtn" type="button" data-t="reset">Скинути</button><a class="btn sm" href="https://borovyk-automation.com/contact/" target="_top" data-t="cta">Хочу такий пульт</a></span></div>
 <div class="wrap">
   <header class="top">
-    <div class="brand"><div class="mark" aria-hidden="true">Х</div>
-      <div><p class="kick" data-t="kick">// пульт керування</p><h1 data-t="brand">SMM-агенція «Хвиля»</h1></div></div>
+    <div class="brand"><div class="mark" aria-hidden="true">Л</div>
+      <div><p class="kick" data-t="kick">// пульт керування салоном</p><h1 data-t="brand">Салон краси «Ліра»</h1></div></div>
     <span class="week" id="weekLabel"></span>
   </header>
   <div class="stats" aria-label="Summary">
@@ -94,7 +94,7 @@ a.btn{color:var(--on-brass)}
     <div class="stat"><span data-t="sMoney">Баланс місяця</span><b id="kMoney">—</b><span id="kMoneySub"></span></div>
   </div>
   <nav class="tabs" role="tablist">
-    <button role="tab" aria-selected="true" data-tab="clients" data-t="tClients">Клієнти</button>
+    <button role="tab" aria-selected="true" data-tab="clients" data-t="tClients">Записи</button>
     <button role="tab" aria-selected="false" data-tab="tasks" data-t="tTasks">Задачі</button>
     <button role="tab" aria-selected="false" data-tab="posts" data-t="tPosts">Контент</button>
         <button role="tab" aria-selected="false" data-tab="money" data-t="tMoney">Фінанси</button>
@@ -122,7 +122,7 @@ a.btn{color:var(--on-brass)}
       <button class="btn" id="addClient" type="button" data-t="add">Додати</button>
     </div>
     <div class="tbl box" style="padding:0"><table>
-      <thead><tr><th data-t="thClient">Клієнт</th><th data-t="thService">Що потрібно</th><th data-t="thStage">Етап</th><th style="text-align:right" data-t="thAmount">Сума</th></tr></thead>
+      <thead><tr><th data-t="thClient">Клієнтка</th><th data-t="thService">Послуга · майстер</th><th data-t="thStage">Статус</th><th style="text-align:right" data-t="thAmount">Сума</th></tr></thead>
       <tbody id="clientRows"></tbody></table></div>
   </section>
   <section class="pane" id="p-money" hidden>

@@ -6,63 +6,65 @@
   var T = {
     uk: {
       demoTag: 'ДЕМО', demoText: 'Дані вигадані, зміни не зберігаються. Потикайте: ставте галочки, міняйте статуси, додавайте записи.',
-      reset: 'Скинути', cta: 'Хочу такий пульт', kick: '// пульт керування', brand: 'SMM-агенція «Хвиля»',
-      sTasks: 'Задачі тижня', sPosts: 'Пости опубліковано', sClients: 'Клієнти в роботі', sMoney: 'Баланс місяця',
-      tTasks: 'Задачі', tPosts: 'Контент', tClients: 'Клієнти', tMoney: 'Фінанси', add: 'Додати',
+      reset: 'Скинути', cta: 'Хочу такий пульт', kick: '// пульт керування салоном', brand: 'Салон краси «Ліра»', mark: 'Л', cur: '₴',
+      sTasks: 'Задачі тижня', sPosts: 'Пости опубліковано', sClients: 'Візити цього тижня', sMoney: 'Баланс місяця',
+      tTasks: 'Задачі', tPosts: 'Контент', tClients: 'Записи', tMoney: 'Фінанси', add: 'Додати',
       postsNote: 'План публікацій. «Готово» означає, що пост погоджено, і автопостинг опублікує його в дату.',
-      thDate: 'Дата', thRubric: 'Рубрика', thTopic: 'Тема', thWhere: 'Куди', thStatus: 'Статус', thClient: 'Клієнт', thService: 'Що потрібно', thStage: 'Етап', thAmount: 'Сума', thNote: 'Опис',
-      foot: 'Це демо. Справжній пульт синхронізується між власником, командою і AI-асистентом, який сам оновлює задачі, контент-план і звіти.',
-      phTask: 'Нова задача…', phClient: 'Клієнт або компанія', phService: 'Що потрібно', phAmount: 'Сума, $', phNote: 'За що',
-      week: 'Тиждень з ', days: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'], owner: 'Марта', ai: 'AI', ownerFull: 'Марта', aiFull: 'AI-асистент',
+      thDate: 'Дата', thRubric: 'Рубрика', thTopic: 'Тема', thWhere: 'Куди', thStatus: 'Статус', thClient: 'Клієнтка', thService: 'Послуга · майстер', thStage: 'Статус', thAmount: 'Сума', thNote: 'Опис',
+      foot: 'Це демо. Справжній пульт синхронізується з ботом запису: нові записи, підтвердження і нагадування з’являються тут самі, а AI-асистент рахує завантаження майстрів і виручку.',
+      phTask: 'Нова задача…', phClient: 'Ім’я клієнтки', phService: 'Послуга · майстер', phAmount: 'Сума, ₴', phNote: 'За що',
+      week: 'Тиждень з ', days: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'], owner: 'Олена', ai: 'AI', ownerFull: 'Олена (власниця)', aiFull: 'AI-асистент',
       status: { draft: 'Чернетка', ready: 'Готово', done: 'Опубліковано', err: 'Помилка' },
-      stages: ['Заявка', 'Переговори', 'В роботі', 'Здано', 'Відмова'], leads: 'заявок і переговорів: ', income: ' дохід · ', expense: ' витрати',
+      stages: ['Нова заявка', 'Підтверджено', 'Прийшла', 'Не прийшла', 'Скасовано'], leads: 'нових і підтверджених: ', income: ' дохід · ', expense: ' витрати',
       inOut: { out: 'Витрата', 'in': 'Дохід' }, emptyTasks: 'На цей тиждень задач немає. Додайте першу.',
       tasks: [
-        ['Пн', 'me', 'Погодити контент-план для кав\'ярні «Зерно»', true], ['Пн', 'ai', 'Зібрати статистику постів за минулий тиждень', true],
-        ['Пн', 'ai', 'Підготувати 5 чернеток постів для студії йоги', true], ['Вт', 'me', 'Дзвінок з новим клієнтом: магазин квітів', true],
-        ['Вт', 'ai', 'Комерційна пропозиція для магазину квітів', false], ['Ср', 'me', 'Зйомка для салону краси «Ліра»', false],
-        ['Ср', 'ai', 'Нагадати клієнтам про оплату за жовтень', false], ['Чт', 'me', 'Перевірити й погодити пости на наступний тиждень', false],
-        ['Чт', 'ai', 'Звіт для кав\'ярні «Зерно»: охоплення і заявки', false], ['Пт', 'me', 'Підсумки тижня і план на наступний', false]
+        ['Пн', 'ai', 'Нагадати 14 клієнткам про запис на завтра', true], ['Пн', 'me', 'Замовити гель-лаки і базу у постачальника', true],
+        ['Пн', 'ai', 'Знайти «вікна» у графіку й запропонувати їх у сторіз', true], ['Вт', 'me', 'Погодити графік майстрів на листопад', true],
+        ['Вт', 'ai', 'Написати клієнткам, які не були 6+ тижнів', false], ['Ср', 'me', 'Співбесіда з новою майстринею педикюру', false],
+        ['Ср', 'ai', 'Зібрати відгуки після вчорашніх візитів', false], ['Чт', 'me', 'Зйомка робіт для Instagram', false],
+        ['Чт', 'ai', 'Звіт: завантаження майстрів і виручка за тиждень', false], ['Пт', 'me', 'Підсумки тижня і акція на вихідні', false]
       ],
       posts: [
-        [-3, 'Кейс', 'Як кав\'ярня отримала 40 замовлень через Instagram', 'done'], [-1, 'Порада', '5 помилок у сторіз малого бізнесу', 'done'],
-        [1, 'Практика', 'Контент-план на місяць за 1 годину', 'ready'], [3, 'Кейс', 'Студія йоги: запуск з нуля', 'ready'],
-        [5, 'Порада', 'Як відповідати на негативні коментарі', 'draft'], [8, 'Практика', 'Шаблони сторіз для салону краси', 'draft']
+        [-3, 'Роботи', 'Нюдовий манікюр на короткі нігті: до і після', 'done'], [-1, 'Порада', 'Як продовжити носіння покриття до 4 тижнів', 'done'],
+        [1, 'Акція', 'Манікюр + педикюр у четвер: −15%', 'ready'], [3, 'Майстри', 'Знайомтесь: Іра, топ-майстер манікюру', 'ready'],
+        [5, 'Порада', 'Догляд за кутикулою вдома', 'draft'], [8, 'Роботи', 'Осінні дизайни: 6 ідей', 'draft']
       ],
-      clients: [['Кав\'ярня «Зерно»', 'Ведення Instagram', 'В роботі', 450], ['Студія йоги «Прана»', 'Запуск акаунта', 'В роботі', 600],
-        ['Магазин квітів «Букет»', 'Таргетована реклама', 'Переговори', 350], ['Салон краси «Ліра»', 'Контент і зйомка', 'Заявка', 0]],
-      money: [[-9, 'in', 450, 'Кав\'ярня «Зерно», жовтень'], [-6, 'in', 300, 'Студія йоги, передоплата 50%'], [-5, 'out', 29, 'Сервіс автопостингу'],
-        [-4, 'out', 20, 'Підписка на AI'], [-2, 'out', 60, 'Реклама агенції']]
+      clients: [['Анна К.', 'Манікюр + покриття · Іра', 'Прийшла', 650], ['Марина Т.', 'Педикюр · Оля', 'Прийшла', 750],
+        ['Софія Л.', 'Корекція брів · Таня', 'Підтверджено', 400], ['Юлія М.', 'Манікюр + дизайн · Іра', 'Підтверджено', 800],
+        ['Катерина Р.', 'Нарощування · Іра', 'Нова заявка', 1100], ['Олена Д.', 'Педикюр · Оля', 'Не прийшла', 0]],
+      money: [[-9, 'in', 18400, 'Виручка за минулий тиждень'], [-6, 'in', 2600, 'Продаж догляду (олійки, креми)'], [-5, 'out', 4200, 'Матеріали: гель-лаки, база, топ'],
+        [-4, 'out', 900, 'Бот запису і AI-асистент'], [-2, 'out', 1500, 'Реклама в Instagram']]
     },
     en: {
       demoTag: 'DEMO', demoText: 'Sample data, changes are not saved. Try it: tick tasks, change statuses, add rows.',
-      reset: 'Reset', cta: 'I want this cockpit', kick: '// business cockpit', brand: '«Wave» SMM Agency',
-      sTasks: 'Tasks this week', sPosts: 'Posts published', sClients: 'Active clients', sMoney: 'Month balance',
-      tTasks: 'Tasks', tPosts: 'Content', tClients: 'Clients', tMoney: 'Finance', add: 'Add',
+      reset: 'Reset', cta: 'I want this cockpit', kick: '// salon cockpit', brand: '«Lyra» Beauty Salon', mark: 'L', cur: '$',
+      sTasks: 'Tasks this week', sPosts: 'Posts published', sClients: 'Visits this week', sMoney: 'Month balance',
+      tTasks: 'Tasks', tPosts: 'Content', tClients: 'Bookings', tMoney: 'Finance', add: 'Add',
       postsNote: 'Publishing plan. “Ready” means the post is approved and autoposting will publish it on the date.',
-      thDate: 'Date', thRubric: 'Rubric', thTopic: 'Topic', thWhere: 'Where', thStatus: 'Status', thClient: 'Client', thService: 'Need', thStage: 'Stage', thAmount: 'Amount', thNote: 'Note',
-      foot: 'This is a demo. The real cockpit syncs between the owner, the team and an AI assistant that updates tasks, the content plan and reports by itself.',
-      phTask: 'New task…', phClient: 'Client or company', phService: 'What they need', phAmount: 'Amount, $', phNote: 'What for',
-      week: 'Week of ', days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], owner: 'Marta', ai: 'AI', ownerFull: 'Marta', aiFull: 'AI assistant',
+      thDate: 'Date', thRubric: 'Rubric', thTopic: 'Topic', thWhere: 'Where', thStatus: 'Status', thClient: 'Client', thService: 'Service · master', thStage: 'Status', thAmount: 'Amount', thNote: 'Note',
+      foot: 'This is a demo. The real cockpit syncs with the booking bot: new bookings, confirmations and reminders appear here automatically, and the AI assistant tracks master workload and revenue.',
+      phTask: 'New task…', phClient: 'Client name', phService: 'Service · master', phAmount: 'Amount, $', phNote: 'What for',
+      week: 'Week of ', days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], owner: 'Olena', ai: 'AI', ownerFull: 'Olena (owner)', aiFull: 'AI assistant',
       status: { draft: 'Draft', ready: 'Ready', done: 'Published', err: 'Error' },
-      stages: ['Lead', 'Talks', 'In progress', 'Delivered', 'Lost'], leads: 'leads and talks: ', income: ' income · ', expense: ' expenses',
+      stages: ['New request', 'Confirmed', 'Came', 'No-show', 'Cancelled'], leads: 'new and confirmed: ', income: ' income · ', expense: ' expenses',
       inOut: { out: 'Expense', 'in': 'Income' }, emptyTasks: 'No tasks this week yet. Add the first one.',
       tasks: [
-        ['Mon', 'me', 'Approve the content plan for “Grain” café', true], ['Mon', 'ai', 'Collect last week\'s post statistics', true],
-        ['Mon', 'ai', 'Draft 5 posts for the yoga studio', true], ['Tue', 'me', 'Call with a new client: flower shop', true],
-        ['Tue', 'ai', 'Proposal for the flower shop', false], ['Wed', 'me', 'Photo shoot for “Lyra” beauty salon', false],
-        ['Wed', 'ai', 'Remind clients about October invoices', false], ['Thu', 'me', 'Review and approve next week\'s posts', false],
-        ['Thu', 'ai', 'Report for “Grain” café: reach and leads', false], ['Fri', 'me', 'Weekly review and next week\'s plan', false]
+        ['Mon', 'ai', 'Remind 14 clients about tomorrow\'s bookings', true], ['Mon', 'me', 'Order gel polish and base from the supplier', true],
+        ['Mon', 'ai', 'Find free slots and offer them in Stories', true], ['Tue', 'me', 'Approve the masters\' November schedule', true],
+        ['Tue', 'ai', 'Message clients who haven\'t visited in 6+ weeks', false], ['Wed', 'me', 'Interview a new pedicure master', false],
+        ['Wed', 'ai', 'Collect reviews after yesterday\'s visits', false], ['Thu', 'me', 'Photo shoot of works for Instagram', false],
+        ['Thu', 'ai', 'Report: master workload and weekly revenue', false], ['Fri', 'me', 'Weekly review and a weekend offer', false]
       ],
       posts: [
-        [-3, 'Case', 'How a café got 40 orders from Instagram', 'done'], [-1, 'Tip', '5 Stories mistakes small businesses make', 'done'],
-        [1, 'How-to', 'A month of content planned in 1 hour', 'ready'], [3, 'Case', 'Yoga studio: launch from scratch', 'ready'],
-        [5, 'Tip', 'How to answer negative comments', 'draft'], [8, 'How-to', 'Stories templates for a beauty salon', 'draft']
+        [-3, 'Works', 'Nude manicure on short nails: before and after', 'done'], [-1, 'Tip', 'How to make your polish last 4 weeks', 'done'],
+        [1, 'Offer', 'Manicure + pedicure on Thursday: −15%', 'ready'], [3, 'Team', 'Meet Ira, our top manicure master', 'ready'],
+        [5, 'Tip', 'Cuticle care at home', 'draft'], [8, 'Works', 'Autumn designs: 6 ideas', 'draft']
       ],
-      clients: [['“Grain” café', 'Instagram management', 'In progress', 450], ['“Prana” yoga studio', 'Account launch', 'In progress', 600],
-        ['“Bouquet” flower shop', 'Paid ads', 'Talks', 350], ['“Lyra” beauty salon', 'Content and photo', 'Lead', 0]],
-      money: [[-9, 'in', 450, '“Grain” café, October'], [-6, 'in', 300, 'Yoga studio, 50% prepayment'], [-5, 'out', 29, 'Autoposting service'],
-        [-4, 'out', 20, 'AI subscription'], [-2, 'out', 60, 'Agency ads']]
+      clients: [['Anna K.', 'Manicure + gel · Ira', 'Came', 18], ['Maryna T.', 'Pedicure · Olia', 'Came', 20],
+        ['Sofia L.', 'Brow shaping · Tania', 'Confirmed', 11], ['Yulia M.', 'Manicure + design · Ira', 'Confirmed', 22],
+        ['Kateryna R.', 'Nail extensions · Ira', 'New request', 30], ['Olena D.', 'Pedicure · Olia', 'No-show', 0]],
+      money: [[-9, 'in', 450, 'Last week\'s revenue'], [-6, 'in', 65, 'Retail: oils and creams'], [-5, 'out', 100, 'Supplies: gel polish, base, top'],
+        [-4, 'out', 22, 'Booking bot and AI assistant'], [-2, 'out', 36, 'Instagram ads']]
     }
   };
 
@@ -74,7 +76,7 @@
   function shift(n) { var d = new Date(); d.setDate(d.getDate() + n); return iso(d); }
   function monday() { var d = new Date(); var w = (d.getDay() + 6) % 7; d.setDate(d.getDate() - w); return iso(d); }
   function fmtDate(s) { var p = s.split('-'); return p[2] + '.' + p[1]; }
-  function money(n) { return (n < 0 ? '−' : '') + '$' + Math.abs(n).toLocaleString(lang === 'uk' ? 'uk-UA' : 'en-US', { maximumFractionDigits: 2 }); }
+  function money(n) { var c = T[lang].cur; return (n < 0 ? '−' : '') + (c === '$' ? '$' : '') + Math.abs(n).toLocaleString(lang === 'uk' ? 'uk-UA' : 'en-US', { maximumFractionDigits: 2 }) + (c === '$' ? '' : ' ' + c); }
 
   function seed() {
     var t = T[lang], id = 0;
@@ -93,7 +95,7 @@
     document.querySelectorAll('[data-ph]').forEach(function (el) { el.placeholder = t[el.dataset.ph]; });
     $('#langBtn').textContent = lang === 'uk' ? 'EN' : 'UA';
     document.querySelector('[data-t="cta"]').setAttribute('href', lang === 'uk' ? '/contact/' : '/en/contact/');
-    $('.mark').textContent = lang === 'uk' ? 'Х' : 'W';
+    $('.mark').textContent = T[lang].mark;
     $('#newTaskDay').innerHTML = t.days.map(function (d) { return '<option>' + d + '</option>'; }).join('');
     $('#newTaskWho').innerHTML = '<option value="me">' + t.ownerFull + '</option><option value="ai">' + t.aiFull + '</option>';
     $('#mType').innerHTML = '<option value="out">' + t.inOut.out + '</option><option value="in">' + t.inOut['in'] + '</option>';
