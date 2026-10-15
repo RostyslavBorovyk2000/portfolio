@@ -527,6 +527,10 @@ html[data-btn="scan"] .btn::after{opacity:.35;transform:scale(1)}
 .art article ul,.art article ol{color:var(--soft);font-size:1.1rem;line-height:1.7;margin:0;padding-left:1.3rem}
 .art article a{color:var(--brass-hi)}
 .art article img{border:1px solid var(--line)}
+.art article table{width:100%;border-collapse:collapse;font-size:1rem;display:block;overflow-x:auto}
+.art article th,.art article td{border:1px solid var(--line);padding:.6rem .9rem;text-align:left;vertical-align:top;color:var(--soft)}
+.art article th{background:var(--panel);color:var(--fg);font-family:var(--f-mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+.art article td:first-child{font-family:var(--f-mono);font-size:.9rem;color:var(--brass-hi);white-space:nowrap}
 .done:focus{outline:none}
 .prose-block p + p{margin-top:1rem}
 .case-big .vis img:only-child{max-width:72%}
