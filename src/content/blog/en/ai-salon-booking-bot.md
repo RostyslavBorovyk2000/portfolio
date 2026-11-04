@@ -1,56 +1,53 @@
 ---
-title: "An AI administrator for a salon: how a bot books clients 24/7"
-description: "A breakdown of a Telegram booking bot for a nail studio on Make.com: how AI understands \"on Friday\", why the bot checks the calendar twice, and the pitfalls I hit during launch."
+title: "A bot instead of a receptionist: how a nail studio books clients even at night"
+description: "How much time a salon spends on booking chats, what changes when a bot takes bookings, and what it costs to run. A real nail studio case."
 date: 2026-10-09
 category: CASE STUDIES
-read_minutes: 6
-lead: Salon clients write in the evening and at weekends, and the administrator answers in the morning. I built a bot that books on its own — here's how it turned out.
+read_minutes: 4
+lead: Clients message in the evening and at weekends, and get a reply the next morning. By then some have already booked somewhere else. Here's how we fixed that.
 related_case: ai-salon-admin
-tags: [TELEGRAM, MAKE.COM, OPENAI, GOOGLE CALENDAR]
+tags: [SALONS, BOOKING, REMINDERS]
 ---
 
-## Where the routine comes from
+## Where the receptionist's time goes
 
-For a studio with 30–40 bookings a month, every booking is a separate conversation: say hello, find out the service, pick a master, agree on a time, confirm, enter it into a sheet. By my estimate that's about 15 minutes per booking, or 8–10 hours a month on messaging alone.
+In a studio with 30–40 bookings a month, every booking is a separate chat: say hello, find out the service, pick a stylist, find a time, confirm and add it to the spreadsheet. That's about 15 minutes per booking, or **8–10 hours a month on messaging alone**.
 
-Then there are the mistakes: two clients at the same time, forgotten reschedules and no-shows because people simply forgot.
+And that's before the mistakes that cost money:
 
-## Six steps from "hi" to a booking
+- two clients booked for the same slot;
+- a reschedule that got forgotten;
+- a client who simply didn't show up because she forgot, while the stylist sits idle for an hour.
 
-The bot guides the client with buttons: a service with length and price → a master → a date → a free slot → contact details → confirmation. Returning clients aren't asked again because the bot remembers their name and phone.
+## What changed with the bot
 
-Services, prices, masters and schedules live in an ordinary Google Sheet. Add a service or change a price and the bot shows it right away. Set "Active: No" and the service disappears from the list. No developer needed.
+The client messages on Telegram whenever she likes, even at 11 pm. Within a minute the bot offers only **truly free** slots for the right stylist, with prices. She picks a time and the booking lands straight in the stylist's calendar and the salon's spreadsheet.
 
-## Where AI is actually needed
+Regular clients aren't asked the same questions again: the bot remembers their name and phone number.
 
-AI isn't here to "chat". It does two things buttons can't:
+It understands normal language: "anything on Friday afternoon?", "next Tuesday", "the 15th". No need to tap through dozens of buttons.
 
-- understands dates in plain language: "next Monday", "in a week", "15.10";
-- calculates truly free slots, taking the master's schedule, service length and already booked time into account.
+## No more double bookings
 
-Everything else is ordinary logic in Make. That's cheaper and more predictable.
-
-## Checking the calendar twice
-
-Between the moment a client sees a free slot and the moment they tap "Confirm", someone else may have taken it. So before saving, the bot checks the master's calendar again. If the slot was just taken, the client sees "Sorry, this time was just booked" and picks another.
-
-> There will never be two clients at the same time, even if they book simultaneously.
+Right before saving a booking, the bot checks the calendar again. If someone took that slot a second ago, the client sees "this time was just taken" and picks another one. No more overlaps that end in apologies and discounts.
 
 ## Reminders instead of no-shows
 
-A separate scenario checks the sheet every 15 minutes and sends reminders a day and an hour before the visit. The first one has a "Reschedule or cancel" button: a client whose plans changed reschedules on their own, and the freed slot is immediately available to others.
+A day and an hour before the visit, the client gets a reminder. The first one has a "Reschedule or cancel" button. If plans change, she moves the booking herself, and the freed slot is instantly visible to other clients. The stylist doesn't sit idle.
 
-## Pitfalls
+## Who controls the bot
 
-A few things that cost me the most time:
+The owner. Services, prices, stylists and schedules live in an ordinary Google Sheet. Change a price and the bot shows the new one straight away. A stylist goes on holiday — tick a box and there are no bookings for those days. No developer needed.
 
-- **Time zone.** It must match in Make (both profile and organisation), in the sheet and in the calendars. Otherwise slots shift by 2–3 hours.
-- **Calendar ID.** After connecting Google, Make clears this field. If you pick a calendar from the list, every booking goes to one master. The right way is to map the ID from the masters sheet.
-- **One webhook per bot.** If the same bot is connected to another scenario, messages simply won't arrive.
-- **Stale buttons.** A client may tap a time button from yesterday's message. The bot ignores it and doesn't create an extra booking.
+## What it costs
 
-## The outcome
+Setup is a one-off, and running the bot (automation and AI services) costs a few dollars a month. That's less than one hour of a receptionist's time, and the receptionist now looks after clients in the salon instead of the phone.
 
-Booking works at night, at weekends and while the masters are with clients. The sheet is always up to date, with colour-coded statuses and reschedule history. And the administrator spends time on clients in the salon instead of in chats.
+## The result
 
-The full breakdown with screenshots is in the case study below.
+- bookings work at night, at weekends and while stylists are busy;
+- the bookings spreadsheet is always up to date;
+- fewer no-shows thanks to reminders;
+- 8–10 hours a month go back into working with clients.
+
+Want the same in your salon or studio? [Get in touch](/en/contact/): I'll review how your bookings work today for free and estimate how much time a bot would free up.

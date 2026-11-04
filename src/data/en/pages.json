@@ -257,19 +257,19 @@
     ]
   },
   "blog": {
-    "seo_title": "Blog on AI automation and Make.com — Borovyk Automation",
-    "seo_description": "Case breakdowns, how to save Make.com credits, how to set up an AI bot that doesn't make things up. Practical automation notes.",
+    "seo_title": "Blog: how small businesses free up time with AI — Borovyk Automation",
+    "seo_description": "Real cases and numbers: how salons, service shops and other small businesses hand chats, bookings, reminders and spreadsheets over to bots. What it costs and what it gives.",
     "kicker": "// Blog",
-    "title": "Automation notes",
-    "lead": "I write when there's something worth saying: case breakdowns, saving Make credits and making AI work for business.",
+    "title": "How businesses get their time back",
+    "lead": "Real cases and simple maths: how many hours chats, bookings and spreadsheets take, and what changes when a bot takes that work over.",
     "toc": "CONTENTS",
     "read_time": "MIN READ",
     "all": "← ALL POSTS",
     "back": "Back to the blog",
     "related": "RELATED CASE STUDY →",
-    "cta_kicker": "Need optimisation?",
-    "cta_title": "Is your Make eating credits too?",
-    "cta_text": "I'll audit your scenarios and show where you can save."
+    "cta_kicker": "Recognise your routine?",
+    "cta_title": "Let's work out what it costs you",
+    "cta_text": "Tell me what eats most of your time. I'll review the process for free and tell you what a bot can take over and what it will cost to run."
   },
   "notfound": {
     "title": "Page not found — Borovyk Automation",

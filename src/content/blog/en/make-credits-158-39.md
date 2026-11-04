@@ -1,37 +1,40 @@
 ---
-title: How I cut Make usage from 158 to 39 credits
-description: "A practical breakdown: moving logic from Make.com scenarios into Supabase SQL functions. What changed, how much it saved and when not to do it."
+title: "Why my bots cost pennies to run"
+description: "What it costs to run a business bot each month, what that cost is made of, and how I make running costs four times lower. Explained without the technical details."
 date: 2026-10-06
-category: MAKE.COM
-read_minutes: 4
-lead: One AutoHunter monitoring run used to cost 158 operations. After moving the logic into the database it costs 39. Here's exactly what I changed.
+category: SAVINGS
+read_minutes: 3
+lead: A business owner's first question after "what can the bot do" is "and how much will it cost every month?". Here's what that number is made of and how I keep it low.
 related_case: autohunter
-tags: [MAKE.COM, SUPABASE, OPTIMISATION]
+tags: [RUNNING COSTS, EXPENSES, OPTIMISATION]
 ---
 
-## The problem
+## What you pay for each month
 
-Make bills every module operation. When a scenario loops over hundreds of listings with an iterator and queries the database for each one, credits disappear fast.
+A bot isn't a single program but several services working together:
 
-## Where the credits went
+- **an automation service** where the bot's logic lives: received a message, checked the calendar, wrote to the spreadsheet;
+- **AI** that understands normal language and voice messages;
+- **spreadsheets and calendars** — usually free Google services.
 
-Three places were the most expensive: duplicate checks, market price calculation and filtering. Each was a separate module running for every listing.
+The automation service counts every step the bot takes as a separate action. The more steps per client, the more expensive it is to run. That's where most bots "eat" money.
 
-```sql
--- one function instead of three modules per car
-select * from pick_deals(:batch);
-```
+## How I cut those costs
 
-## Logic in SQL
+I build bots so that each client action takes as few steps as possible. Heavy calculations, checks and filters run in one go in a separate database instead of step by step.
 
-Now Make sends the whole batch of listings to the database in a single request. A Supabase function drops duplicates, calculates the average price and returns only the candidates.
+An example from my AutoHunter project, which checks hundreds of car listings every hour:
 
-> Make should be the conductor, not the calculator.
+> One run used to cost **158** actions. After optimisation it costs **39**. Running costs dropped fourfold, and the bot works exactly the same.
 
-## The result
+For a business that takes bookings, this means the bot costs a few dollars a month to run, not dozens.
 
-One monitoring run: 158 credits before, 39 after. And when no user has active filters, monitoring doesn't run at all and spends no credits.
+## Why I think about it before we start
 
-## When not to do it
+A bot that gets more expensive with every new client is a bad investment. So before any work begins, I calculate what it will cost to run at your number of clients and tell you that figure upfront. No surprise bills six months later.
 
-If a scenario handles a few records a day, rewriting it in SQL isn't worth it: the savings will be smaller than the development time.
+## The rule I stick to
+
+**Running a bot should cost less than one hour of the person's time it frees up.** If it doesn't, automation makes no sense, and I'll tell you so honestly.
+
+Want to know what a bot would cost for your business? [Get in touch](/en/contact/): I'll review your process and work out the running costs before we start.

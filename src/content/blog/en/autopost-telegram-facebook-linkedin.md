@@ -1,83 +1,48 @@
 ---
-title: Auto-posting to Telegram, Facebook and LinkedIn from Google Sheets
-description: "How to set up auto-posting to Telegram, Facebook and LinkedIn with Make.com and a Google Sheet: scenario layout, fields, common errors and the credit cost."
+title: "Business social media every day, for one hour a week"
+description: "How a small business can post to Telegram, Facebook and LinkedIn every day while spending one hour a week on it. How auto-posting works and what it costs."
 date: 2026-10-15
-category: MAKE.COM
-read_minutes: 6
-lead: I write posts once a week in a spreadsheet, and Make publishes them at 10:00 to three networks at once. Here is the setup I built for my own content plan, and the mistakes that cost me an evening.
+category: FOR BUSINESS
+read_minutes: 4
+lead: Posts keep clients remembering you. But posting daily in three places while running your actual business is almost impossible. Here's how I solved it for myself and set it up for clients.
 related_case: ai-autopost
-tags: [MAKE.COM, AUTO-POSTING, TELEGRAM, FACEBOOK, LINKEDIN]
+tags: [SOCIAL MEDIA, AUTO-POSTING, TELEGRAM, FACEBOOK, LINKEDIN]
 ---
 
-## Why a small business needs auto-posting
+## Why business pages "fall asleep"
 
-Regular posts are the easiest way to stay on your clients' radar. The hard part isn't what to write — it's publishing every day, in several places, on time. Skip one week and the channel goes quiet.
+Sound familiar? The first week there's a post every day, then every other day, then the page goes quiet for a month. Not because there's nothing to say. Posting has to happen every day, on time and in several places at once, and at that moment you're busy with clients.
 
-The fix: write texts in batches when you have time and hand publishing over to automation. No paid SMM tools needed — a Google Sheet and the free Make.com plan are enough.
+And a client who visits the page and sees a post from a month ago thinks: "are they even still open?"
 
 ## How it works
 
-The whole system is one sheet and one Make scenario with five modules:
+You (or AI) prepare posts in a batch whenever you have a free hour, for example on Sunday for the whole week. Automation does the rest:
 
-1. **Google Sheet** — the content plan. One row is one post.
-2. **Make, every weekday at 10:00**, looks for a row with today's date and the status "Ready".
-3. **A router** sends the post to Telegram, LinkedIn and Facebook — only where the checkbox is ticked.
-4. **The last step** sets the status to "Published" and writes the publishing time.
+1. **Posts live in an ordinary Google Sheet.** Each row is one post: text, image, date and where to publish.
+2. **Every day at 10:00** the system picks today's post.
+3. **It publishes it** to Telegram, Facebook and LinkedIn — only where you ticked the box.
+4. **It marks the row "Published"** so nothing goes out twice.
 
-The status protects against duplicates: once published, the scenario won't pick the post again, even if you run it twice.
+You don't press anything or remember to post. The pages run themselves.
 
-## The sheet you need
+## Even simpler: AI writes the posts
 
-Minimum set of columns:
+If you don't have time even for the texts, AI can draft them in your style, about your services, with an image. In the evening you get tomorrow's post on Telegram with **"Publish"**, **"Rewrite"** and **"Skip"** buttons. One tap, and the post goes out at 10:00 the next day.
 
-| Column | Contents |
-|---|---|
-| date | publishing date as 2026-10-16 |
-| text_tg | text for Telegram and Facebook |
-| text_li | separate text for LinkedIn |
-| image_url | direct link to the image |
-| tg / li / fb | checkboxes: where to publish |
-| status | Draft → Ready → Published |
-| published_at | filled in by Make |
-
-Tip: keep the first row technical (short Latin names) and put human-friendly labels in the second. Make handles short column names better.
-
-## Setting up the scenario in Make
-
-**Finding the post.** Google Sheets → Search Rows, limit 1. Two filters: date equals today and status is "Ready". Always format the date to match the sheet:
-
-```
-{{formatDate(now; "YYYY-MM-DD"; "Europe/Kyiv")}}
-```
-
-Without it Make compares the sheet with its own date format and finds nothing.
-
-**Telegram.** Telegram Bot → Send a Photo. The bot must be a channel admin. Photo by URL from image_url, caption from text_tg.
-
-**LinkedIn.** LinkedIn → Create a User Image Post. You can pass the image straight from the sheet URL — no need to download the file first. Use "Connections" visibility for the first test, then "Public".
-
-**Facebook.** Facebook Pages → Create a Post with Photos. Photo by URL, caption from text_tg.
-
-**Status update.** Google Sheets → Update a Row, with the row number from the search module.
-
-## Common errors (and how I fixed them)
-
-**"Access Denied" in Facebook.** Make sees your account but not the Page. Fix: in Facebook → Settings → "Apps and websites" remove Make, then create the connection again in Make and tick your Page at the page-selection step.
-
-**Empty page list in Facebook.** You can only publish to a Page, not a personal profile. No Page yet — create one, it takes five minutes.
-
-**"rowNumber missing" error.** The search found nothing, but the update step ran anyway. Add a "row number exists" filter on the update route, and on days without a post the scenario ends quietly.
-
-**Status changed but the post didn't go out.** The update route runs before the social routes. Order: Telegram → LinkedIn → Facebook → sheet update.
-
-**Filter in the wrong place.** The "tg = TRUE" condition belongs on the line before the Telegram module, not before the router. Otherwise a post without the Telegram box won't reach LinkedIn either.
+That's exactly how my own pages are run right now.
 
 ## What it costs
 
-Make counts every step as a credit. A day without a post costs 1 credit (just the search). A day with a post to three networks costs about 5. With three posts a week that's roughly 80 credits a month, while the free Make plan gives 1,000. Auto-posting for one business fits inside the free limit.
+No paid social media tools at $20–50 a month. For one business, auto-posting usually fits within the automation service's free tier, and AI texts cost pennies — under a dollar a month.
 
-## What's next
+You only pay once for the setup.
 
-The same setup extends easily: AI can write drafts into the sheet, and you only review them and set "Ready". That's how [my AI auto-posting case for a Telegram channel](/en/cases/ai-autopost/) works.
+## What you get
 
-Want the same for your business? [Get in touch](/en/contact/) and I'll set it up for your networks.
+- pages updated every day, even while you're on holiday;
+- one hour a week instead of a daily "I still need to post something";
+- one post in three networks at once;
+- full control: nothing goes out without your approval.
+
+Want your social media to run itself? [Get in touch](/en/contact/): I'll set it up for your pages and show you how it works using your business as the example.
