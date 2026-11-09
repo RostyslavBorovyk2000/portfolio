@@ -5,6 +5,7 @@ import Num from '../components/Num.astro';
 import Tags from '../components/Tags.astro';
 import Cta from '../components/Cta.astro';
 import SecHead from '../components/SecHead.astro';
+import ReviewForm from '../components/ReviewForm.astro';
 import { url, type Lang } from '../i18n';
 import { data, cases, slugOf, paras } from '../lib/data';
 interface Props { lang: Lang; entry: any }
@@ -105,6 +106,13 @@ const ld = [
         </div>
       )}
       {d.quote && <p class="quote rv">{d.quote}</p>}
+    </div></section>
+  )}
+
+  {d.review_form && (
+    <section class="sec" id="vidguk"><div class="wrap cgrid">
+      <ReviewForm lang={lang} project={d.title} />
+      <aside class="side-c"><div class="chan hi"><span class="meta" style="color:var(--brass-hi)">{p.review_kicker}</span><p class="h3" style="margin-top:.4rem">{p.review_title}</p><p style="color:var(--soft)">{p.review_text}</p></div></aside>
     </div></section>
   )}
 

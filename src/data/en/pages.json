@@ -44,7 +44,10 @@
     "demo_kicker": "// Live demo",
     "demo_title": "Try it yourself",
     "demo_text": "A working version with sample data. Tick tasks, change statuses, add rows — you can't break anything.",
-    "demo_btn": "Open full screen"
+    "demo_btn": "Open full screen",
+    "review_kicker": "// Client review",
+    "review_title": "Worked on this project?",
+    "review_text": "Write a few sentences: how things were before the bot, what changed, and what it was like working together. Your review appears on the site after a quick check."
   },
   "services": {
     "seo_title": "AI automation services: Telegram bots, Make.com, monitoring — Borovyk Automation",

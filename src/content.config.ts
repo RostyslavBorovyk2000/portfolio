@@ -35,6 +35,7 @@ const cases = defineCollection({
     quote: z.string().optional(),
     cta_title: z.string().optional(),
     cta_text: z.string().optional(),
+    review_form: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });
