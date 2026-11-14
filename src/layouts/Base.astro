@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { url, stripLang, OG_LOCALE, type Lang } from '../i18n';
-import { data, services, slugOf } from '../lib/data';
+import { data, services, niches, slugOf } from '../lib/data';
 
 interface Props {
   lang: Lang;
@@ -22,6 +22,7 @@ const tg = `https://t.me/${site.telegram}`;
 const current = (p: string) => path === p || (p !== '/' && path.startsWith(p));
 const other: Lang = lang === 'uk' ? 'en' : 'uk';
 const svc = await services(lang);
+const nic = await niches(lang);
 const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id)}/`) : url(lang, '/services/') + '#' + slugOf(s.id);
 ---
 <!doctype html>
@@ -90,6 +91,7 @@ const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id
           <p class="muted" style="max-width:30ch">{site.footer_text}</p>
         </div>
         <div><h4>{site.footer_site}</h4>{site.nav.filter((n: any) => n.path !== '/services/').map((n: any) => <a href={url(lang, n.path)}>{n.label}</a>)}</div>
+        <div><h4>{site.footer_niches}</h4>{nic.map((n) => <a href={url(lang, `/for/${slugOf(n.id)}/`)}>{n.data.card_title}</a>)}</div>
         <div><h4>{site.footer_services}</h4>{svc.map((s) => <a href={svcHref(s)}>{s.data.title}</a>)}</div>
         <div>
           <h4>{site.footer_contact}</h4>

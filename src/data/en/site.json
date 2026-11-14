@@ -62,5 +62,11 @@
     "title": "What routine should we automate?",
     "text": "Describe the task in a few sentences. Within a day I'll reply with how to automate it and what it will cost to run.",
     "btn": "Send a request"
-  }
+  },
+  "footer_niches": "FOR BUSINESS",
+  "read_more_kicker": "// Further reading",
+  "read_more_title": "Related articles",
+  "niches_kicker": "// Industry solutions",
+  "niches_title": "Ready-made solutions for your business",
+  "other_niches_title": "Other solutions"
 }

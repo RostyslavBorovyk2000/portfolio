@@ -6,6 +6,7 @@ category: FOR BUSINESS
 read_minutes: 4
 lead: Not every business needs a bot. But if you recognise at least two of the signs below, you are already losing money and time every month on work that doesn't have to be done by hand.
 related_case: ai-salon-admin
+niche: salons
 tags: [SALONS, AUTOMATION, ROUTINE]
 ---
 

@@ -6,6 +6,7 @@ category: FOR BUSINESS
 read_minutes: 4
 lead: The client booked, the stylist is waiting, and she doesn't show. Not because she changed her mind, but because she forgot. Let's work out what those "forgot"s cost in a month.
 related_case: ai-salon-admin
+niche: salons
 tags: [SALONS, REMINDERS, NO-SHOWS]
 ---
 

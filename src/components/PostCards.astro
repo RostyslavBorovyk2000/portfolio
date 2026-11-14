@@ -1,0 +1,25 @@
+---
+// Блок «Читайте також»: картки статей
+import SecHead from './SecHead.astro';
+import { url, type Lang } from '../i18n';
+import { data, slugOf } from '../lib/data';
+interface Props { lang: Lang; items: any[]; kicker?: string; title?: string }
+const { lang, items } = Astro.props;
+const site = data(lang, 'site');
+const { kicker = site.read_more_kicker, title = site.read_more_title } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={kicker} title={title} />
+    <div class="posts">
+      {items.map((post, i) => (
+        <a class="card spot rv" style={`--d:${(i % 3) * 0.08}s`} href={url(lang, `/blog/${slugOf(post.id)}/`)}>
+          <p class="meta" style="display:flex;gap:1rem;flex-wrap:wrap"><span style="color:var(--brass-hi)">{post.data.category}</span><span>{post.data.read_minutes} {site.minutes}</span></p>
+          <h3 class="h3">{post.data.title}</h3>
+          <p class="muted">{post.data.description}</p>
+          <span class="go">{site.read} <i>→</i></span>
+        </a>
+      ))}
+    </div>
+  </div></section>
+)}

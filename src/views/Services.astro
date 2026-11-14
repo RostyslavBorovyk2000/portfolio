@@ -3,13 +3,15 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import SecHead from '../components/SecHead.astro';
 import Cta from '../components/Cta.astro';
+import NicheLinks from '../components/NicheLinks.astro';
 import { url, type Lang } from '../i18n';
-import { data, services, slugOf } from '../lib/data';
+import { data, services, niches, slugOf } from '../lib/data';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const site = data(lang, 'site');
 const p = data(lang, 'pages').services;
 const list = await services(lang);
+const nic = await niches(lang);
 const home = new URL(url(lang, '/'), Astro.site).href;
 const ld = [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: list.map((s, i) => ({
   '@type': 'ListItem', position: i + 1, item: { '@type': 'Service', name: s.data.title, description: s.data.description, provider: { '@type': 'Person', name: site.name } } })) },
@@ -36,5 +38,6 @@ const ld = [{ '@context': 'https://schema.org', '@type': 'ItemList', itemListEle
     <SecHead kicker={p.always_kicker} title={p.always_title} />
     <div class="inc rv">{p.always.map((it: any, i: number) => <div><span class="ck">0{i + 1}</span><div><b>{it.title}</b><p>{it.text}</p></div></div>)}</div>
   </div></section>
+  <NicheLinks lang={lang} items={nic} />
   <Cta lang={lang} />
 </Base>

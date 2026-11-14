@@ -162,6 +162,7 @@ collections:
       - { name: read_minutes, label: Хвилин читання, widget: number, value_type: int, default: 5, i18n: duplicate }
       - { name: lead, label: Вступ, widget: text, required: false, i18n: true }
       - { name: related_case, label: "Пов'язаний кейс (slug)", widget: string, required: false, i18n: duplicate }
+      - { name: niche, label: "Ніша (salons, clinics, car-service, telegram-channels)", widget: select, options: [salons, clinics, car-service, telegram-channels], required: false, i18n: duplicate }
       - { name: tags, label: Теги, widget: list, required: false, i18n: true }
       - { name: draft, label: Чернетка, widget: boolean, default: false, i18n: duplicate }
       - { name: body, label: Текст статті, widget: markdown, i18n: true }

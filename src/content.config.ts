@@ -74,6 +74,7 @@ const blog = defineCollection({
     read_minutes: z.number().default(5),
     lead: z.string().optional(),
     related_case: z.string().optional(),
+    niche: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),

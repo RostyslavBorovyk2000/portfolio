@@ -6,6 +6,7 @@ category: FOR BUSINESS
 read_minutes: 4
 lead: Posts keep clients remembering you. But posting daily in three places while running your actual business is almost impossible. Here's how I solved it for myself and set it up for clients.
 related_case: ai-autopost
+niche: telegram-channels
 tags: [SOCIAL MEDIA, AUTO-POSTING, TELEGRAM, FACEBOOK, LINKEDIN]
 ---
 

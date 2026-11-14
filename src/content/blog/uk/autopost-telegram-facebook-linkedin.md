@@ -6,6 +6,7 @@ category: ДЛЯ БІЗНЕСУ
 read_minutes: 4
 lead: Пости потрібні, щоб клієнти пам'ятали про вас. Але публікувати щодня в трьох місцях, коли є основна робота, майже неможливо. Ось як я вирішив це для себе і роблю для клієнтів.
 related_case: ai-autopost
+niche: telegram-channels
 tags: [СОЦМЕРЕЖІ, АВТОПОСТИНГ, TELEGRAM, FACEBOOK, LINKEDIN]
 ---
 

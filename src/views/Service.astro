@@ -5,8 +5,10 @@ import SecHead from '../components/SecHead.astro';
 import Btn from '../components/Btn.astro';
 import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
+import PostCards from '../components/PostCards.astro';
+import NicheLinks from '../components/NicheLinks.astro';
 import { url, type Lang } from '../i18n';
-import { data, cases, slugOf, paras } from '../lib/data';
+import { data, cases, niches, relatedPosts, slugOf, paras } from '../lib/data';
 interface Props { lang: Lang; entry: any }
 const { lang, entry } = Astro.props;
 const site = data(lang, 'site');
@@ -14,6 +16,8 @@ const p = data(lang, 'pages').services;
 const d = entry.data;
 const slug = slugOf(entry.id);
 const related = d.related_case ? (await cases(lang)).find((c) => slugOf(c.id) === d.related_case) : undefined;
+const forSvc = d.related_case ? (await niches(lang)).filter((n) => n.data.related_case === d.related_case) : [];
+const more = await relatedPosts(lang, { related_case: d.related_case });
 const script = lang === 'uk'
   ? [['u','Добрий вечір! Чи є вільний час на манікюр у суботу?'],['b','Добрий вечір! У суботу вільно о 11:00 і о 15:30. Який час зручніший?',['11:00','15:30']],['u','15:30'],['b','Записала вас на суботу о 15:30. Нагадаю за день. Як вас звати?'],['u','Олена'],['b','Дякую, Олено! Запис підтверджено ✓ Адміністратор уже бачить заявку.']]
   : [['u','Good evening! Any free slots for a manicure on Saturday?'],['b','Good evening! Saturday is free at 11:00 and 15:30. Which suits you?',['11:00','15:30']],['u','15:30'],['b',"Booked you for Saturday at 15:30. I'll remind you a day before. What's your name?"],['u','Olena'],['b','Thank you, Olena! Booking confirmed ✓ The administrator can already see it.']];
@@ -88,5 +92,7 @@ const ld = [
       <div class="rv"><Faq items={d.faq} /></div>
     </div></section>
   )}
+  <NicheLinks lang={lang} items={forSvc} />
+  <PostCards lang={lang} items={more} />
   <Cta lang={lang} kicker={p.cta_kicker} />
 </Base>

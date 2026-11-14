@@ -6,6 +6,7 @@ category: CASE STUDIES
 read_minutes: 4
 lead: Clients message in the evening and at weekends, and get a reply the next morning. By then some have already booked somewhere else. Here's how we fixed that.
 related_case: ai-salon-admin
+niche: salons
 tags: [SALONS, BOOKING, REMINDERS]
 ---
 

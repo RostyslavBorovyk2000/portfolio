@@ -44,3 +44,13 @@ export function inline(s = ''): string {
 export function paras(s = ''): string[] {
   return s.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
 }
+
+/** Схожі статті: спершу та сама ніша/кейс, потім спільні теги, потім найновіші */
+export async function relatedPosts(lang: Lang, o: { exclude?: string; niche?: string; related_case?: string; tags?: string[] }, limit = 3) {
+  const list = (await posts(lang)).filter((p) => p.id !== o.exclude);
+  const score = (p: any) =>
+    (o.niche && p.data.niche === o.niche ? 4 : 0) +
+    (o.related_case && p.data.related_case === o.related_case ? 3 : 0) +
+    (o.tags ?? []).filter((t) => p.data.tags.includes(t)).length;
+  return list.map((p, i) => ({ p, s: score(p), i })).sort((a, b) => b.s - a.s || a.i - b.i).slice(0, limit).map((x) => x.p);
+}

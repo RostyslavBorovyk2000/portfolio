@@ -6,8 +6,10 @@ import Tags from '../components/Tags.astro';
 import Cta from '../components/Cta.astro';
 import SecHead from '../components/SecHead.astro';
 import ReviewForm from '../components/ReviewForm.astro';
+import PostCards from '../components/PostCards.astro';
+import NicheLinks from '../components/NicheLinks.astro';
 import { url, type Lang } from '../i18n';
-import { data, cases, slugOf, paras } from '../lib/data';
+import { data, cases, niches, relatedPosts, slugOf, paras } from '../lib/data';
 interface Props { lang: Lang; entry: any }
 const { lang, entry } = Astro.props;
 const site = data(lang, 'site');
@@ -17,6 +19,8 @@ const slug = slugOf(entry.id);
 const all = (await cases(lang)).filter((c) => c.data.has_page);
 const idx = all.findIndex((c) => c.id === entry.id);
 const next = all.length > 1 ? all[(idx + 1) % all.length] : undefined;
+const forCase = (await niches(lang)).filter((n) => n.data.related_case === slug);
+const about = (await relatedPosts(lang, { related_case: slug }, 6)).filter((x) => x.data.related_case === slug).slice(0, 3);
 const home = new URL(url(lang, '/'), Astro.site).href;
 const ld = [
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -115,6 +119,9 @@ const ld = [
       <aside class="side-c"><div class="chan hi"><span class="meta" style="color:var(--brass-hi)">{p.review_kicker}</span><p class="h3" style="margin-top:.4rem">{p.review_title}</p><p style="color:var(--soft)">{p.review_text}</p></div></aside>
     </div></section>
   )}
+
+  <NicheLinks lang={lang} items={forCase} />
+  <PostCards lang={lang} items={about} />
 
   <section class="sec"><div class="wrap">
     <div class="pager rv">

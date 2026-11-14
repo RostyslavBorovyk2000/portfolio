@@ -232,6 +232,7 @@ html[data-btn="scan"] .btn:active{box-shadow:0 0 0 .3rem var(--brass-lo)}
 .svc .scode{font-family:var(--f-mono);font-size:.82rem;color:var(--brass-hi)}
 .svc p{color:var(--muted);font-size:.97rem}
 .svc .more{margin-top:auto;font-weight:700;font-size:.9rem}
+@media (min-width:1101px){.svc[data-n="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}.svc[data-n="2"],.svc[data-n="1"]{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:1100px){.svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.svc{grid-template-columns:1fr}.svc a{min-height:0}}
 
@@ -297,7 +298,7 @@ input[type=range]::-moz-range-thumb{width:1rem;height:1rem;background:var(--bg);
 
 /* ---------- footer ---------- */
 .ftr{border-top:1px solid var(--line);margin-top:clamp(4rem,9vw,7.5rem)}
-.ftr-g{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:2.5rem;padding-block:4rem 2.5rem}
+.ftr-g{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:2.5rem;padding-block:4rem 2.5rem}
 .ftr-g > div{display:flex;flex-direction:column;gap:.6rem;font-size:.95rem;min-width:0}
 .ftr-g h4{margin:0 0 .3rem;font-family:var(--f-mono);font-size:.75rem;font-weight:500;color:var(--dim);letter-spacing:.1em}
 .ftr-g a{color:var(--soft);text-decoration:none;width:fit-content}
@@ -398,7 +399,7 @@ input[type=range]::-moz-range-thumb{width:1rem;height:1rem;background:var(--bg);
 .pager{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 .pager a{border:1px solid var(--line);padding:1.75rem;text-decoration:none;color:var(--fg);transition:border-color .3s}
 .pager a:hover{border-color:var(--brass)}
-.pager a:last-child{text-align:right}
+.pager a:last-child:not(:first-child){text-align:right}
 @media (max-width:600px){.pager{grid-template-columns:1fr}.pager a:last-child{text-align:left}}
 
 /* about */
@@ -573,3 +574,7 @@ html[data-btn="scan"] .btn::after{opacity:.35;transform:scale(1)}
 .demo-frame{border:1px solid var(--brass);background:var(--deep);overflow:hidden}
 .demo-frame iframe{display:block;width:100%;border:0}
 @media (max-width:640px){.demo-frame iframe{height:900px!important}}
+
+/* ---------- посилання на нішу під статтею ---------- */
+.pager-solo{display:block;margin-top:1.25rem;border:1px solid var(--brass);padding:1.75rem;text-decoration:none;color:var(--fg);transition:background .3s}
+.pager-solo:hover{background:var(--panel)}

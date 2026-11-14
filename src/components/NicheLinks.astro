@@ -1,0 +1,20 @@
+---
+// Картки «Рішення під нішу» (/for/…)
+import SecHead from './SecHead.astro';
+import { url, type Lang } from '../i18n';
+import { data, slugOf } from '../lib/data';
+interface Props { lang: Lang; items: any[]; kicker?: string; title?: string }
+const { lang, items } = Astro.props;
+const site = data(lang, 'site');
+const { kicker = site.niches_kicker, title = site.niches_title } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="sec"><div class="wrap">
+    <SecHead kicker={kicker} title={title} />
+    <div class="svc rv" data-n={items.length}>
+      {items.map((n) => (
+        <a href={url(lang, `/for/${slugOf(n.id)}/`)}><span class="scode">[ {n.data.code} ]</span><h3 class="h3" style="font-size:1.3rem">{n.data.card_title}</h3><p>{n.data.card_text}</p><span class="more">{site.more} →</span></a>
+      ))}
+    </div>
+  </div></section>
+)}
