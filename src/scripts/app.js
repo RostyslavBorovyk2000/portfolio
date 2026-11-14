@@ -227,4 +227,68 @@
     }, { rootMargin: '-20% 0px -70% 0px' });
     d.querySelectorAll('.art article h2[id]').forEach(function (h) { io2.observe(h); });
   }
+  /* ---- ефекти: світло за курсором у hero, 3D-нахил фото, «розшифровка» кікерів, поява заголовків по словах ---- */
+  var fine = window.matchMedia && matchMedia('(pointer: fine)').matches;
+  if (!reduce) {
+    // заголовки секцій: кожне слово виїжджає знизу
+    d.querySelectorAll('.sec-head h2').forEach(function (h) {
+      if (h.children.length) return;
+      var words = h.textContent.trim().split(/\s+/);
+      h.setAttribute('aria-label', h.textContent.trim());
+      h.innerHTML = words.map(function (w, i) { return '<span class="w" aria-hidden="true"><span style="--wi:' + i + '">' + w + '</span></span>'; }).join(' ');
+      h.classList.add('wsplit');
+    });
+    // кікери: символи «перебираються», поки не складуться в текст
+    var CH = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЮЯ0123456789/<>_#*';
+    function scramble(el) {
+      if (el.dataset.done) return; el.dataset.done = 1;
+      var txt = el.textContent, n = txt.length, t0 = null, dur = 700 + n * 18;
+      function f(t) {
+        if (!t0) t0 = t; var p = Math.min(1, (t - t0) / dur), out = '';
+        for (var i = 0; i < n; i++) {
+          var c = txt[i];
+          out += (c === ' ' || i / n < p * 1.15 - 0.15) ? c : CH[(Math.random() * CH.length) | 0];
+        }
+        el.textContent = out; if (p < 1) requestAnimationFrame(f); else el.textContent = txt;
+      }
+      requestAnimationFrame(f);
+    }
+    if ('IntersectionObserver' in window) {
+      var io3 = new IntersectionObserver(function (ents) {
+        ents.forEach(function (en) { if (en.isIntersecting) { scramble(en.target); io3.unobserve(en.target); } });
+      }, { rootMargin: '0px 0px -10% 0px' });
+      d.querySelectorAll('.sec-head .kicker, .cta .kicker').forEach(function (k) { if (!k.children.length) io3.observe(k); });
+    }
+  }
+  if (!reduce && fine) {
+    // hero: латунне світло і підсвічена сітка під курсором
+    var hero = d.querySelector('.hero');
+    if (hero) {
+      var glow = d.createElement('div'); glow.className = 'hero-glow'; glow.setAttribute('aria-hidden', 'true');
+      hero.insertBefore(glow, hero.firstChild);
+      var hx = 0, hy = 0, tx = 0, ty = 0, raf = 0;
+      function paint() {
+        hx += (tx - hx) * 0.12; hy += (ty - hy) * 0.12;
+        hero.style.setProperty('--hx', hx + 'px'); hero.style.setProperty('--hy', hy + 'px');
+        raf = (Math.abs(tx - hx) + Math.abs(ty - hy) > 0.5) ? requestAnimationFrame(paint) : 0;
+      }
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top;
+        if (!hero.classList.contains('lit')) { hx = tx; hy = ty; hero.classList.add('lit'); }
+        if (!raf) raf = requestAnimationFrame(paint);
+      });
+      hero.addEventListener('pointerleave', function () { hero.classList.remove('lit'); });
+    }
+    // фото в hero: легкий 3D-нахил і відблиск
+    var ph = d.querySelector('.hero-ph');
+    if (ph) {
+      ph.addEventListener('pointermove', function (e) {
+        var r = ph.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        ph.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg'); ph.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+        ph.style.setProperty('--sx', ((x + 0.5) * 100).toFixed(1) + '%'); ph.style.setProperty('--sy', ((y + 0.5) * 100).toFixed(1) + '%');
+        ph.classList.add('tilt');
+      });
+      ph.addEventListener('pointerleave', function () { ph.classList.remove('tilt'); ph.style.setProperty('--rx', '0deg'); ph.style.setProperty('--ry', '0deg'); });
+    }
+  }
 })();
