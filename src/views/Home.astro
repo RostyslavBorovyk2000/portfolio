@@ -16,7 +16,7 @@ const site = data(lang, 'site');
 const h = data(lang, 'home');
 const allCases = await cases(lang);
 const featured = allCases.find((c) => c.data.featured) ?? allCases[0];
-const rest = allCases.filter((c) => c !== featured).slice(0, 2);
+const rest = allCases.filter((c) => c !== featured).slice(0, 3);
 const svc = await services(lang);
 const nic = await niches(lang);
 const revs = (await reviews()).slice(0, 3);
@@ -112,6 +112,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       {svc.map((s) => (
         <a href={svcHref(s)}><span class="scode">[ {s.data.code} ]</span><h3 class="h3" style="font-size:1.3rem">{s.data.title}</h3><p>{s.data.short}</p><span class="more">{site.more} →</span></a>
       ))}
+      {svc.length % 4 !== 0 && <a class="fill" href={url(lang, '/contact/')} style={`--span:${4 - (svc.length % 4)}`}><span class="scode">[ ? ]</span><h3 class="h3" style="font-size:1.3rem">{h.services.other_title}</h3><p>{h.services.other_text}</p><span class="more">{site.cta} →</span></a>}
     </div>
   </div></section>
 
@@ -160,7 +161,10 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
   {revs.length > 0 && (
     <section class="sec"><div class="wrap">
       <SecHead kicker={rp.home_kicker} title={rp.home_title} link={{ href: url(lang, '/reviews/'), label: rp.home_all }} />
-      <div class="revs">{revs.map((r, i) => <ReviewCard entry={r} lang={lang} delay={i * 0.08} />)}</div>
+      <div class="revs">
+        {revs.map((r, i) => <ReviewCard entry={r} lang={lang} delay={i * 0.08} />)}
+        {revs.length < 3 && <a class="card spot rv rev-cta" href={url(lang, '/reviews/') + '#form'} style={`--span:${3 - revs.length}`}><span class="meta" style="color:var(--brass-hi)">{rp.home_cta_kicker}</span><p class="h3">{rp.home_cta_title}</p><p class="muted">{rp.home_cta_text}</p><span class="go">{rp.home_cta_btn} <i>→</i></span></a>}
+      </div>
     </div></section>
   )}
 

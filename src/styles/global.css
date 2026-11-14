@@ -578,3 +578,11 @@ html[data-btn="scan"] .btn::after{opacity:.35;transform:scale(1)}
 /* ---------- посилання на нішу під статтею ---------- */
 .pager-solo{display:block;margin-top:1.25rem;border:1px solid var(--brass);padding:1.75rem;text-decoration:none;color:var(--fg);transition:background .3s}
 .pager-solo:hover{background:var(--panel)}
+
+/* ---------- заповнювачі порожніх клітинок ---------- */
+.svc .fill{grid-column:span var(--span,1);background:var(--panel)}
+.svc .fill:hover{background:var(--deep)}
+.svc .fill p{max-width:46ch}
+@media (max-width:1100px){.svc .fill{grid-column:auto}}
+.rev-cta{padding:clamp(1.4rem,2.5vw,2rem);gap:1rem;border-style:dashed;justify-content:center}
+@media (min-width:1101px){.rev-cta{grid-column:span var(--span,1)}.rev-cta p{max-width:52ch}}

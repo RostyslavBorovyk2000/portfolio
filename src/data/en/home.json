@@ -60,7 +60,9 @@
   "services": {
     "kicker": "// Services",
     "title": "What the bot takes over",
-    "all": "All services →"
+    "all": "All services →",
+    "other_title": "Something else?",
+    "other_text": "Don't see your routine on the list? Describe it in a few sentences and I'll tell you what a bot can take over and what it would cost."
   },
   "roi": {
     "kicker": "// Calculator",

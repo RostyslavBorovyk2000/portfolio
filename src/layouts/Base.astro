@@ -52,6 +52,8 @@ const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" />
   {jsonld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  <!-- Cloudflare Web Analytics (без cookie) -->
+  {import.meta.env.PROD && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2c4bd8b8570440f9aaecf45e202b9cbc"}'></script>}
 </head>
 <body>
   <a class="skip" href="#main">{site.skip}</a>

@@ -322,7 +322,11 @@
     ],
     "home_kicker": "// Reviews",
     "home_title": "What clients say",
-    "home_all": "All reviews"
+    "home_all": "All reviews",
+    "home_cta_kicker": "YOUR REVIEW",
+    "home_cta_title": "Worked together?",
+    "home_cta_text": "Tell others how the automation works for you. It helps other business owners decide whether a bot fits them.",
+    "home_cta_btn": "Leave a review"
   },
   "niches": {
     "kicker": "// Solution",
