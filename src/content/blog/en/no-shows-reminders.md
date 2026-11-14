@@ -56,4 +56,6 @@ The key is the reschedule button. A client whose plans changed doesn't need to c
 
 Reminders are sent automatically on Telegram, so unlike SMS you don't pay per message. Running such a bot costs a few dollars a month. If it saves even one no-show, it has already paid for itself.
 
+Reminders are part of the [AI receptionist for salons](/en/for/salons/): the same bot takes bookings and invites clients back. How it works in a real studio is in ["A bot instead of a receptionist"](/en/blog/ai-salon-booking-bot/).
+
 Want to work out what no-shows cost your salon? [Get in touch](/en/contact/): we'll go through your numbers and see how much you can win back.

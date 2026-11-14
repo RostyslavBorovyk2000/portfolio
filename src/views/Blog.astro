@@ -8,14 +8,22 @@ const { lang } = Astro.props;
 const site = data(lang, 'site');
 const p = data(lang, 'pages').blog;
 const list = await posts(lang);
+const cats = [...new Set(list.map((x) => x.data.category))];
+const catKey = (c: string) => 'c' + cats.indexOf(c);
 const fmt = new Intl.DateTimeFormat(lang === 'uk' ? 'uk-UA' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 ---
 <Base lang={lang} title={p.seo_title} description={p.seo_description}>
   <PageHero crumbs={[{ name: site.home, href: url(lang, '/') }, { name: p.kicker.replace('// ', '') }]} kicker={p.kicker} title={p.title} lead={p.lead} />
   <section class="sec" style="padding-top:2.5rem"><div class="wrap">
-    <div class="posts">
+    {cats.length > 1 && (
+      <div class="filters" data-for="#post-list" role="group" style="margin-bottom:1.75rem">
+        <button type="button" data-f="all" aria-pressed="true">{site.all} · {list.length}</button>
+        {cats.map((c) => <button type="button" data-f={catKey(c)} aria-pressed="false">{c} · {list.filter((x) => x.data.category === c).length}</button>)}
+      </div>
+    )}
+    <div class="posts" id="post-list">
       {list.map((post, i) => (
-        <a class={`card spot rv${i === 0 ? ' feat' : ''}`} style={`--d:${(i % 3) * 0.08}s`} href={url(lang, `/blog/${slugOf(post.id)}/`)}>
+        <a class={`card spot rv${i === 0 ? ' feat' : ''}`} style={`--d:${(i % 3) * 0.08}s`} href={url(lang, `/blog/${slugOf(post.id)}/`)} data-cat={catKey(post.data.category)}>
           <p class="meta" style="display:flex;gap:1rem;flex-wrap:wrap"><span style="color:var(--brass-hi)">{post.data.category}</span><time datetime={post.data.date.toISOString()}>{fmt.format(post.data.date)}</time><span>{post.data.read_minutes} {site.minutes}</span></p>
           <h2 class="h3">{post.data.title}</h2>
           <p class="muted" style="max-width:60ch">{post.data.description}</p>

@@ -37,4 +37,6 @@ A bot that gets more expensive with every new client is a bad investment. So bef
 
 **Running a bot should cost less than one hour of the person's time it frees up.** If it doesn't, automation makes no sense, and I'll tell you so honestly.
 
+How I estimate running costs before we start, and what each service includes, is on the [Services](/en/services/) page.
+
 Want to know what a bot would cost for your business? [Get in touch](/en/contact/): I'll review your process and work out the running costs before we start.

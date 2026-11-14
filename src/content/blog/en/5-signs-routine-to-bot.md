@@ -38,4 +38,6 @@ A simple rule: **running the bot should cost less than one hour of the work it f
 
 A bot doesn't replace the stylist or handle tricky situations. It takes the repetitive work: answers, bookings, reminders, reports. The receptionist and the owner focus on clients, service quality and growth.
 
+To see how it works in a salon, from booking to reminders, check the [AI receptionist for beauty salons](/en/for/salons/). There's a [separate solution for clinics](/en/for/clinics/) and [one for car services](/en/for/car-service/).
+
 Recognised two or three signs? [Message me](/en/contact/) and I'll show you a free 15-minute demo for your business.

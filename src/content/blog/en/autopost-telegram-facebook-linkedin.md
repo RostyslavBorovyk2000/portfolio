@@ -46,4 +46,6 @@ You only pay once for the setup.
 - one post in three networks at once;
 - full control: nothing goes out without your approval.
 
+If you run a Telegram channel, see the [solution for channels and content](/en/for/telegram-channels/): topic research, posts in your style and publishing after approval.
+
 Want your social media to run itself? [Get in touch](/en/contact/): I'll set it up for your pages and show you how it works using your business as the example.

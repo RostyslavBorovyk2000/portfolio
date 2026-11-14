@@ -51,4 +51,6 @@ Setup is a one-off, and running the bot (automation and AI services) costs a few
 - fewer no-shows thanks to reminders;
 - 8–10 hours a month go back into working with clients.
 
+What exactly the bot takes over in a salon and what it costs is on the [solution page for beauty salons and barbershops](/en/for/salons/).
+
 Want the same in your salon or studio? [Get in touch](/en/contact/): I'll review how your bookings work today for free and estimate how much time a bot would free up.
