@@ -8,6 +8,7 @@ import Faq from '../components/Faq.astro';
 import Cta from '../components/Cta.astro';
 import PostCards from '../components/PostCards.astro';
 import NicheLinks from '../components/NicheLinks.astro';
+import { render } from 'astro:content';
 import { url, type Lang } from '../i18n';
 import { data, cases, niches, relatedPosts, slugOf, paras } from '../lib/data';
 interface Props { lang: Lang; entry: any }
@@ -21,6 +22,8 @@ const slug = slugOf(entry.id);
 const related = d.related_case ? (await cases(lang)).find((c) => slugOf(c.id) === d.related_case) : undefined;
 const others = (await niches(lang)).filter((x) => x.id !== entry.id);
 const more = await relatedPosts(lang, { niche: slug, related_case: d.related_case });
+const { Content } = await render(entry);
+const hasBody = !!entry.body?.trim();
 const page = new URL(url(lang, `/for/${slug}/`), Astro.site).href;
 const ld = [
   { '@context': 'https://schema.org', '@type': 'Service', name: d.title, description: d.description, url: page, provider: { '@type': 'Person', name: site.name }, areaServed: ['UA', 'EU', 'US'] },
@@ -66,6 +69,14 @@ const ld = [
     <SecHead kicker={h.process.kicker} title={h.process.title} />
     <div class="steps">{h.process.steps.map((s: any, i: number) => <div class="step" style={`--d:${i * 0.15}s`}><p class="mono">STEP 0{i + 1}</p><h3>{s.title}</h3><p>{s.text}</p></div>)}</div>
   </div></section>
+
+  {hasBody && (
+    <section class="sec"><div class="wrap art">
+      <div><p class="kicker">{n.more_kicker}</p></div>
+      <article class="rv"><Content /></article>
+      <div></div>
+    </div></section>
+  )}
 
   <section class="sec"><div class="wrap cases">
     {related && (
