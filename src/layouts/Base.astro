@@ -105,6 +105,7 @@ const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id
           <a href={url(other, path)} hreflang={other}>{other === 'en' ? 'English version' : 'Українська версія'}</a>
         </div>
       </div>
+      {site.legal && <p class="muted ftr-legal">{site.legal}</p>}
       <div class="ftr-b"><span>© {new Date().getFullYear()} {site.brand}</span><span>BOROVYK-AUTOMATION.COM</span></div>
     </div>
   </footer>

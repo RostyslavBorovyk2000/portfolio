@@ -303,6 +303,7 @@ input[type=range]::-moz-range-thumb{width:1rem;height:1rem;background:var(--bg);
 .ftr-g h4{margin:0 0 .3rem;font-family:var(--f-mono);font-size:.75rem;font-weight:500;color:var(--dim);letter-spacing:.1em}
 .ftr-g a{color:var(--soft);text-decoration:none;width:fit-content}
 .ftr-g a:hover{color:var(--brass-hi)}
+.ftr-legal{font-size:.82rem;margin:0 0 1rem;max-width:70ch}
 .ftr-b{border-top:1px solid var(--line);padding-block:1.25rem 2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.78rem;color:var(--dim)}
 .copy{background:none;border:1px solid var(--line2);color:var(--muted);font:500 .7rem var(--f-mono);padding:.2rem .45rem;margin-left:.4rem;cursor:pointer}
 .copy:hover{border-color:var(--brass);color:var(--brass-hi)}
