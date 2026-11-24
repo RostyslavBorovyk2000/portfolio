@@ -106,7 +106,7 @@ const svcHref = (s: any) => s.data.has_page ? url(lang, `/services/${slugOf(s.id
           <a href={url(other, path)} hreflang={other}>{other === 'en' ? 'English version' : 'Українська версія'}</a>
         </div>
       </div>
-      <div class="ftr-b"><span>© {new Date().getFullYear()} {site.brand}</span><span style="display:flex;gap:1.2rem;flex-wrap:wrap"><a href={url(lang, '/privacy/')}>{lang === 'uk' ? 'Конфіденційність' : 'Privacy'}</a><a href={url(lang, '/terms/')}>{lang === 'uk' ? 'Умови' : 'Terms'}</a><a href={url(lang, '/data-deletion/')}>{lang === 'uk' ? 'Видалення даних' : 'Data deletion'}</a></span><span>BOROVYK-AUTOMATION.COM</span></div>
+      <div class="ftr-b"><span>© {new Date().getFullYear()} {site.brand} · {lang === 'uk' ? 'ФОП Боровик Ростислав Олександрович' : 'Sole proprietor Borovyk Rostyslav Oleksandrovych (ФОП Боровик Ростислав Олександрович)'}</span><span style="display:flex;gap:1.2rem;flex-wrap:wrap"><a href={url(lang, '/privacy/')}>{lang === 'uk' ? 'Конфіденційність' : 'Privacy'}</a><a href={url(lang, '/terms/')}>{lang === 'uk' ? 'Умови' : 'Terms'}</a><a href={url(lang, '/data-deletion/')}>{lang === 'uk' ? 'Видалення даних' : 'Data deletion'}</a></span><span>BOROVYK-AUTOMATION.COM</span></div>
     </div>
   </footer>
 
