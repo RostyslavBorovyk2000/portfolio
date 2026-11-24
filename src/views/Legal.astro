@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { url, type Lang } from '../i18n';
+import { data } from '../lib/data';
+type Doc = 'privacy' | 'terms' | 'deletion';
+interface Props { lang: Lang; doc: Doc }
+const { lang, doc } = Astro.props;
+const site = data(lang, 'site');
+const email = site.email;
+const updated = lang === 'uk' ? '24 листопада 2026' : 'November 24, 2026';
+
+const T: Record<Lang, Record<Doc, { title: string; lead: string; seo: string; blocks: { h: string; p: string[] }[] }>> = {
+  uk: {
+    privacy: {
+      title: 'Політика конфіденційності',
+      lead: 'Як Borovyk Automation збирає, використовує і захищає ваші дані.',
+      seo: 'Політика конфіденційності Borovyk Automation: які дані ми обробляємо, навіщо і як їх видалити.',
+      blocks: [
+        { h: 'Хто ми', p: ['Borovyk Automation — це ФОП Боровик Ростислав, м. Хмельницький, Україна. Ми створюємо AI-автоматизації та чат-ботів для бізнесу.', `Питання щодо ваших даних: ${email}.`] },
+        { h: 'Які дані ми обробляємо', p: [
+          'Заявки з сайту: імʼя, контакт (телефон, Telegram або email) і текст повідомлення, які ви самі вказали у формі.',
+          'Повідомлення в Instagram Direct нашого акаунта @borovyk.automation: ваш ідентифікатор в Instagram (IGSID), імʼя користувача, імʼя профілю, кількість підписників і текст повідомлень, які ви нам надіслали.',
+          'Публічна інформація про бізнеси з Google Maps (назва, адреса, телефон, сайт, рейтинг, відгуки) — для пошуку потенційних клієнтів серед компаній.',
+        ] },
+        { h: 'Навіщо', p: [
+          'Щоб відповідати на ваші повідомлення і заявки, вести історію розмови та нагадувати нам про відповідь.',
+          'Для підготовки чернеток відповідей ми використовуємо штучний інтелект. Жодна відповідь не надсилається автоматично: кожну перевіряє і підтверджує людина.',
+          'Ми не продаємо і не передаємо ваші дані для реклами.',
+        ] },
+        { h: 'Хто ще може обробляти дані', p: [
+          'Лише сервіси, без яких робота неможлива: Meta (Instagram), Google (таблиці для зберігання), Anthropic (AI для чернеток відповідей), Telegram (сповіщення нам), Cloudflare (хостинг сайту), n8n на нашому сервері (автоматизація).',
+        ] },
+        { h: 'Скільки зберігаємо', p: ['Поки триває спілкування і до 12 місяців після останнього повідомлення. Після цього дані видаляються, або раніше — на ваш запит.'] },
+        { h: 'Ваші права', p: [`Ви можете дізнатися, які дані про вас ми маємо, виправити або видалити їх. Напишіть на ${email} або в Direct @borovyk.automation. Як видалити дані — на сторінці «Видалення даних».`] },
+        { h: 'Зміни', p: [`Ми можемо оновлювати цю політику. Дата останнього оновлення: ${updated}.`] },
+      ],
+    },
+    terms: {
+      title: 'Умови використання',
+      lead: 'Правила користування сайтом і сервісами Borovyk Automation.',
+      seo: 'Умови використання сайту і сервісів Borovyk Automation.',
+      blocks: [
+        { h: 'Загальне', p: ['Сайт borovyk-automation.com і пов’язані сервіси (чат-боти, автоматизації) належать ФОП Боровик Ростислав. Користуючись ними, ви погоджуєтесь з цими умовами.'] },
+        { h: 'Спілкування в месенджерах', p: ['Відповіді в Instagram Direct і Telegram можуть готуватися з допомогою AI, але надсилаються після перевірки людиною. Інформація в повідомленнях має довідковий характер; умови співпраці фіксуються окремою домовленістю.'] },
+        { h: 'Послуги', p: ['Вартість, терміни і обсяг робіт погоджуються індивідуально перед початком проєкту.'] },
+        { h: 'Відповідальність', p: ['Ми робимо все, щоб сервіси працювали стабільно, але не гарантуємо їх безперервну роботу через залежність від сторонніх платформ (Meta, Google, Telegram тощо).'] },
+        { h: 'Контакти', p: [`${email} · Telegram @${site.telegram}. Оновлено: ${updated}.`] },
+      ],
+    },
+    deletion: {
+      title: 'Видалення даних',
+      lead: 'Як попросити нас видалити ваші дані.',
+      seo: 'Інструкція з видалення даних користувача Borovyk Automation.',
+      blocks: [
+        { h: 'Як подати запит', p: [
+          `1. Напишіть на ${email} з темою «Видалення даних» або надішліть у Direct @borovyk.automation повідомлення «Видаліть мої дані».`,
+          '2. Вкажіть ваш нік в Instagram або контакт, з якого ви писали.',
+          '3. Протягом 30 днів ми видалимо ваші повідомлення, історію розмови та інші дані про вас з наших таблиць і систем і підтвердимо це у відповідь.',
+        ] },
+        { h: 'Що буде видалено', p: ['Ваш ідентифікатор в Instagram, імʼя, нік, тексти повідомлень, заявки з сайту і нотатки про вас.'] },
+        { h: 'Що не залежить від нас', p: ['Повідомлення, які зберігаються у вашому Instagram чи Telegram, видаляються в самих цих застосунках.'] },
+      ],
+    },
+  },
+  en: {
+    privacy: {
+      title: 'Privacy Policy',
+      lead: 'How Borovyk Automation collects, uses and protects your data.',
+      seo: 'Borovyk Automation privacy policy: what data we process, why, and how to delete it.',
+      blocks: [
+        { h: 'Who we are', p: ['Borovyk Automation is a sole proprietorship of Rostyslav Borovyk, Khmelnytskyi, Ukraine. We build AI automations and chatbots for businesses.', `Questions about your data: ${email}.`] },
+        { h: 'Data we process', p: [
+          'Website requests: the name, contact (phone, Telegram or email) and message you enter in the form.',
+          'Instagram Direct messages sent to our account @borovyk.automation: your Instagram-scoped ID (IGSID), username, profile name, follower count and the text of messages you send us.',
+          'Public business information from Google Maps (name, address, phone, website, rating, reviews) to find potential business clients.',
+        ] },
+        { h: 'Why', p: [
+          'To reply to your messages and requests, keep the conversation history and remind us to follow up.',
+          'We use artificial intelligence to draft replies. No reply is sent automatically: every message is reviewed and approved by a human.',
+          'We do not sell your data or share it for advertising.',
+        ] },
+        { h: 'Processors', p: ['Only services required to operate: Meta (Instagram), Google (Sheets storage), Anthropic (AI reply drafts), Telegram (notifications to us), Cloudflare (website hosting), self-hosted n8n (automation).'] },
+        { h: 'Retention', p: ['While the conversation is active and up to 12 months after the last message, then deleted — or earlier on request.'] },
+        { h: 'Your rights', p: [`You can request access to, correction or deletion of your data at ${email} or via Instagram Direct @borovyk.automation. See the Data Deletion page.`] },
+        { h: 'Changes', p: [`We may update this policy. Last updated: ${updated}.`] },
+      ],
+    },
+    terms: {
+      title: 'Terms of Service',
+      lead: 'Rules for using the Borovyk Automation website and services.',
+      seo: 'Terms of Service for the Borovyk Automation website and services.',
+      blocks: [
+        { h: 'General', p: ['The website borovyk-automation.com and related services (chatbots, automations) are operated by sole proprietor Rostyslav Borovyk. By using them you agree to these terms.'] },
+        { h: 'Messaging', p: ['Replies in Instagram Direct and Telegram may be drafted with AI but are sent only after human review. Information in messages is for reference; cooperation terms are agreed separately.'] },
+        { h: 'Services', p: ['Price, timeline and scope are agreed individually before a project starts.'] },
+        { h: 'Liability', p: ['We work to keep services stable but cannot guarantee uninterrupted operation, as they depend on third-party platforms (Meta, Google, Telegram, etc.).'] },
+        { h: 'Contact', p: [`${email} · Telegram @${site.telegram}. Updated: ${updated}.`] },
+      ],
+    },
+    deletion: {
+      title: 'Data Deletion',
+      lead: 'How to ask us to delete your data.',
+      seo: 'User data deletion instructions for Borovyk Automation.',
+      blocks: [
+        { h: 'How to request', p: [
+          `1. Email ${email} with the subject “Data deletion”, or send “Delete my data” in Instagram Direct to @borovyk.automation.`,
+          '2. Include your Instagram username or the contact you used.',
+          '3. Within 30 days we will delete your messages, conversation history and any other data about you from our sheets and systems, and confirm by reply.',
+        ] },
+        { h: 'What is deleted', p: ['Your Instagram ID, name, username, message texts, website requests and notes about you.'] },
+        { h: 'Outside our control', p: ['Messages stored in your own Instagram or Telegram are deleted in those apps.'] },
+      ],
+    },
+  },
+};
+const d = T[lang][doc];
+---
+<Base lang={lang} title={`${d.title} — Borovyk Automation`} description={d.seo}>
+  <PageHero crumbs={[{ name: site.home, href: url(lang, '/') }, { name: d.title }]} kicker="// legal" title={d.title} lead={d.lead} />
+  <section class="sec"><div class="wrap" style="max-width:52rem">
+    {d.blocks.map((b) => (
+      <div class="rv" style="margin-bottom:2.4rem">
+        <h2 class="h2" style="font-size:clamp(1.3rem,2.2vw,1.7rem);margin-bottom:.9rem">{b.h}</h2>
+        <div class="prose-block" style="color:var(--soft);display:flex;flex-direction:column;gap:.7rem">{b.p.map((t) => <p>{t}</p>)}</div>
+      </div>
+    ))}
+  </div></section>
+</Base>
